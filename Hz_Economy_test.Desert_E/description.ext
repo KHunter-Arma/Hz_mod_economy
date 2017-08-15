@@ -1,0 +1,13 @@
+allowfunctionsrecompile = 1;
+
+class CfgMusic
+{
+	tracks[]={};
+
+	class Hz_econ_media_showroom
+	{
+		name = "Callista";
+		sound[] = {"media\Saki_Kaskas_Callista.ogg", db-10, 1.0};
+	};
+
+};
