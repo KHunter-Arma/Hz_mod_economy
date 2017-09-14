@@ -18,7 +18,7 @@ class cfgPatches {
     url = "https://github.com/KHunter-Arma";
     
     requiredVersion = 1.58; 
-    requiredAddons[] = {"A3_Modules_F"};
+    requiredAddons[] = {"A3_Ui_F","A3_Modules_F"};
     units[] = {"Hz_mod_economy_module"};
     weapons[] = {};
     
@@ -36,6 +36,29 @@ class CfgMusic
 		sound[] = {"\x\Hz\Hz_mod_economy\media\Saki_Kaskas_Callista.ogg", db-10, 1.0};
 	};
 
+};
+
+class RscDisplayGarage;
+class RscDisplayGarage_Hz : RscDisplayGarage
+{
+	onLoad="[""onLoad"",_this,""RscDisplayGarage"",'GUI'] call 	(uinamespace getvariable 'Hz_BIS_fnc_initDisplay')";
+	onUnload="[""onUnload"",_this,""RscDisplayGarage"",'GUI'] call 	(uinamespace getvariable 'Hz_BIS_fnc_initDisplay')";
+};
+
+
+class RscDisplayGarage3DEN;
+class RscDisplayGarage3DEN_Hz : RscDisplayGarage3DEN
+{
+	onLoad="[""onLoad"",_this,""RscDisplayGarage"",'GUI'] call 	(uinamespace getvariable 'Hz_BIS_fnc_initDisplay')";
+	onUnload="[""onUnload"",_this,""RscDisplayGarage"",'GUI'] call 	(uinamespace getvariable 'Hz_BIS_fnc_initDisplay')";
+};
+
+
+class RscDisplayArsenal;
+class RscDisplayArsenal_Hz : RscDisplayArsenal
+{
+	onLoad="[""onLoad"",_this,""RscDisplayArsenal"",'GUI'] call 	(uinamespace getvariable 'Hz_BIS_fnc_initDisplayArsenal')";
+	onUnload="[""onUnload"",_this,""RscDisplayArsenal"",'GUI'] call 	(uinamespace getvariable 'Hz_BIS_fnc_initDisplayArsenal')";
 };
 
 class cfgFunctions
