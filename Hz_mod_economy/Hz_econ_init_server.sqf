@@ -24,22 +24,31 @@ publicvariable "Hz_econ_funds";
 
 Hz_econ_module_pRestrictionsSetupFunctionName = _moduleLogic getVariable ["Hz_econ_module_pRestrictionsSetupFunctionName",""];
 
-if (Hz_econ_module_pRestrictionsSetupFunctionName != "") then {
+if (Hz_econ_enableRestrictions) then {
 
-  waitUntil {
-  
-    sleep 0.1;
-    
-    !isnil {missionNamespace getVariable Hz_econ_module_pRestrictionsSetupFunctionName};
-  
-  };
-  
-_func = missionNamespace getVariable Hz_econ_module_pRestrictionsSetupFunctionName;
+	[] spawn {
 
-call _func;
+		waitUntil {
+		
+			sleep 0.1;
+			
+			!isnil {missionNamespace getVariable Hz_econ_module_pRestrictionsSetupFunctionName};
+		
+		};
+		
+		_func = missionNamespace getVariable Hz_econ_module_pRestrictionsSetupFunctionName;
+
+		call _func;
+		
+		Hz_econ_preInitDone = true;
+		publicVariable "Hz_econ_preInitDone";
+		
+	};
+
+} else {
+
+	Hz_econ_preInitDone = true;
+	publicVariable "Hz_econ_preInitDone";
 
 };
-
-Hz_econ_preInitDone = true;
-publicVariable "Hz_econ_preInitDone";
 
