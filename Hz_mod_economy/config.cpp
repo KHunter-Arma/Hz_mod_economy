@@ -97,7 +97,6 @@ class CfgVehicles
     {
       class Default;
       class Edit; // Default edit box (i.e., text input field)
-      class EditArray;
       class Combo; // Default combo box (i.e., drop-down menu)
       class Checkbox; // Default checkbox (returned value is Bool)
       class CheckboxNumber; // Default checkbox (returned value is Number)
@@ -145,23 +144,23 @@ class CfgVehicles
         // Because it's an expression, to return a String one must have a string within a string
         defaultValue = "0";
       };
-      class VehStores: EditArray
+      class VehStores: Edit
       {
 				property = "Hz_econ_module_pVehStores";
         displayName = "Vehicle Stores";
-        tooltip = "Array holding names of references to vehicle store objects. Objects can be anything including vehicles and units. Enter names (references as global variables) given to store objects wrapped in quotes and seperated by commas. The default value is an example. It is highly recommended to set a position via a variable called 'Hz_econ_vehStore_spawnPos' on each store object using the 'setVariable' command to define a safe spawn position for vehicles bought from that store.";
+        tooltip = "Array holding names of references to vehicle store objects. Objects can be anything including vehicles and units. Enter names (references as global variables) given to store objects wrapped in quotes. The default value is an example. It is highly recommended to set a position via a variable called 'Hz_econ_vehStore_spawnPos' on each store object using the 'setVariable' command to define a safe spawn position for vehicles bought from that store.";
         // Default text filled in the input box
         // Because it's an expression, to return a String one must have a string within a string
-        defaultValue = """myVehStore1"",""myVehStore2"",""myVehStore3""";
+        defaultValue = "[""myVehStore1"",""myVehStore2"",""myVehStore3""]";
       };
-      class CombatStores: EditArray
+      class CombatStores: Edit
       {
 				property = "Hz_econ_module_pCombatStores";
         displayName = "Combat Stores";
-        tooltip = "Array holding names of references to combat store objects. Objects can be anything including vehicles and units. Enter names (references as global variables) given to store objects wrapped in quotes and seperated by commas. The default value is an example.";
+        tooltip = "Array holding names of references to combat store objects. Objects can be anything including vehicles and units. Enter names (references as global variables) given to store objects wrapped in quotes. The default value is an example.";
         // Default text filled in the input box
         // Because it's an expression, to return a String one must have a string within a string
-        defaultValue = """myStore1"",""myStore2"",""myStore3""";
+        defaultValue = "[""myStore1"",""myStore2"",""myStore3""]";
       };
       class Restrictions: Combo
       {
@@ -180,7 +179,7 @@ class CfgVehicles
       class RestrictionsSetupFunctionName: Edit
       {
 				property = "Hz_econ_module_pRestrictionsSetupFunctionName";
-        displayName = "RestrictionsSetupFunctionName";
+        displayName = "Restrictions Setup Function Name";
         tooltip = "Required only if restrictions are enabled. Name of the function that the server will call during module initialisation to set up required restriction config variables. The name of the function must be entered as a string (wrapped in quotes).";
         // Default text filled in the input box
         // Because it's an expression, to return a String one must have a string within a string
