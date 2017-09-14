@@ -12,7 +12,7 @@
 _storeObj = _this select 0;
 _caller = _this select 1;
 
-_spawnPos = _storeObj getvariable ["spawnpos",getposatl _storeObj];
+_spawnPos = _storeObj getvariable ["Hz_econ_vehStore_spawnPos",getposatl _storeObj];
 
 if ((count nearestObjects [_spawnPos,["LandVehicle","Air"],10]) > 0) exitwith {hint "Error: Vehicle delivery position obstructed!";};
 

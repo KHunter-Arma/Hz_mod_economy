@@ -34,8 +34,8 @@ Hz_econ_vehStore_fnc_showroom = compile preprocessfilelinenumbers (Hz_econ_funcs
 uinamespace setvariable ["Hz_econ_vehStore_fnc_getVehCost",compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_vehStore_fnc_getVehCost.sqf")];
 
 {
-
-    _x addaction ["Hunter'z Vehicle Store",(Hz_econ_funcsPath + "Hz_econ_vehStore_fnc_openStore.sqf"),[]];
+  _store = missionnamespace getVariable [_x,objNull];
+  _store addaction ["Hunter'z Vehicle Store",(Hz_econ_funcsPath + "Hz_econ_vehStore_fnc_openStore.sqf"),[]];
 
 } foreach Hz_econ_vehStore_stores;
 

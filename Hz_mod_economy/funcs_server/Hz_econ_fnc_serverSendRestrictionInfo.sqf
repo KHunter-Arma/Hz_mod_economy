@@ -9,19 +9,26 @@
 * https://creativecommons.org/licenses/by-nc-sa/4.0/
 *******************************************************************************/
 
-/*
 
-[
-[UID,INFO],
-[UID,INFO],
-[UID,INFO],
-[UID,INFO],
-		.
-		.
-		.
-]
 
-*/
+/*------------------------------------------------------------------------------
+
+        Information in all config variables to be stored in the following way:
+
+                                      [
+                                      [UID,INFO],
+                                      [UID,INFO],
+                                      [UID,INFO],
+                                      [UID,INFO],
+                                          .
+                                          .
+                                          .
+                                      ]
+                                      
+      where UID is the player ID as a string, and INFO is an array of strings
+      holding classnames (upper case!) of all assets restricted for that UID.
+
+------------------------------------------------------------------------------*/
 
 _clientID = _this select 0;
 _clientUID = _this select 1;

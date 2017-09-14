@@ -11,12 +11,12 @@
 
 disableserialization;
 
-Hz_econ_path = "\";
-uinamespace setvariable ["Hz_econ_path","\"];
+Hz_econ_path = "\x\Hz\Hz_mod_economy\";
+uinamespace setvariable ["Hz_econ_path","\x\Hz\Hz_mod_economy\"];
 
 Hz_econ_funcsPath = Hz_econ_path + "funcs\";
 Hz_econ_serverFuncsPath = Hz_econ_path + "funcs_server\";
 uinamespace setvariable ["Hz_econ_funcsPath",(uiNamespace getVariable "Hz_econ_path") + "funcs\"];
 
-if (isServer) then {call compile preprocessFileLineNumbers (Hz_econ_path + "Hz_econ_init_server.sqf");};
-if (!isDedicated) then {call compile preprocessFileLineNumbers (Hz_econ_path + "Hz_econ_init_client.sqf");};
+if (isServer) then {_this call compile preprocessFileLineNumbers (Hz_econ_path + "Hz_econ_init_server.sqf");};
+if (!isDedicated) then {_this call compile preprocessFileLineNumbers (Hz_econ_path + "Hz_econ_init_client.sqf");};

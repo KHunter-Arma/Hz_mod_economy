@@ -24,11 +24,11 @@ if((vehicle player) != player) then {
     
 } else {
     	
-    _crate = [player,["ACE_USVehicleBox_EP1"]] call Hz_func_find_nearest_ammo_crate;
+    _nearcrates = nearestObjects [player,["ReammoBox"],10];        
         
-     if(!isnull _crate) then {
+     if((count _nearcrates) > 0) then {
          
-      _wepholder = _crate;
+      _wepholder = _nearcrates select 0;
       hint "You are not allowed to carry this item!\nItem is now stored in nearest ammo crate";
      
      } else {   

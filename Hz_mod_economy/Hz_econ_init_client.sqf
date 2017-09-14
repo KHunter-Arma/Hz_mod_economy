@@ -9,4 +9,9 @@
 * https://creativecommons.org/licenses/by-nc-sa/4.0/
 *******************************************************************************/
 
-// placeholder
+waitUntil {sleep 0.1; !isnil "Hz_econ_preInitDone"};
+waitUntil {sleep 0.1; Hz_econ_preInitDone};
+
+_this call compile preprocessFileLineNumbers (Hz_econ_path + "Hz_econ_setupRestrictions.sqf");
+_this call compile preprocessFileLineNumbers (Hz_econ_path + "Hz_econ_initVehStore.sqf");
+_this call compile preprocessFileLineNumbers (Hz_econ_path + "Hz_econ_initCombatStore.sqf");
