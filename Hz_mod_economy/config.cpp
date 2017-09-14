@@ -181,7 +181,7 @@ class CfgVehicles
       {
 				property = "Hz_econ_module_pRestrictionsSetupFunctionName";
         displayName = "RestrictionsSetupFunctionName";
-        tooltip = "Required only if restrictions are enabled. Name of the function that the server will call during module initialisation to set up required restriction config variables.";
+        tooltip = "Required only if restrictions are enabled. Name of the function that the server will call during module initialisation to set up required restriction config variables. The name of the function must be entered as a string (wrapped in quotes).";
         // Default text filled in the input box
         // Because it's an expression, to return a String one must have a string within a string
         defaultValue = """someScripter_fnc_setupRestrictionVars""";
