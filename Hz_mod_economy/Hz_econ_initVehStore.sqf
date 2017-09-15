@@ -21,14 +21,14 @@ waituntil {!isnil "bis_fnc_garage"};
 
 sleep 0.1;
 
-bis_fnc_garage = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "bis_fnc_garage.sqf");
+bis_fnc_garage_M = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "bis_fnc_garage.sqf");
 //bis_fnc_garage3DEN = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "bis_fnc_garage3DEN.sqf");
 
 waituntil {!isnil "bis_fnc_arsenal"};
 
 sleep 0.1;
 
-bis_fnc_arsenal = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "bis_fnc_arsenal.sqf");
+bis_fnc_arsenal_M = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "bis_fnc_arsenal.sqf");
 
 Hz_econ_vehStore_fnc_showroom = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_vehStore_fnc_showroom.sqf");
 uinamespace setvariable ["Hz_econ_vehStore_fnc_getVehCost",compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_vehStore_fnc_getVehCost.sqf")];
