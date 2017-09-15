@@ -9,19 +9,35 @@
 * https://creativecommons.org/licenses/by-nc-sa/4.0/
 *******************************************************************************/
 
-_storeObj = _this select 0;
-_caller = _this select 1;
+if (Hz_econ_funds <= 0) exitwith {hint "Insufficient funds!";};
 
-_spawnPos = _storeObj getvariable ["Hz_econ_vehStore_spawnPos",getposatl _storeObj];
+[] spawn {
 
-if ((count nearestObjects [_spawnPos,["LandVehicle","Air"],10]) > 0) exitwith {hint "Error: Vehicle delivery position obstructed!";};
+	_gearBegin = player call Hz_econ_combatStore_fnc_getGear;
 
-BIS_fnc_garage_center = nil;
-BIS_fnc_arsenal_center = nil;
+	waituntil {dialog};
+	waituntil {sleep 0.1; !dialog};
+	sleep 1;
 
-_originalPos = getposatl _caller;
-_caller setposatl _spawnPos;
+	//revert not implemented
+	Hz_econ_combatStore_checkout = true;
 
-[_originalPos] spawn Hz_econ_vehStore_fnc_showroom;
+	if (Hz_econ_combatStore_checkout) then {
 
-["Open",true] call BIS_fnc_garage;
+		//purchase
+		_gearEnd = player call Hz_econ_combatStore_fnc_getGear;
+		
+		_newGear = [_gearEnd, _gearBegin] call Hz_econ_combatStore_fnc_getGearDifference;
+		
+		_newGear call Hz_econ_combatStore_fnc_makePayment;
+
+	} else {
+
+		//revert
+
+	};
+
+};
+
+Hz_econ_combatStore_checkout = false;
+_this call bis_fnc_arsenal_M;
