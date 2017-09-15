@@ -605,10 +605,10 @@ switch _mode do {
 
 		_display displayaddeventhandler ["mousebuttondown","with uinamespace do {['MouseButtonDown',_this] call (uinamespace getvariable ""bis_fnc_arsenal_UI"");};"];
 		_display displayaddeventhandler ["mousebuttonup","with uinamespace do {['MouseButtonUp',_this] call (uinamespace getvariable ""bis_fnc_arsenal_UI"");};"];
-		//_display displayaddeventhandler ["mousezchanged","with uinamespace do {['MouseZChanged',_this] call bis_fnc_arsenal;};"];
+		//_display displayaddeventhandler ["mousezchanged","with uinamespace do {['MouseZChanged',_this] call bis_fnc_arsenal_M;};"];
 		_display displayaddeventhandler ["keydown","with (uinamespace) do {['KeyDown',_this] call (uinamespace getvariable ""bis_fnc_arsenal_UI"");};"];
-		//_display displayaddeventhandler ["mousemoving","with (uinamespace) do {['Loop',_this] call bis_fnc_arsenal;};"];
-		//_display displayaddeventhandler ["mouseholding","with (uinamespace) do {['Loop',_this] call bis_fnc_arsenal;};"];
+		//_display displayaddeventhandler ["mousemoving","with (uinamespace) do {['Loop',_this] call bis_fnc_arsenal_M;};"];
+		//_display displayaddeventhandler ["mouseholding","with (uinamespace) do {['Loop',_this] call bis_fnc_arsenal_M;};"];
 
 		_ctrlMouseArea = _display displayctrl IDC_RSCDISPLAYARSENAL_MOUSEAREA;
 		_ctrlMouseArea ctrladdeventhandler ["mousemoving","with uinamespace do {['Mouse',_this] call (uinamespace getvariable ""bis_fnc_arsenal_UI"");};"];
@@ -651,7 +651,7 @@ switch _mode do {
 								_ctrlButtonSave ctrlSetTextColor [1, 0, 0, 0.6];                
                 _ctrlButtonSave ctrlenable false;
 								_ctrlButtonSave ctrlSetTooltip "";
-	//	_ctrlButtonSave ctrladdeventhandler ["buttonclick","with uinamespace do {['buttonSave',[ctrlparent (_this select 0)]] call bis_fnc_arsenal;};"];
+	//	_ctrlButtonSave ctrladdeventhandler ["buttonclick","with uinamespace do {['buttonSave',[ctrlparent (_this select 0)]] call bis_fnc_arsenal_M;};"];
                 _ctrlButtonSave ctrlRemoveAllEventHandlers "onMouseEnter";
 
 		_ctrlButtonLoad = _display displayctrl IDC_RSCDISPLAYARSENAL_CONTROLSBAR_BUTTONLOAD;
@@ -667,7 +667,7 @@ switch _mode do {
            
                 _ctrlButtonLoad ctrlenable false;
 								_ctrlButtonLoad ctrlSetTooltip "";
-	//	_ctrlButtonLoad ctrladdeventhandler ["buttonclick","with uinamespace do {['buttonLoad',[ctrlparent (_this select 0)]] call bis_fnc_arsenal;};"];
+	//	_ctrlButtonLoad ctrladdeventhandler ["buttonclick","with uinamespace do {['buttonLoad',[ctrlparent (_this select 0)]] call bis_fnc_arsenal_M;};"];
                 _ctrlButtonLoad ctrlRemoveAllEventHandlers "onMouseEnter";
 
 		_ctrlButtonExport = _display displayctrl IDC_RSCDISPLAYARSENAL_CONTROLSBAR_BUTTONEXPORT;
@@ -1715,7 +1715,7 @@ switch _mode do {
 		];
 
 		//--- Refresh weapon accessory lists
-		//['SelectItem',[_display,_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + _index),_index]] call bis_fnc_arsenal;
+		//['SelectItem',[_display,_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + _index),_index]] call bis_fnc_arsenal_M;
 
 	
 	};
@@ -2703,7 +2703,7 @@ switch _mode do {
 			case (_key == DIK_DELETE): {
 				_ctrlMouseBlock = _display displayctrl IDC_RSCDISPLAYARSENAL_MOUSEBLOCK;
 				if !(ctrlenabled _ctrlMouseBlock) then {
-					['buttonTemplateDelete',[_display]] call bis_fnc_arsenal;
+					['buttonTemplateDelete',[_display]] call bis_fnc_arsenal_M;
 					_return = true;
 				};
 			};
@@ -2932,7 +2932,7 @@ switch _mode do {
 		_ctrlTemplateValue lnbsort [0,false];
 
 		["templateSelChanged",[_display]] call (uinamespace getvariable "bis_fnc_arsenal_UI");
-		//['buttonExport',[_display]] call bis_fnc_arsenal;
+		//['buttonExport',[_display]] call bis_fnc_arsenal_M;
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -3056,7 +3056,7 @@ switch _mode do {
 		};
 
 		["ListSelectCurrent",[_display]] call (uinamespace getvariable "bis_fnc_arsenal_UI");
-		//["templateSelChanged",[_display]] call bis_fnc_arsenal;
+		//["templateSelChanged",[_display]] call bis_fnc_arsenal_M;
 		endloadingscreen;
 	};
 
@@ -3324,7 +3324,7 @@ switch _mode do {
 			[_box,true,true,false] call bis_fnc_addVirtualItemCargo;
 			[_box,true,true,false] call bis_fnc_addVirtualBackpackCargo;
 		};
-		["AmmoboxServer",_box,true] call bis_fnc_arsenal;
+		["AmmoboxServer",_box,true] call bis_fnc_arsenal_M;
 	};
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "AmmoboxExit": {
@@ -3343,7 +3343,7 @@ switch _mode do {
 		missionnamespace setvariable ["bis_fnc_arsenal_boxes",_boxes];
 	//	publicvariable "bis_fnc_arsenal_boxes";
 
-		"AmmoboxLocal" call bis_fnc_arsenal;
+		"AmmoboxLocal" call bis_fnc_arsenal_M;
 		bis_fnc_arsenal_ammoboxServer = true;
 	};
 	///////////////////////////////////////////////////////////////////////////////////////////
