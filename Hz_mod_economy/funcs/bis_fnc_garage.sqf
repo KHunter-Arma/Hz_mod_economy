@@ -71,12 +71,12 @@ switch _mode do {
         };
 
         _types = [];			_types set [			0,["carx"]];			_types set [			1,["tankx"]];			_types set [			2,["helicopterx"]];			_types set [			3,["airplanex"]];			_types set [			4,["shipx","sumbarinex"]];			_types set [			5,[""]];
-        ["InitGUI",[_display,"bis_fnc_garage"]] call bis_fnc_arsenal;
-        ["Preload"] call BIS_fnc_garage;
-        ["ListAdd",[_display]] call BIS_fnc_garage;
+        ["InitGUI",[_display,"bis_fnc_garage"]] call bis_fnc_arsenal_M;
+        ["Preload"] call bis_fnc_garage_M;
+        ["ListAdd",[_display]] call bis_fnc_garage_M;
 
-        if (BIS_fnc_garage_centerType == "") then {["buttonRandom",[_display]] call BIS_fnc_garage;};
-        ["MouseZChanged",[controlnull,0]] call BIS_fnc_arsenal; 
+        if (BIS_fnc_garage_centerType == "") then {["buttonRandom",[_display]] call bis_fnc_garage_M;};
+        ["MouseZChanged",[controlnull,0]] call bis_fnc_arsenal_M; 
         {
             _ctrl = _display displayctrl _x;
             _ctrl ctrlsetfade 0;
@@ -108,7 +108,7 @@ switch _mode do {
         with missionnamespace do {
             [missionnamespace,"garageClosed",[displaynull,uinamespace getvariable ["BIS_fnc_arsenal_toggleSpace",false]]] call bis_fnc_callscriptedeventhandler;
         };
-        "Exit" call bis_fnc_arsenal;
+        "Exit" call bis_fnc_arsenal_M;
     };
 
 
@@ -257,7 +257,7 @@ switch _mode do {
             } foreach _data;
 
             _cfg = configfile >> "cfgvehicles" >> typeof _center;
-            ["ShowItemInfo",[_cfg,gettext (_cfg >> "displayName")]] call bis_fnc_arsenal;
+            ["ShowItemInfo",[_cfg,gettext (_cfg >> "displayName")]] call bis_fnc_arsenal_M;
             ["ShowItemStats",[_cfg]] call (uinamespace getvariable "bis_fnc_garage_UI");
         } else {
             {
@@ -337,7 +337,7 @@ switch _mode do {
                 ];
                 _ctrlLineTabLeft ctrlcommit 0;
                 ctrlsetfocus _ctrlList;
-                ['SelectItem',[_display,_display displayctrl (			960 + _idc),_idc]] call bis_fnc_garage;
+                ['SelectItem',[_display,_display displayctrl (			960 + _idc),_idc]] call bis_fnc_garage_M;
             } else {
                 if ((_center getvariable "bis_fnc_arsenal_idc") != _idc) then {_ctrlList lbsetcursel -1;};
             };
@@ -386,7 +386,7 @@ switch _mode do {
             ];
         };
 
-        ['TabSelectRight',[_display,		18 ]] call bis_fnc_garage;
+        ['TabSelectRight',[_display,		18 ]] call bis_fnc_garage_M;
     };
 
 
@@ -435,7 +435,7 @@ switch _mode do {
                 } foreach [_ctrFrameRight,_ctrBackgroundRight];
 
                 if (_idc in [		21,		22,		23,		24]) then {
-                    ["SelectItemRight",[_display,_ctrlList,_index]] call bis_fnc_arsenal;
+                    ["SelectItemRight",[_display,_ctrlList,_index]] call bis_fnc_arsenal_M;
                 };
             };
 
@@ -987,7 +987,7 @@ switch _mode do {
             _display,
             "Not allowed"
             ]
-            ] call bis_fnc_arsenal;
+            ] call bis_fnc_arsenal_M;
 
         };
 
@@ -1001,7 +1001,7 @@ switch _mode do {
             _display,
             "Not allowed"
             ]
-            ] call bis_fnc_arsenal;
+            ] call bis_fnc_arsenal_M;
 
         };
 
@@ -1015,7 +1015,7 @@ switch _mode do {
             _display,
             "Not allowed"
             ]
-            ] call bis_fnc_arsenal;
+            ] call bis_fnc_arsenal_M;
 
         };
 
@@ -1029,7 +1029,7 @@ switch _mode do {
             _display,
             "Not allowed"
             ]
-            ] call bis_fnc_arsenal;
+            ] call bis_fnc_arsenal_M;
 
         };
 
@@ -1043,7 +1043,7 @@ switch _mode do {
             _display,
             "Not allowed"
             ]
-            ] call bis_fnc_arsenal;
+            ] call bis_fnc_arsenal_M;
 
         };
 
@@ -1096,7 +1096,7 @@ switch _mode do {
             _display,
             "Not allowed"
             ]
-            ] call bis_fnc_arsenal;
+            ] call bis_fnc_arsenal_M;
 
         };
 
