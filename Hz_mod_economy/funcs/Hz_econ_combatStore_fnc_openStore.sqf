@@ -40,4 +40,4 @@ if (Hz_econ_funds <= 0) exitwith {hint "Insufficient funds!";};
 };
 
 Hz_econ_combatStore_checkout = false;
-_this call bis_fnc_arsenal;
+_this call bis_fnc_arsenal_M;
