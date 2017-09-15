@@ -303,10 +303,10 @@ uinamespace setvariable ["bis_fnc_arsenal_defaultClass",nil];
 };
 
 		_types = [];		_types set [		3,["Uniform"]];		_types set [			4,["Vest"]];		_types set [		5,["Backpack"]];		_types set [		6,["Headgear"]];		_types set [		7,["Glasses"]];		_types set [			8,["NVGoggles"]];		_types set [		9,["Binocular","LaserDesignator"]];		_types set [		0,["AssaultRifle","MachineGun","SniperRifle","Shotgun","Rifle","SubmachineGun"]];		_types set [	1,["Launcher","MissileLauncher","RocketLauncher"]];		_types set [		2,["Handgun"]];		_types set [			10,["Map"]];		_types set [			11,["GPS","UAVTerminal"]];		_types set [			12,["Radio"]];		_types set [		13,["Compass"]];		_types set [			14,["Watch"]];		_types set [			15,[]];		_types set [			16,[]];		_types set [		17,[]];		_types set [		18,[]];		_types set [		19,[]];		_types set [		20,[]];		_types set [		25,[]];		_types set [		21,[]];		_types set [		26,[]];		_types set [		22,[]];		_types set [		23,[]];		_types set [		24,["FirstAidKit","Medikit","MineDetector","Toolkit"]];
-["InitGUI",[_display,"bis_fnc_arsenal"]] call bis_fnc_arsenal;
-["Preload"] call bis_fnc_arsenal;
-["ListAdd",[_display]] call bis_fnc_arsenal;
-["ListSelectCurrent",[_display]] call bis_fnc_arsenal;
+["InitGUI",[_display,"bis_fnc_arsenal"]] call bis_fnc_arsenal_M;
+["Preload"] call bis_fnc_arsenal_M;
+["ListAdd",[_display]] call bis_fnc_arsenal_M;
+["ListSelectCurrent",[_display]] call bis_fnc_arsenal_M;
 
 
 BIS_fnc_arsenal_selectedWeaponType = switch true do {
@@ -557,7 +557,7 @@ _ctrlSort ctrlcommit 0;
 } foreach 	[			0,		1,			2,			3,				4,			5,			6,			7,				8,			9,				10,				11,				12,			13,				14,				15,				16,			17,			18,			19,			20,			25,			21,			26,			22,			23,			24];
 };
 uinamespace setvariable ["bis_fnc_arsenal_sort",_sortValues];
-['TabDeselect',[_display,-1]] call bis_fnc_arsenal;
+['TabDeselect',[_display,-1]] call bis_fnc_arsenal_M;
 ['SelectItem',[_display,controlnull,-1]] call (uinamespace getvariable _function);
 
 _ctrlButtonClose = _display displayctrl 	44448;
@@ -668,8 +668,8 @@ BIS_fnc_arsenal_cam = _cam;
 ["#(argb,8,8,3)color(0,0,0,1)",false,nil,0,[0,0.5]] call bis_fnc_textTiles;
 
 
-["Mouse",[controlnull,0,0]] call bis_fnc_arsenal;
-BIS_fnc_arsenal_draw3D = addMissionEventHandler ["draw3D",{with (uinamespace) do {['draw3D',_this] call bis_fnc_arsenal;};}];
+["Mouse",[controlnull,0,0]] call bis_fnc_arsenal_M;
+BIS_fnc_arsenal_draw3D = addMissionEventHandler ["draw3D",{with (uinamespace) do {['draw3D',_this] call bis_fnc_arsenal_M;};}];
 
 setacctime (missionnamespace getvariable ["BIS_fnc_arsenal_acctime",1]);
 };
@@ -1099,7 +1099,7 @@ _ctrlList lnbsort [1,false];
 
 _ctrlSort = _display displayctrl (			800 + _foreachindex);
 _sortValues = uinamespace getvariable ["bis_fnc_arsenal_sort",[]];
-["lbSort",[[_ctrlSort,_sortValues param [_foreachindex,0]],_foreachindex]] call bis_fnc_arsenal;
+["lbSort",[[_ctrlSort,_sortValues param [_foreachindex,0]],_foreachindex]] call bis_fnc_arsenal_M;
 };
 } foreach _data;
 };
@@ -1187,7 +1187,7 @@ if ({count _x > 0} count BIS_fnc_arsenal_buttons == 0) then {
 
 
 _shown = ctrlshown (_display displayctrl 		44046);
-if (!_shown || _key == 1) exitwith {['buttonInterface',[_display]] call bis_fnc_arsenal;};
+if (!_shown || _key == 1) exitwith {['buttonInterface',[_display]] call bis_fnc_arsenal_M;};
 
 {
 _idc = _x;
@@ -1291,7 +1291,7 @@ ctrlposition _ctrlTab select 3
 ];
 _ctrlLineTabLeft ctrlcommit 0;
 ctrlsetfocus _ctrlList;
-['SelectItem',[_display,_display displayctrl (			960 + _idc),_idc]] call bis_fnc_arsenal;
+['SelectItem',[_display,_display displayctrl (			960 + _idc),_idc]] call bis_fnc_arsenal_M;
 };
 
 _ctrlIcon = _display displayctrl (			900 + _idc);
@@ -1334,7 +1334,7 @@ _ctrl ctrlcommit 	0.15;
 		20,
 		25
 ];
-if (_showItems) then {['TabSelectRight',[_display,		18]] call bis_fnc_arsenal;};
+if (_showItems) then {['TabSelectRight',[_display,		18]] call bis_fnc_arsenal_M;};
 
 
 _showCargo = _index in [		3,			4,		5];
@@ -1361,7 +1361,7 @@ _ctrlList ctrlcommit 	0.15;
 _ctrl = _display displayctrl 			991;
 _ctrl ctrlsetfade _fadeCargo;
 _ctrl ctrlcommit 	0.15;
-if (_showCargo) then {['TabSelectRight',[_display,		21]] call bis_fnc_arsenal;};
+if (_showCargo) then {['TabSelectRight',[_display,		21]] call bis_fnc_arsenal_M;};
 
 
 _showRight = _showItems || _showCargo;
@@ -1445,7 +1445,7 @@ for "_l" from 0 to (lbsize _ctrlList - 1) do {
 _class = _ctrlList lnbdata [_l,0];
 _ctrlList lnbsettext [[_l,2],str ({_x == _class} count _itemsCurrent)];
 };
-["SelectItemRight",[_display,_ctrlList,_index]] call bis_fnc_arsenal;
+["SelectItemRight",[_display,_ctrlList,_index]] call bis_fnc_arsenal_M;
 };
 };
 
@@ -1718,7 +1718,7 @@ for "_l" from 0 to (lbsize _ctrlList - 1) do {
 _class = _ctrlList lnbdata [_l,0];
 _ctrlList lnbsettext [[_l,2],str ({_x == _class} count _itemsCurrent)];
 };
-["SelectItemRight",[_display,_ctrlList,_index]] call bis_fnc_arsenal;
+["SelectItemRight",[_display,_ctrlList,_index]] call bis_fnc_arsenal_M;
 };
 } foreach [
 		21,
@@ -1798,7 +1798,7 @@ if (_data != "" && {{_data == _x} count _weaponAccessories > 0}) exitwith {_ctrl
 if (lbcursel _ctrlList < 0) then {_ctrlList lbsetcursel 0;};
 
 _ctrlSort = _display displayctrl (			800 + _x);
-["lbSort",[[_ctrlSort,lbcursel _ctrlSort],_x]] call bis_fnc_arsenal;
+["lbSort",[[_ctrlSort,lbcursel _ctrlSort],_x]] call bis_fnc_arsenal_M;
 } foreach [
 		20,
 		19,
@@ -1836,8 +1836,8 @@ case 		24:	{configfile >> "cfgmagazines" >> _item};
 default						{configfile >> "cfgweapons" >> _item};
 };
 if (BIS_fnc_arsenal_type == 0 || (BIS_fnc_arsenal_type == 1 && !is3DEN)) then {
-["ShowItemInfo",[_itemCfg]] call bis_fnc_arsenal;
-["ShowItemStats",[_itemCfg]] call bis_fnc_arsenal;
+["ShowItemInfo",[_itemCfg]] call bis_fnc_arsenal_M;
+["ShowItemStats",[_itemCfg]] call bis_fnc_arsenal_M;
 };
 };
 };
@@ -2249,9 +2249,9 @@ if !(ctrlenabled _ctrlTab) exitwith {_idc = _x;};
 _idcCount = {!isnull (_display displayctrl (			930 + _x))} count [			0,		1,			2,			3,				4,			5,			6,			7,				8,			9,				10,				11,				12,			13,				14,				15,				16,			17];
 _idc = if (_ctrl) then {(_idc - 1 + _idcCount) % _idcCount} else {(_idc + 1) % _idcCount};
 if (BIS_fnc_arsenal_type == 0) then {
-["TabSelectLeft",[_display,_idc]] call bis_fnc_arsenal;
+["TabSelectLeft",[_display,_idc]] call bis_fnc_arsenal_M;
 } else {
-["TabSelectLeft",[_display,_idc]] call bis_fnc_garage;
+["TabSelectLeft",[_display,_idc]] call bis_fnc_garage_M;
 };
 _return = true;
 };
@@ -2260,26 +2260,26 @@ _return = true;
 case (_key == 0x2E): {
 _mode = if (_shift) then {"config"} else {"init"};
 if (BIS_fnc_arsenal_type == 0) then {
-if (_ctrl) then {['buttonExport',[_display,_mode]] call bis_fnc_arsenal;};
+if (_ctrl) then {['buttonExport',[_display,_mode]] call bis_fnc_arsenal_M;};
 } else {
-if (_ctrl) then {['buttonExport',[_display,_mode]] call bis_fnc_garage;};
+if (_ctrl) then {['buttonExport',[_display,_mode]] call bis_fnc_garage_M;};
 };
 };
 
 case (_key == 0x2F): {
 if (BIS_fnc_arsenal_type == 0) then {
-if (_ctrl) then {['buttonImport',[_display]] call bis_fnc_arsenal;};
+if (_ctrl) then {['buttonImport',[_display]] call bis_fnc_arsenal_M;};
 } else {
-if (_ctrl) then {['buttonImport',[_display]] call bis_fnc_garage;};
+if (_ctrl) then {['buttonImport',[_display]] call bis_fnc_garage_M;};
 };
 };
 
 case (_key == 0x1F): {
-if (_ctrl) then {['buttonSave',[_display]] call bis_fnc_arsenal;};
+if (_ctrl) then {['buttonSave',[_display]] call bis_fnc_arsenal_M;};
 };
 
 case (_key == 0x18): {
-if (_ctrl) then {['buttonLoad',[_display]] call bis_fnc_arsenal;};
+if (_ctrl) then {['buttonLoad',[_display]] call bis_fnc_arsenal_M;};
 };
 
 case (_key == 0x13): {
@@ -2291,18 +2291,18 @@ _soldiers = [];
 _soldiers set [count _soldiers,configname _x];
 } foreach ("isclass _x && getnumber (_x >> 'scope') > 1 && gettext (_x >> 'simulation') == 'soldier'" configclasses (configfile >> "cfgvehicles"));
 [_center,_soldiers call bis_fnc_selectrandom] call bis_fnc_loadinventory;
-["ListSelectCurrent",[_display]] call bis_fnc_arsenal;
+["ListSelectCurrent",[_display]] call bis_fnc_arsenal_M;
 }else {
-['buttonRandom',[_display]] call bis_fnc_arsenal;
+['buttonRandom',[_display]] call bis_fnc_arsenal_M;
 };
 } else {
-['buttonRandom',[_display]] call bis_fnc_garage;
+['buttonRandom',[_display]] call bis_fnc_garage_M;
 };
 };
 };
 
 case (_key == 0x0E                 && !_inTemplate): {
-['buttonInterface',[_display]] call bis_fnc_arsenal;
+['buttonInterface',[_display]] call bis_fnc_arsenal_M;
 _return = true;
 };
 
@@ -2403,7 +2403,7 @@ _value = {_x == _item} count _items;
 
 _ctrlList lnbsettext [[_lbcursel,2],str _value];
 
-["SelectItemRight",[_display,_ctrlList,_index]] call bis_fnc_arsenal;
+["SelectItemRight",[_display,_ctrlList,_index]] call bis_fnc_arsenal_M;
 };
 
 
@@ -2445,7 +2445,7 @@ _center setspeaker (_inventoryCustom select 1);
 [_center,_inventoryCustom select 2] call bis_fnc_setUnitInsignia;
 };
 
-["ListSelectCurrent",[_display]] call bis_fnc_arsenal;
+["ListSelectCurrent",[_display]] call bis_fnc_arsenal_M;
 } else {
 _hideTemplate = false;
 };
@@ -2484,7 +2484,7 @@ _name = _ctrlTemplateValue lnbtext [_cursel,0];
 ['showTemplates',[_display]] call (uinamespace getvariable (["bis_fnc_arsenal_UI","bis_fnc_garage"] select BIS_fnc_arsenal_type));
 _ctrlTemplateValue lnbsetcurselrow (_cursel max (lbsize _ctrlTemplateValue - 1));
 
-["templateSelChanged",[_display]] call bis_fnc_arsenal;
+["templateSelChanged",[_display]] call bis_fnc_arsenal_M;
 
 
 
@@ -2576,7 +2576,7 @@ _ctrlTemplateValue lbsetvalue [_lbAdd,-1];
 };
 _ctrlTemplateValue lnbsort [0,false];
 
-["templateSelChanged",[_display]] call bis_fnc_arsenal;
+["templateSelChanged",[_display]] call bis_fnc_arsenal_M;
 
 };
 
@@ -2697,10 +2697,10 @@ if (_fullVersion) then {[_center,_importArray select ((_foreachindex - 3) max 0)
 
 
 if (count _disabledItems > 0) then {
-['showMessage',[_display,localize "STR_A3_RscDisplayArsenal_message_unavailable"]] call bis_fnc_arsenal;
+['showMessage',[_display,localize "STR_A3_RscDisplayArsenal_message_unavailable"]] call bis_fnc_arsenal_M;
 };
 
-["ListSelectCurrent",[_display]] call bis_fnc_arsenal;
+["ListSelectCurrent",[_display]] call bis_fnc_arsenal_M;
 
 endloadingscreen;
 };
@@ -2713,7 +2713,7 @@ _center = (missionnamespace getvariable ["BIS_fnc_arsenal_center",player]);
 
 _export = [_center,_exportMode,_fullVersion] call bis_fnc_exportInventory;
 _export spawn {copytoclipboard _this;};
-['showMessage',[_display,localize "STR_a3_RscDisplayArsenal_message_clipboard"]] call bis_fnc_arsenal;
+['showMessage',[_display,localize "STR_a3_RscDisplayArsenal_message_clipboard"]] call bis_fnc_arsenal_M;
 };
 
 
@@ -2783,7 +2783,7 @@ _ctrlTemplateButtonOK ctrlenable true;
 _ctrlTemplateButtonDelete = _display displayctrl 	36021;
 _ctrlTemplateButtonDelete ctrlenable ((lnbsize _ctrlTemplateValue select 0) > 0);
 
-['showMessage',[_display,localize "STR_A3_RscDisplayArsenal_message_save"]] call bis_fnc_arsenal;
+['showMessage',[_display,localize "STR_A3_RscDisplayArsenal_message_save"]] call bis_fnc_arsenal_M;
 };
 
 
@@ -2968,7 +2968,7 @@ if (_allowAll) then {
 [_box,true,true,false] call bis_fnc_addVirtualItemCargo;
 [_box,true,true,false] call bis_fnc_addVirtualBackpackCargo;
 };
-["AmmoboxServer",_box,true] call bis_fnc_arsenal;
+["AmmoboxServer",_box,true] call bis_fnc_arsenal_M;
 };
 
 case "AmmoboxExit": {
@@ -2987,7 +2987,7 @@ if (_add) then {_boxes = _boxes + [_box];};
 missionnamespace setvariable ["bis_fnc_arsenal_boxes",_boxes];
 //publicvariable "bis_fnc_arsenal_boxes";
 
-"AmmoboxLocal" call bis_fnc_arsenal;
+"AmmoboxLocal" call bis_fnc_arsenal_M;
 bis_fnc_arsenal_ammoboxServer = true;
 };
 
