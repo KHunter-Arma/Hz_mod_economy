@@ -22,6 +22,6 @@ Hz_econ_combatStore_fnc_checkout = compile preprocessfilelinenumbers (Hz_econ_fu
 
 {
 _store = missionnamespace getVariable [_x,objNull];
-["AmmoboxInit",[_store,true]] call BIS_fnc_arsenal;  
+["AmmoboxInit",[_store,true]] call BIS_fnc_arsenal_M;  
 
 }foreach Hz_econ_combatStore_stores;
