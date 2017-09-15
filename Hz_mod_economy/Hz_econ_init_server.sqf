@@ -12,17 +12,17 @@
 Hz_econ_fnc_serverSendRestrictionInfo = compile preprocessfilelinenumbers (Hz_econ_serverFuncsPath + "Hz_econ_fnc_serverSendRestrictionInfo.sqf");
 
 _moduleLogic = _this select 0;
-Hz_econ_enableRestrictions = _moduleLogic getVariable ["Hz_econ_module_pRestrictions",false];
-Hz_econ_combatStore_stores = _moduleLogic getVariable ["Hz_econ_module_pCombatStores",[]];
-Hz_econ_vehStore_stores = _moduleLogic getVariable ["Hz_econ_module_pVehStores",[]];
-Hz_econ_funds = _moduleLogic getVariable ["Hz_econ_module_pFunds",0];
+Hz_econ_enableRestrictions = _moduleLogic getVariable "Restrictions";
+Hz_econ_combatStore_stores = call compile (_moduleLogic getVariable "CombatStores");
+Hz_econ_vehStore_stores = call compile (_moduleLogic getVariable "VehStores");
+Hz_econ_funds = call compile (_moduleLogic getVariable "Funds");
 
 publicvariable "Hz_econ_enableRestrictions";
 publicvariable "Hz_econ_combatStore_stores";
 publicvariable "Hz_econ_vehStore_stores";
 publicvariable "Hz_econ_funds";
 
-Hz_econ_module_pRestrictionsSetupFunctionName = _moduleLogic getVariable ["Hz_econ_module_pRestrictionsSetupFunctionName",""];
+Hz_econ_module_pRestrictionsSetupFunctionName = _moduleLogic getVariable "RestrictionsSetupFunctionName";
 
 if (Hz_econ_enableRestrictions) then {
 
