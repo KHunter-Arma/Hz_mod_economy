@@ -26,6 +26,26 @@ class cfgPatches {
 
 };
 
+class CfgMods
+{
+	class Mod_Base;
+	class Hz_mod_economy: Mod_Base
+	{
+		name = "Hunter'z Economy Module";
+		picture = "\x\Hz\Hz_mod_economy\media\Hunterz_logo.paa";
+		logo = "\x\Hz\Hz_mod_economy\media\Hunterz_icon.paa";
+		logoSmall = "\x\Hz\Hz_mod_economy\media\Hunterz_iconSmall.paa";
+		logoOver = "\x\Hz\Hz_mod_economy\media\Hunterz_icon.paa";
+		tooltipOwned = "";
+		action = "https://github.com/KHunter-Arma";
+		dlcColor[] = {1,00,00,0.8};
+		overview = "";
+		hideName = 0;
+		hidePicture = 0;
+		dir = "@Hz_mod_economy";
+	};
+};
+
 class CfgMusic
 {
 	tracks[]={};
@@ -113,7 +133,7 @@ class CfgVehicles
     // Standard object definitions
     scope = 2; // Editor visibility; 2 will show it in the menu, 1 will hide it.
     displayName = "Hunter'z Economy"; // Name displayed in the menu
-    icon = "\x\Hz\Hz_mod_economy\media\Hunterz_logo.paa"; // Map icon. Delete this entry to use the default icon
+    icon = "\x\Hz\Hz_mod_economy\media\Hunterz_icon.paa"; // Map icon. Delete this entry to use the default icon
     category = "Hz_editorModules";
 
     // Name of function triggered once conditions are met
