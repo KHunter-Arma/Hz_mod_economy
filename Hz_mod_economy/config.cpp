@@ -182,19 +182,12 @@ class CfgVehicles
         // Because it's an expression, to return a String one must have a string within a string
         defaultValue = "[""myStore1"",""myStore2"",""myStore3""]";
       };
-      class Restrictions: Combo
+      class Restrictions: Checkbox
       {
         // Unique property, use "<moduleClass>_<attributeClass>" format to make sure the name is unique in the world
         property = "Hz_econ_module_pRestrictions";
         displayName = "Enable Restrictions"; // Argument label
         tooltip = "Enable/disable player restrictions system to limit use of different equipment including all gear items and vehicles."; // Tooltip description
-        typeName = "BOOL"; // Value type, can be "NUMBER", "STRING" or "BOOL"
-        defaultValue = "false"; // Default attribute value. WARNING: This is an expression, and its returned value will be used (50 in this case)
-        class Values
-        {
-					class disabled	{name = "Disable"; value = false;};
-          class enabled	{name = "Enable";	value = true;}; // Listbox item
-        };
       };
       class RestrictionsSetupFunctionName: Edit
       {
