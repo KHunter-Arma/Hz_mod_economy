@@ -2095,6 +2095,8 @@ switch _mode do {
 			//--- Attachments
 			_compatibleItems = _item call bis_fnc_compatibleItems;
 			
+			with missionNamespace do {
+			
 			if (Hz_econ_enableRestrictions) then {_compatibleItems = _compatibleItems - Hz_econ_restrictedAttachments;};
 			
 			_temp = +_compatibleItems;
@@ -2102,6 +2104,8 @@ switch _mode do {
 				if ((_x call Hz_econ_combatStore_fnc_getAttachmentPrice) == -1) then {_compatibleItems = _compatibleItems - [_x];};
 			
 			} foreach _temp;
+			
+			};
 			
 			{
 				private ["_item"];
@@ -3352,7 +3356,7 @@ switch _mode do {
 		{
 			if (isnil {_x getvariable "bis_fnc_arsenal_action"}) then {
 				_action = _x addaction [
-					"Hunter'z Combat Store",
+					"<t color='#00ffff'>Hunter'z Combat Store</t>",
 					{
 						_box = _this select 0;
 						_unit = _this select 1;
@@ -3380,8 +3384,15 @@ switch _mode do {
 };
 
 
-	//Hunter: This is gross but I can't spend any more days on this or I'll loose the small amount of sanity left in me...
+	//Hunter: This is literally gross but I can't spend any more days on this or I'll loose the small amount of sanity left in me...
 	if(isnil "BIS_fnc_arsenal_display") exitwith {};
+	_exit = false;
+	with missionNamespace do {
+		if(isnil "Hz_econ_vehStore_vehicle") then {Hz_econ_vehStore_vehicle = objNull;};
+		if(!isnull Hz_econ_vehStore_vehicle) then {_exit = true;};
+	};
+	if (_exit) exitWith {};
+	
 	_display = BIS_fnc_arsenal_display;
 	with missionNamespace do {
 	
@@ -3402,13 +3413,17 @@ switch _mode do {
 		
 				_compatibleItems = _x call bis_fnc_compatibleItems;
 				
-				if (Hz_econ_enableRestrictions) then {_compatibleItems = _compatibleItems - Hz_econ_restrictedAttachments;};
+				with missionNamespace do {
 				
+				if (Hz_econ_enableRestrictions) then {_compatibleItems = _compatibleItems - Hz_econ_restrictedAttachments;};
+								
 				_temp = +_compatibleItems;
 				{
 					if ((_x call Hz_econ_combatStore_fnc_getAttachmentPrice) == -1) then {_compatibleItems = _compatibleItems - [_x];};
 				
 				} foreach _temp;
+				
+				};
 				
 				{
 					private ["_item"];

@@ -35,7 +35,7 @@ uinamespace setvariable ["Hz_econ_vehStore_fnc_getVehCost",compile preprocessfil
 
 {
   _store = missionnamespace getVariable [_x,objNull];
-  _store addaction ["Hunter'z Vehicle Store",(Hz_econ_funcsPath + "Hz_econ_vehStore_fnc_openStore.sqf"),[]];
+  _store addaction ["<t color='#00ffff'>Hunter'z Vehicle Store</t>",(Hz_econ_funcsPath + "Hz_econ_vehStore_fnc_openStore.sqf"),[]];
 
 } foreach Hz_econ_vehStore_stores;
 
