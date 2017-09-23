@@ -3394,7 +3394,7 @@ switch _mode do {
 	if (_exit) exitWith {};
 	
 	_display = BIS_fnc_arsenal_display;
-	with missionNamespace do {
+		with missionNamespace do {
 	
 		{
 			_ctrlList = _display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + _x);
@@ -3407,21 +3407,27 @@ switch _mode do {
 			//IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG
 		];
 		
-		//--- Attachments
-		{
-			if(_x != "") then {
+		_selectedWeapon = switch true do {
+			case ((ctrlFade (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_PRIMARYWEAPON))) == 0): {primaryweapon player};
+			case ((ctrlfade (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_SECONDARYWEAPON))) == 0): {secondaryWeapon player};
+			case ((ctrlFade (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_HANDGUN))) == 0): {handgunweapon player};
+			default {""};
+		};
 		
-				_compatibleItems = _x call bis_fnc_compatibleItems;
-				
-				with missionNamespace do {
+		//--- Attachments
+			if(_selectedWeapon != "") then {
+		
+				_compatibleItems = _selectedWeapon call bis_fnc_compatibleItems;
 				
 				if (Hz_econ_enableRestrictions) then {_compatibleItems = _compatibleItems - Hz_econ_restrictedAttachments;};
-								
-				_temp = +_compatibleItems;
-				{
-					if ((_x call Hz_econ_combatStore_fnc_getAttachmentPrice) == -1) then {_compatibleItems = _compatibleItems - [_x];};
 				
-				} foreach _temp;
+				if ((count _compatibleItems) > 0) then {
+				
+					_temp = +_compatibleItems;
+					{
+						if ((_x call Hz_econ_combatStore_fnc_getAttachmentPrice) == -1) then {_compatibleItems = _compatibleItems - [_x];};
+					
+					} foreach _temp;
 				
 				};
 				
@@ -3448,6 +3454,5 @@ switch _mode do {
 				} foreach _compatibleItems;
 			
 			};
-		} foreach [primaryWeapon player, secondaryWeapon player, handgunWeapon player];
 
 	};
