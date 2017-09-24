@@ -3356,7 +3356,7 @@ switch _mode do {
 		{
 			if (isnil {_x getvariable "bis_fnc_arsenal_action"}) then {
 				_action = _x addaction [
-					"<t color='#00ffff'>Hunter'z Combat Store</t>",
+					"<t color='#e01414'>Hunter'z Combat Store</t>",
 					{
 						_box = _this select 0;
 						_unit = _this select 1;
@@ -3407,6 +3407,7 @@ switch _mode do {
 			//IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG
 		];
 		
+		//alternative: use BIS_fnc_arsenal_selectedWeaponType
 		_selectedWeapon = switch true do {
 			case ((ctrlFade (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_PRIMARYWEAPON))) == 0): {primaryweapon player};
 			case ((ctrlfade (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_SECONDARYWEAPON))) == 0): {secondaryWeapon player};

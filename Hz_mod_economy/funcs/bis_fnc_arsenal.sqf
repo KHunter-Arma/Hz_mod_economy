@@ -2996,7 +2996,7 @@ _boxes = missionnamespace getvariable ["bis_fnc_arsenal_boxes",[]];
 {
 if (isnil {_x getvariable "bis_fnc_arsenal_action"}) then {
 _action = _x addaction [
-"<t color='#00ffff'>Hunter'z Combat Store</t>",
+"<t color='#e01414'>Hunter'z Combat Store</t>",
 {
 _box = _this select 0;
 _unit = _this select 1;
