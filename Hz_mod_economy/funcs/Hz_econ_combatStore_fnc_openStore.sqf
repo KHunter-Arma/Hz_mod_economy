@@ -13,6 +13,8 @@ if (Hz_econ_funds <= 0) exitwith {hint "Insufficient funds!";};
 
 [] spawn {
 
+  call Hz_pers_API_disablePlayerSaveStateOnDisconnect;
+
 	_gearBegin = player call Hz_econ_combatStore_fnc_getGear;
 
 	waituntil {dialog};
@@ -37,6 +39,8 @@ if (Hz_econ_funds <= 0) exitwith {hint "Insufficient funds!";};
 
 	};
 
+  call Hz_pers_API_enablePlayerSaveStateOnDisconnect;
+  
 };
 
 Hz_econ_combatStore_checkout = false;
