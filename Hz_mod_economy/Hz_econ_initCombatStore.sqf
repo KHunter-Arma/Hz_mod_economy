@@ -10,6 +10,7 @@
 *******************************************************************************/
 
 //compile funcs
+Hz_econ_combatStore_fnc_getAmmoPrice = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_combatStore_fnc_getAttachmentPrice.sqf");
 Hz_econ_combatStore_fnc_getAttachmentPrice = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_combatStore_fnc_getAttachmentPrice.sqf");
 Hz_econ_combatStore_fnc_getItemPrice = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_combatStore_fnc_getItemPrice.sqf");
 Hz_econ_combatStore_fnc_getMagazinePrice = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_combatStore_fnc_getMagazinePrice.sqf");

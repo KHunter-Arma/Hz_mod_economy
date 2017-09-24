@@ -17,6 +17,7 @@ _weaponsArray = _this select 0;
 _attachmentsArray = _this select 1;
 _itemsArray = _this select 2;
 _magazinesArray = _this select 3;
+_ammoArray = _this select 4;
 
 {
 
@@ -53,6 +54,15 @@ _cost = _cost*((_magazinesArray select A_COUNT) select _foreachIndex);
 _totalCost = _totalCost + _cost;
 
 } foreach (_magazinesArray select A_TYPE);
+
+{
+
+_cost = _x call Hz_econ_combatStore_fnc_getAmmoPrice;
+_cost = _cost*((_ammoArray select A_COUNT) select _foreachIndex);
+
+_totalCost = _totalCost + _cost;
+
+} foreach (_ammoArray select A_TYPE);
 
 
 Hz_econ_funds = Hz_econ_funds - _totalCost;

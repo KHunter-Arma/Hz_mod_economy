@@ -26,6 +26,26 @@ class cfgPatches {
 
 };
 
+class CfgMods
+{
+	class Mod_Base;
+	class Hz_mod_economy: Mod_Base
+	{
+		name = "Hunter'z Economy Module";
+		picture = "\x\Hz\Hz_mod_economy\media\Hunterz_logo.paa";
+		logo = "\x\Hz\Hz_mod_economy\media\Hunterz_icon.paa";
+		logoSmall = "\x\Hz\Hz_mod_economy\media\Hunterz_iconSmall.paa";
+		logoOver = "\x\Hz\Hz_mod_economy\media\Hunterz_icon.paa";
+		tooltipOwned = "";
+		action = "https://github.com/KHunter-Arma";
+		dlcColor[] = {1,00,00,0.8};
+		overview = "";
+		hideName = 0;
+		hidePicture = 0;
+		dir = "@Hz_mod_economy";
+	};
+};
+
 class CfgMusic
 {
 	tracks[]={};
@@ -113,7 +133,7 @@ class CfgVehicles
     // Standard object definitions
     scope = 2; // Editor visibility; 2 will show it in the menu, 1 will hide it.
     displayName = "Hunter'z Economy"; // Name displayed in the menu
-    icon = "\x\Hz\Hz_mod_economy\media\Hunterz_logo.paa"; // Map icon. Delete this entry to use the default icon
+    icon = "\x\Hz\Hz_mod_economy\media\Hunterz_icon.paa"; // Map icon. Delete this entry to use the default icon
     category = "Hz_editorModules";
 
     // Name of function triggered once conditions are met
@@ -162,19 +182,12 @@ class CfgVehicles
         // Because it's an expression, to return a String one must have a string within a string
         defaultValue = "[""myStore1"",""myStore2"",""myStore3""]";
       };
-      class Restrictions: Combo
+      class Restrictions: Checkbox
       {
         // Unique property, use "<moduleClass>_<attributeClass>" format to make sure the name is unique in the world
         property = "Hz_econ_module_pRestrictions";
         displayName = "Enable Restrictions"; // Argument label
         tooltip = "Enable/disable player restrictions system to limit use of different equipment including all gear items and vehicles."; // Tooltip description
-        typeName = "BOOL"; // Value type, can be "NUMBER", "STRING" or "BOOL"
-        defaultValue = "false"; // Default attribute value. WARNING: This is an expression, and its returned value will be used (50 in this case)
-        class Values
-        {
-					class disabled	{name = "Disable"; value = false;};
-          class enabled	{name = "Enable";	value = true;}; // Listbox item
-        };
       };
       class RestrictionsSetupFunctionName: Edit
       {
