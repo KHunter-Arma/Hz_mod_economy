@@ -173,6 +173,15 @@ class CfgVehicles
         // Because it's an expression, to return a String one must have a string within a string
         defaultValue = "[""myVehStore1"",""myVehStore2"",""myVehStore3""]";
       };
+			class VehCustomInitFunctionName: Edit
+      {
+				property = "Hz_econ_module_pVehCustomInitFunctionName";
+        displayName = "Vehicle Custom Init Function Name";
+        tooltip = "OPTIONAL: Leave empty if you don't want to use it. The name of your function to execute when a new vehicle is bought from the store. Parameters passed to function: [vehicle]. WARNING: This function will be executed locally by the client that is using the store. The vehicle will be local to the client when spawned as it's 'createvehicle'd by them.";
+        // Default text filled in the input box
+        // Because it's an expression, to return a String one must have a string within a string
+        defaultValue = """""";
+      };
       class CombatStores: Edit
       {
 				property = "Hz_econ_module_pCombatStores";

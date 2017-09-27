@@ -20,6 +20,7 @@ BIS_fnc_garage_center = nil;
 BIS_fnc_arsenal_center = nil;
 
 _originalPos = getposatl _caller;
+player hideObjectGlobal true;
 _caller setposatl _spawnPos;
 
 [_originalPos] spawn Hz_econ_vehStore_fnc_showroom;

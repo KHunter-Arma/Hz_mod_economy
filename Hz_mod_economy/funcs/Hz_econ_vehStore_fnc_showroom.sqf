@@ -11,7 +11,7 @@
 
 _originalPos = _this select 0;
 
-[-2, {_this hideobject true;}, player] call CBA_fnc_globalExecute;
+player hideObjectGlobal true;
 
 waituntil {!isnil "Hz_econ_vehStore_vehicle"};
 waituntil {!isnull Hz_econ_vehStore_vehicle};
@@ -40,7 +40,7 @@ while {dialog} do {
 deletevehicle Hz_econ_vehStore_vehicle;
 detach player;
 player setposatl _originalPos;
-[-2, {_this hideobject false;}, player] call CBA_fnc_globalExecute;
+player hideObjectGlobal false;
 
 5 fademusic 0;
 {deletevehicle _x} foreach (uinamespace getvariable "Hz_econ_vehStore_dummyObjects");

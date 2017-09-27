@@ -1234,6 +1234,8 @@ switch _mode do {
                             publicvariable "Hz_econ_funds";                       
 
                             _veh = _vehType createvehicle _spawnPos;
+														
+														[_veh] call Hz_econ_vehStore_customInitFnc;
 
 														[_veh,_customStuff select 0,_customStuff select 1] call BIS_fnc_initVehicle;
 														

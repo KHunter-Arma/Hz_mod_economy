@@ -36,6 +36,8 @@ if (Hz_econ_enableRestrictions) then {
 		
 		};
 		
+		sleep 0.1;
+		
 		_func = missionNamespace getVariable Hz_econ_module_pRestrictionsSetupFunctionName;
 
 		call _func;
