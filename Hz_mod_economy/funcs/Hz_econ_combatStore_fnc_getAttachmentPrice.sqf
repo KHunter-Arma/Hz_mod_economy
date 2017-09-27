@@ -9,6 +9,8 @@
 * https://creativecommons.org/licenses/by-nc-sa/4.0/
 *******************************************************************************/
 
+/*
+
 private ["_return","_attachment"];
 
 _attachment = toupper _this;
@@ -54,3 +56,7 @@ default {-1};
 };
 
 _return
+
+*/
+
+_this call Hz_econ_combatStore_customAttachmentPrice;

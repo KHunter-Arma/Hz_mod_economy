@@ -154,7 +154,16 @@ class CfgVehicles
 
     // Module attributes, uses https://community.bistudio.com/wiki/Eden_Editor:_Configuring_Attributes#Entity_Specific
     class Attributes: AttributesBase
-    {    
+    {   
+      class PathToPriceFunctions: Edit
+      {
+				property = "Hz_econ_module_pPathToPriceFunctions";
+        displayName = "Path To Price Functions";
+        tooltip = "Path to the folder where you have all the files containing the store price code functions which are required by the module.  Equipment or vehicles that have no price defined will not be available in the stores. The input to all functions is the classname (held by the '_this' variable). The functions must return the cost of the equipment/vehicle in question, or -1 if the price is not available. Example files are provided in the Examples folder that you are recommended to use as a template. WARNING: These functions must be defined on all clients, and therefore it is recommended to have these files either in your mission file, or your own custom addon.";
+        // Default text filled in the input box
+        // Because it's an expression, to return a String one must have a string within a string
+        defaultValue = """""";
+      };
       class Funds: Edit
       {
 				property = "Hz_econ_module_pFunds";

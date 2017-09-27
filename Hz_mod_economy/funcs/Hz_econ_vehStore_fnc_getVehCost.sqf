@@ -9,6 +9,7 @@
 * https://creativecommons.org/licenses/by-nc-sa/4.0/
 *******************************************************************************/
 
+/*
 private ["_price"];
 
 _price = switch (true) do {
@@ -50,7 +51,7 @@ case (_this iskindof "CUP_BAF_Jackal2_L2A1_D") : {500000};
 case (_this iskindof "CUP_BAF_Jackal2_L2A1_D") : {500000};
 case (_this iskindof "CUP_BAF_Jackal2_L2A1_D") : {500000};
 
-/*
+
 C_Van_01_box_F
 O_G_Van_01_transport_F
 O_G_Van_01_fuel_F
@@ -85,10 +86,14 @@ LOP_IA_M1025_W_M2
 LOP_IA_M1025_W_Mk19
 LOP_AM_OPF_Landrover_M2
 LOP_AM_OPF_Landrover
-*/
+
 
 default {-1};
 
 };
 
 _price
+
+*/
+
+_this call Hz_econ_vehStore_customPriceFunction;

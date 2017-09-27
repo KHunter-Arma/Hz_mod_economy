@@ -9,6 +9,8 @@
 * https://creativecommons.org/licenses/by-nc-sa/4.0/
 *******************************************************************************/
 
+/*
+
 private ["_return","_weapon"];
 
 _M203 = 1080;
@@ -81,3 +83,7 @@ default {-1};
 };
 
 _return
+
+*/
+
+_this call Hz_econ_combatStore_customWeaponPrice;
