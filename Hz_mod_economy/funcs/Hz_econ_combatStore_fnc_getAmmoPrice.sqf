@@ -9,21 +9,4 @@
 * https://creativecommons.org/licenses/by-nc-sa/4.0/
 *******************************************************************************/
 
-/*
-
-private ["_return","_ammo"];
-
-_ammo = toupper _this;
-
-_return = switch (_ammo) do {
-    		
-
-default {-1};
-
-};
-
-_return
-
-*/
-
 _this call Hz_econ_combatStore_customAmmoPrice;

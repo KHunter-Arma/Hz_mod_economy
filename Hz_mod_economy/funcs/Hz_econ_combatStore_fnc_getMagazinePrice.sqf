@@ -9,21 +9,4 @@
 * https://creativecommons.org/licenses/by-nc-sa/4.0/
 *******************************************************************************/
 
-/*
-
-private ["_return","_magazine"];
-
-_magazine = toupper _this;
-
-_return = switch (_magazine) do {
-    		
-
-default {-1};
-
-};
-
-_return
-
-*/
-
 _this call Hz_econ_combatStore_customMagazinePrice;
