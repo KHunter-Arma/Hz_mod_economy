@@ -11,8 +11,6 @@
 
 _originalPos = _this select 0;
 
-player hideObjectGlobal true;
-
 waituntil {!isnil "Hz_econ_vehStore_vehicle"};
 waituntil {!isnull Hz_econ_vehStore_vehicle};
 
@@ -25,7 +23,8 @@ playmusic "Hz_econ_media_showroom";
 //rotate
 while {dialog} do {
     
-    player attachto [Hz_econ_vehStore_vehicle,[0,0,0]];    
+    player attachto [Hz_econ_vehStore_vehicle,[0,0,0]];   
+	player hideObjectGlobal true;		
             
     while {!isnull Hz_econ_vehStore_vehicle && dialog} do {
     
