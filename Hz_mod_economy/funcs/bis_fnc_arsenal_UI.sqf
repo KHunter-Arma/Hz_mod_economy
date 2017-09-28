@@ -2378,22 +2378,47 @@ switch _mode do {
 						_statHit = linearConversion [_statsMin select 3,_statsMax select 3,_stats select 3,_barMin,_barMax];
 						_statMass = linearConversion [_statsMin select 4,_statsMax select 4,_stats select 4,_barMin,_barMax];
 						_statInitSpeed = linearConversion [_statsMin select 5,_statsMax select 5,_stats select 5,_barMin,_barMax];
-						if (getnumber (_itemCfg >> "type") == 4) then {
+						
+            _cost = 0;
+            with missionNamespace do {
+            
+              _currentGear = player call Hz_econ_combatStore_fnc_getGear;
+		
+              _newGear = [_currentGear, Hz_econ_combatStore_gearAtStoreEntry] call Hz_econ_combatStore_fnc_getGearDifference;
+              
+              _cost = _newGear call Hz_econ_combatStore_fnc_getCheckoutCost;
+            
+            };
+            
+            _funds = missionnamespace getvariable "Hz_econ_funds";
+            _fundsDisplay = "";
+            
+           if(_funds >= 1000000) then {
+
+                  _fundsDisplay = format ["$%1 million",(_funds / 1000000)];
+
+              } else {
+
+                  _fundsDisplay = format ["$%1",_funds];   
+
+              };
+            
+            if (getnumber (_itemCfg >> "type") == 4) then {
 							[
-								[],
-								[],
-								[_statMaxRange,localize "str_a3_rscdisplayarsenal_stat_range"],
-								[_statHit,localize "str_a3_rscdisplayarsenal_stat_impact"],
+								[1,format ["New Items Cost:         %1",_cost]],
+								[1,format ["Available funds:       %1",_fundsDisplay]],
+								[_statMaxRange,"Range"],
+								[_statHit,"Stopping Power"],
 								[_statMass,localize "str_a3_rscdisplayarsenal_stat_weight"]
 							] call _fnc_showStats;
 						} else {
 							_statHit = sqrt(_statHit^2 * _statInitSpeed); //--- Make impact influenced by muzzle speed
-							[
-								[_statReloadSpeed,localize "str_a3_rscdisplayarsenal_stat_rof"],
-								[_statDispersion,localize "str_a3_rscdisplayarsenal_stat_dispersion"],
-								[_statMaxRange,localize "str_a3_rscdisplayarsenal_stat_range"],
-								[_statHit,localize "str_a3_rscdisplayarsenal_stat_impact"],
-								[_statMass,localize "str_a3_rscdisplayarsenal_stat_weight"]
+							[								
+                [1,format ["New Items Cost:         %1",_cost]],
+								[1,format ["Available funds:       %1",_fundsDisplay]],
+								[_statDispersion,"Accuracy"],
+								[_statMaxRange,"Range"],
+								[_statHit,"Stopping Power"]
 							] call _fnc_showStats;
 						};
 					};

@@ -65,15 +65,6 @@ class RscDisplayGarage_Hz : RscDisplayGarage
 	onUnload="[""onUnload"",_this,""RscDisplayGarage"",'GUI'] call 	(uinamespace getvariable 'Hz_BIS_fnc_initDisplay')";
 };
 
-
-class RscDisplayGarage3DEN;
-class RscDisplayGarage3DEN_Hz : RscDisplayGarage3DEN
-{
-	onLoad="[""onLoad"",_this,""RscDisplayGarage"",'GUI'] call 	(uinamespace getvariable 'Hz_BIS_fnc_initDisplay')";
-	onUnload="[""onUnload"",_this,""RscDisplayGarage"",'GUI'] call 	(uinamespace getvariable 'Hz_BIS_fnc_initDisplay')";
-};
-
-
 class RscDisplayArsenal;
 class RscDisplayArsenal_Hz : RscDisplayArsenal
 {

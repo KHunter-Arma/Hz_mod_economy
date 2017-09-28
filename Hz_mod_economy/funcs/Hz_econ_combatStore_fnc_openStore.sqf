@@ -16,6 +16,8 @@ if (Hz_econ_funds <= 0) exitwith {hint "Insufficient funds!";};
   call Hz_pers_API_disablePlayerSaveStateOnDisconnect;
 
 	_gearBegin = player call Hz_econ_combatStore_fnc_getGear;
+  
+  Hz_econ_combatStore_gearAtStoreEntry = _gearBegin;
 
 	waituntil {dialog};
 	waituntil {sleep 0.1; !dialog};
@@ -31,7 +33,9 @@ if (Hz_econ_funds <= 0) exitwith {hint "Insufficient funds!";};
 		
 		_newGear = [_gearEnd, _gearBegin] call Hz_econ_combatStore_fnc_getGearDifference;
 		
-		_newGear call Hz_econ_combatStore_fnc_makePayment;
+    _cost = _newGear call Hz_econ_combatStore_fnc_getCheckoutCost;
+    
+		_cost call Hz_econ_combatStore_fnc_makePayment;
 
 	} else {
 

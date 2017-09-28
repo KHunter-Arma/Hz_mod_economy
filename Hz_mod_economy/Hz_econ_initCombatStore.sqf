@@ -20,6 +20,7 @@ Hz_econ_combatStore_fnc_getGear = compile preprocessfilelinenumbers (Hz_econ_fun
 Hz_econ_combatStore_fnc_makePayment = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_combatStore_fnc_makePayment.sqf");
 Hz_econ_combatStore_fnc_getGearDifference = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_combatStore_fnc_getGearDifference.sqf");
 Hz_econ_combatStore_fnc_checkout = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_combatStore_fnc_checkout.sqf");
+Hz_econ_combatStore_fnc_getCheckoutCost = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_combatStore_fnc_getCheckoutCost.sqf");
 
 {
 _store = missionnamespace getVariable [_x,objNull];
