@@ -162,7 +162,7 @@ class CfgVehicles
         tooltip = "The money you have at the start of the mission.";
         // Default text filled in the input box
         // Because it's an expression, to return a String one must have a string within a string
-        defaultValue = "0";
+        defaultValue = """0""";
       };
       class VehStores: Edit
       {
@@ -171,7 +171,14 @@ class CfgVehicles
         tooltip = "Array holding names of references to vehicle store objects. Objects can be anything including vehicles and units. Enter names (references as global variables) given to store objects wrapped in quotes. The default value is an example. It is highly recommended to set a position via a variable called 'Hz_econ_vehStore_spawnPos' on each store object using the 'setVariable' command to define a safe spawn position for vehicles bought from that store.";
         // Default text filled in the input box
         // Because it's an expression, to return a String one must have a string within a string
-        defaultValue = "[""myVehStore1"",""myVehStore2"",""myVehStore3""]";
+        defaultValue = "'[""myVehStore1"",""myVehStore2"",""myVehStore3""]'";
+      };
+			class VehSpawnEmpty: Checkbox
+      {
+        // Unique property, use "<moduleClass>_<attributeClass>" format to make sure the name is unique in the world
+        property = "Hz_econ_module_pVehSpawnEmpty";
+        displayName = "Enable Vehicle Spawn Empty"; // Argument label
+        tooltip = "If enabled, vehicles bought from the store will spawn with no ammo, and will have very little fuel."; // Tooltip description
       };
 			class VehCustomInitFunctionName: Edit
       {
@@ -182,6 +189,15 @@ class CfgVehicles
         // Because it's an expression, to return a String one must have a string within a string
         defaultValue = """""";
       };
+			class FuelPrice: Edit
+      {
+				property = "Hz_econ_module_pFuelPrice";
+        displayName = "FuelPrice";
+        tooltip = "Cost per liter of fuel. Used with ACE Refuel if ACE is running. Note: For the ACE interface to work at all, functions recompile should be enabled in the mission description.ext.";
+        // Default text filled in the input box
+        // Because it's an expression, to return a String one must have a string within a string
+        defaultValue = """1.5""";
+      };
       class CombatStores: Edit
       {
 				property = "Hz_econ_module_pCombatStores";
@@ -189,7 +205,7 @@ class CfgVehicles
         tooltip = "Array holding names of references to combat store objects. Objects can be anything including vehicles and units. Enter names (references as global variables) given to store objects wrapped in quotes. The default value is an example.";
         // Default text filled in the input box
         // Because it's an expression, to return a String one must have a string within a string
-        defaultValue = "[""myStore1"",""myStore2"",""myStore3""]";
+        defaultValue = "'[""myStore1"",""myStore2"",""myStore3""]'";
       };
       class Restrictions: Checkbox
       {

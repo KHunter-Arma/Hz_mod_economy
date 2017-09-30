@@ -32,6 +32,7 @@ bis_fnc_arsenal_M = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "bis_
 
 Hz_econ_vehStore_fnc_showroom = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_vehStore_fnc_showroom.sqf");
 uinamespace setvariable ["Hz_econ_vehStore_fnc_getVehCost",compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_vehStore_fnc_getVehCost.sqf")];
+Hz_econ_vehStore_fnc_getVehCost = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_vehStore_fnc_getVehCost.sqf");
 
 uinamespace setvariable ["Hz_econ_vehStore_dummyObjects",[]];
 

@@ -2405,7 +2405,7 @@ switch _mode do {
             
             if (getnumber (_itemCfg >> "type") == 4) then {
 							[
-								[1,format ["New Items Cost:         %1",_cost]],
+								[1,format ["New Items Cost:          $%1",_cost]],
 								[1,format ["Available funds:       %1",_fundsDisplay]],
 								[_statMaxRange,"Range"],
 								[_statHit,"Stopping Power"],
@@ -2414,7 +2414,7 @@ switch _mode do {
 						} else {
 							_statHit = sqrt(_statHit^2 * _statInitSpeed); //--- Make impact influenced by muzzle speed
 							[								
-                [1,format ["New Items Cost:         %1",_cost]],
+                [1,format ["New Items Cost:          $%1",_cost]],
 								[1,format ["Available funds:       %1",_fundsDisplay]],
 								[_statDispersion,"Accuracy"],
 								[_statMaxRange,"Range"],
@@ -3353,7 +3353,7 @@ switch _mode do {
 			[_box,true,true,false] call bis_fnc_addVirtualItemCargo;
 			[_box,true,true,false] call bis_fnc_addVirtualBackpackCargo;
 		};
-		["AmmoboxServer",_box,true] call bis_fnc_arsenal_M;
+		["AmmoboxServer",_box,true] call bis_fnc_arsenal_UI;
 	};
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "AmmoboxExit": {
@@ -3372,7 +3372,7 @@ switch _mode do {
 		missionnamespace setvariable ["bis_fnc_arsenal_boxes",_boxes];
 	//	publicvariable "bis_fnc_arsenal_boxes";
 
-		"AmmoboxLocal" call bis_fnc_arsenal_M;
+		"AmmoboxLocal" call bis_fnc_arsenal_UI;
 		bis_fnc_arsenal_ammoboxServer = true;
 	};
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -3408,7 +3408,6 @@ switch _mode do {
 	};
 };
 
-
 	//Hunter: This is literally gross but I can't spend any more days on this or I'll loose the small amount of sanity left in me...
 	if(isnil "BIS_fnc_arsenal_display") exitwith {};
 	_exit = false;
@@ -3420,6 +3419,20 @@ switch _mode do {
 	
 	_display = BIS_fnc_arsenal_display;
 		with missionNamespace do {
+		
+		//alternative: use BIS_fnc_arsenal_selectedWeaponType
+		_selectedWeapon = switch true do {
+			case ((ctrlFade (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_PRIMARYWEAPON))) == 0): {primaryweapon player};
+			case ((ctrlfade (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_SECONDARYWEAPON))) == 0): {secondaryWeapon player};
+			case ((ctrlFade (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_HANDGUN))) == 0): {handgunweapon player};
+			default {""};
+		};
+		
+		if(_selectedWeapon != "") then {
+		
+			["ShowItemStats",[configfile >> "cfgweapons" >> _selectedWeapon]] call (uinamespace getvariable "bis_fnc_arsenal_UI");
+			
+		};
 	
 		{
 			_ctrlList = _display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + _x);
@@ -3431,14 +3444,6 @@ switch _mode do {
 			IDC_RSCDISPLAYARSENAL_TAB_ITEMBIPOD
 			//IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG
 		];
-		
-		//alternative: use BIS_fnc_arsenal_selectedWeaponType
-		_selectedWeapon = switch true do {
-			case ((ctrlFade (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_PRIMARYWEAPON))) == 0): {primaryweapon player};
-			case ((ctrlfade (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_SECONDARYWEAPON))) == 0): {secondaryWeapon player};
-			case ((ctrlFade (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_HANDGUN))) == 0): {handgunweapon player};
-			default {""};
-		};
 		
 		//--- Attachments
 			if(_selectedWeapon != "") then {

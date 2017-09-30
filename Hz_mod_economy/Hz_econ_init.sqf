@@ -20,3 +20,9 @@ uinamespace setvariable ["Hz_econ_funcsPath",(uiNamespace getVariable "Hz_econ_p
 
 if (isServer) then {_this call compile preprocessFileLineNumbers (Hz_econ_path + "Hz_econ_init_server.sqf");};
 if (!isDedicated) then {_this call compile preprocessFileLineNumbers (Hz_econ_path + "Hz_econ_init_client.sqf");};
+
+if (isClass (configfile >> "cfgPatches" >> "ace_main")) then {
+
+	_this spawn compile preprocessFileLineNumbers (Hz_econ_path + "Hz_econ_initAceInterface.sqf");
+
+};

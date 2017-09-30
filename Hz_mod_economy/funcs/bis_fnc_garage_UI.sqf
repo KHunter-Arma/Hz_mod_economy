@@ -1239,6 +1239,16 @@ switch _mode do {
 
 														[_veh,_customStuff select 0,_customStuff select 1] call BIS_fnc_initVehicle;
 														
+														if (Hz_econ_vehStore_spawnEmpty) then {
+														
+														    clearMagazineCargoGlobal _veh;
+																clearItemCargoGlobal _veh;
+																clearWeaponCargoGlobal _veh;
+																_veh setfuel 0.05;
+																_veh setvehicleammo 0;														
+														
+														};
+														
 														if(!isnil "Hz_pers_network_vehicles") then {
 														
 														Hz_pers_network_vehicles pushback _veh;
