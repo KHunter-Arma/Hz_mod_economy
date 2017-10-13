@@ -5,10 +5,14 @@ private _ammoCount = (_this select 3) select 1;
 
 if (_magType in Hz_econ_restrictedMagazines) then {
 
-	_unit removeWeapon _weapon;
-	_unit addMagazine [_magType,_ammoCount];
-	_unit addWeapon _weapon;
+		if ((_weapon == (primaryWeapon _unit)) || (_weapon == (secondaryWeapon _unit)) || (_weapon == (handgunWeapon _unit))) then {
 
-	hint "You are not trained to use this magazine!";
+			_unit removeWeapon _weapon;
+			_unit addMagazine [_magType,_ammoCount];
+			_unit addWeapon _weapon;
+
+			hint "You are not trained to use this magazine!";
+
+		};
 
 };

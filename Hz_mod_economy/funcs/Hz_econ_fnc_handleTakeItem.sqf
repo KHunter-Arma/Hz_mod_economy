@@ -70,6 +70,16 @@ if ((count _parents) > 0) then {
 		
 			_itemCategory = "backpack";
 		
+		} else {
+		
+			_parents = [configfile >> "cfgMagazines" >> _itemType, true] call bis_fnc_returnparents;
+			
+			if ((count _parents) > 0) then {
+			
+				_itemCategory = "magazine";
+			
+			};
+		
 		};
 	
 	};
@@ -194,6 +204,28 @@ switch (true) do {
 
 		};
 
+	};
+	
+	case (_itemCategory == "magazine") : {
+	
+		if (_itemType in Hz_econ_restrictedMagazines) then {
+		
+			//don't restrict actual magazines unless they're about to be used (handled by reload EH)
+			//only restrict other items like throwables and explosives because they're always locked and loaded
+		
+			if ((_itemType in Hz_econ_allThrowableMags) || (_itemType in Hz_econ_allPutableMags)) then {
+			
+				_unit removeItem _itemType;
+				_unit removeItemFromBackpack _itemType;
+				_unit removeItemFromVest _itemType;
+				_unit removeItemFromUniform _itemType;
+				_container addItemCargoGlobal [_itemType,1];
+				hint "You are not allowed to use this item!";				
+			
+			};
+		
+		};
+		
 	};
 
 	default {};

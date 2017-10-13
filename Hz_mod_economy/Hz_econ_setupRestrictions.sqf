@@ -36,3 +36,38 @@ player addEventHandler ["Take",Hz_econ_fnc_handleTakeItem];
 player addEventHandler ["Reloaded",Hz_econ_fnc_handleReloaded];
 player addEventHandler ["GetInMan",Hz_econ_fnc_handleGetIn];
 player addEventHandler ["SeatSwitchedMan",Hz_econ_fnc_handleSeatSwitch];
+
+
+//store magazine types for Put and Throw weapons
+
+_throwClass = configFile >> "CfgWeapons" >> "Throw";
+_throwMuzzles = getArray (_throwClass >> "muzzles");
+Hz_econ_allThrowableMags = [];
+
+{
+	_muzzle = _x;
+	_magazines = getArray (_throwClass >> _muzzle >> "Magazines");
+	
+	{
+		
+		Hz_econ_allThrowableMags pushbackunique (toupper _x);
+		
+	} foreach _magazines;
+
+} foreach _throwMuzzles;
+
+_putClass = configFile >> "CfgWeapons" >> "Put";
+_putMuzzles = getArray (_putClass >> "muzzles");
+Hz_econ_allPutableMags = [];
+
+{
+	_muzzle = _x;
+	_magazines = getArray (_putClass >> _muzzle >> "Magazines");
+	
+	{
+		
+		Hz_econ_allPutableMags pushbackunique (toupper _x);
+		
+	} foreach _magazines;
+
+} foreach _putMuzzles;
