@@ -9,12 +9,27 @@
 * https://creativecommons.org/licenses/by-nc-sa/4.0/
 *******************************************************************************/
 
+if (_this > 0) then {
 
-Hz_econ_funds = Hz_econ_funds - _this;
-publicVariable "Hz_econ_funds";
+	Hz_econ_funds = Hz_econ_funds - _this;
+	publicVariable "Hz_econ_funds";
 
-if((random 1) > 0.5) then {hint format ["Hope you have fun with that!\nTotal Spent: $%1",_this];} else {
-if((random 1) > 0.5) then {hint format["I'd be careful with that if I were you!\nTotal Spent: $%1",_this];} else {
-hint format["Come back again!\nTotal Spent: $%1",_this];    
+	if((random 1) > 0.5) then {
+
+		hint format ["Hope you have fun with that!\nTotal Spent: $%1",_this];
+
+	} else {
+
+		if((random 1) > 0.5) then {
+
+			hint format["I'd be careful with that if I were you!\nTotal Spent: $%1",_this];
+
+		} else {
+
+			hint format["Come back again!\nTotal Spent: $%1",_this];    
+
 		};       
+		
 	};
+	
+};

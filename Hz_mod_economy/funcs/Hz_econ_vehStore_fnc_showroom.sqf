@@ -11,10 +11,17 @@
 
 _originalPos = _this select 0;
 
-waituntil {!isnil "Hz_econ_vehStore_vehicle"};
-waituntil {!isnull Hz_econ_vehStore_vehicle};
-
 waitUntil {dialog};
+
+waituntil {!isnil "Hz_econ_vehStore_vehicle" || !dialog};
+
+if (!dialog) exitWith {player setposatl _originalPos;};
+
+waituntil {!isnull Hz_econ_vehStore_vehicle || !dialog};
+
+player setposatl _originalPos;
+
+if (!dialog) exitWith {};
 
 //start music
 ace_hearing_disableVolumeUpdate = true;
@@ -22,9 +29,6 @@ playmusic "Hz_econ_media_showroom";
 
 //rotate
 while {dialog} do {
-    
-    player attachto [Hz_econ_vehStore_vehicle,[0,0,0]];   
-	player hideObjectGlobal true;		
             
     while {!isnull Hz_econ_vehStore_vehicle && dialog} do {
     
@@ -37,9 +41,6 @@ while {dialog} do {
 };
 
 deletevehicle Hz_econ_vehStore_vehicle;
-detach player;
-player setposatl _originalPos;
-player hideObjectGlobal false;
 
 5 fademusic 0;
 {deletevehicle _x} foreach (uinamespace getvariable "Hz_econ_vehStore_dummyObjects");
