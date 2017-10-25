@@ -102,9 +102,13 @@ _wepFilterBody = [];
 			
 				[_mag, _magazines] call _addToArray;	
 				
-				_ammoCount = _ammoArray select 1;
-				_ammoType = getText (configfile >> "cfgMagazines" >> _mag >> "ammo");
-				[_ammoType, _ammo, _ammoCount] call _addToArray;						
+				if ((getNumber (configfile >> "cfgMagazines" >> _mag >> "count")) > 1) then {
+			
+					_ammoCount = _ammoArray select 1;
+					_ammoType = getText (configfile >> "cfgMagazines" >> _mag >> "ammo");
+					[_ammoType, _ammo, _ammoCount] call _addToArray;	
+					
+				};
 			
 			};
 		
@@ -126,12 +130,16 @@ _wepFilterBody = [];
 		
 			_mag = _ammoArray select 0;
 		
-			[_mag, _magazines] call _addToArray;	
+			[_mag, _magazines] call _addToArray;
+
+			if ((getNumber (configfile >> "cfgMagazines" >> _mag >> "count")) > 1) then {
 			
-			_ammoCount = _ammoArray select 1;
-			_ammoType = getText (configfile >> "cfgMagazines" >> _mag >> "ammo");
-			[_ammoType, _ammo, _ammoCount] call _addToArray;						
-		
+				_ammoCount = _ammoArray select 1;
+				_ammoType = getText (configfile >> "cfgMagazines" >> _mag >> "ammo");
+				[_ammoType, _ammo, _ammoCount] call _addToArray;
+					
+			};	
+			
 		};
 	
 	};
@@ -183,9 +191,14 @@ _wepFilterBody = [];
 				
 					[_mag, _magazines] call _addToArray;	
 					
-					_ammoCount = _ammoArray select 1;
-					_ammoType = getText (configfile >> "cfgMagazines" >> _mag >> "ammo");
-					[_ammoType, _ammo, _ammoCount] call _addToArray;						
+					if ((getNumber (configfile >> "cfgMagazines" >> _mag >> "count")) > 1) then {
+			
+						_ammoCount = _ammoArray select 1;
+						_ammoType = getText (configfile >> "cfgMagazines" >> _mag >> "ammo");	
+
+						[_ammoType, _ammo, _ammoCount] call _addToArray;
+					
+					};						
 				
 				};
 			

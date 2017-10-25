@@ -1393,10 +1393,10 @@ switch _mode do {
 							_wepClassName = configName _xCfg;							
 							_skip = false;							
 							with missionnamespace do {							
-								if ((_wepClassName call Hz_econ_combatStore_fnc_getMagazinePrice) == -1) then {_skip = true;};		
+								if ((_wepClassName call Hz_econ_combatStore_fnc_getItemPrice) == -1) then {_skip = true;};		
 								if (Hz_econ_enableRestrictions) then {
 							
-								if(_wepClassName in Hz_econ_restrictedMagazines) then {_skip = true;};
+								if(_wepClassName in Hz_econ_restrictedItems) then {_skip = true;};
 							
 								};
 							};

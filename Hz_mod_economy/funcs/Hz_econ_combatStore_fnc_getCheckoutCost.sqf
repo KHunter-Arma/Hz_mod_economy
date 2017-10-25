@@ -47,6 +47,10 @@ _totalCost = _totalCost + _cost;
 {
 
 _cost = _x call Hz_econ_combatStore_fnc_getAmmoPrice;
+
+//exception handling
+if (_cost == -1) then {_cost = 0;};
+
 _cost = _cost*((_ammoArray select A_COUNT) select _foreachIndex);
 
 _totalCost = _totalCost + _cost;
