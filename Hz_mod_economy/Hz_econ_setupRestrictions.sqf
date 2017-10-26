@@ -29,6 +29,7 @@ waitUntil {sleep 0.1; !isnil "Hz_econ_restrictedWeapons"};
 waitUntil {sleep 0.1; !isnil "Hz_econ_restrictedAttachments"};
 waitUntil {sleep 0.1; !isnil "Hz_econ_restrictedItems"};
 waitUntil {sleep 0.1; !isnil "Hz_econ_restrictedMagazines"};
+waitUntil {sleep 0.1; !isnil "Hz_econ_restrictionVariables"};
 
 sleep 0.1;
 
@@ -36,6 +37,12 @@ player addEventHandler ["Take",Hz_econ_fnc_handleTakeItem];
 player addEventHandler ["Reloaded",Hz_econ_fnc_handleReloaded];
 player addEventHandler ["GetInMan",Hz_econ_fnc_handleGetIn];
 player addEventHandler ["SeatSwitchedMan",Hz_econ_fnc_handleSeatSwitch];
+
+{
+
+	player setvariable _x;
+
+} foreach Hz_econ_restrictionVariables;
 
 
 //store magazine types for Put and Throw weapons

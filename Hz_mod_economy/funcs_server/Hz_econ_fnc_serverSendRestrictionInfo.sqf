@@ -134,7 +134,7 @@ Hz_econ_restrictedItems = +_info;
 _clientID publicVariableClient "Hz_econ_restrictedItems";
 
 /*******************
-		 ITEMS
+		 MAGAZINES
 *******************/
 
 _index = -1;
@@ -157,3 +157,28 @@ _info = (Hz_econ_cfg_magazineRestrictions select _index) select 1;
 
 Hz_econ_restrictedMagazines = +_info;
 _clientID publicVariableClient "Hz_econ_restrictedMagazines";
+
+/*******************
+		 VARIABLES
+*******************/
+
+_index = -1;
+_info = Hz_econ_cfg_variables_default;
+
+_found = -1;
+{
+
+	_found = _x find _clientUID;
+
+	if(_found != -1) exitwith {_index = _foreachIndex};
+
+}foreach Hz_econ_cfg_variables;
+
+if(_index != -1) then {
+
+_info = (Hz_econ_cfg_variables select _index) select 1;
+
+};
+
+Hz_econ_restrictionVariables = +_info;
+_clientID publicVariableClient "Hz_econ_restrictionVariables";
