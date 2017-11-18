@@ -53,7 +53,7 @@ if (_fncName != "") then {
 
 {
   _store = missionnamespace getVariable [_x,objNull];
-  _store addaction ["<t color='#e01414'>Hunter'z Vehicle Store</t>",(Hz_econ_funcsPath + "Hz_econ_vehStore_fnc_openStore.sqf"),[]];
+  _store addaction ["<t color='#e01414'>Hunter'z Vehicle Store</t>",(Hz_econ_funcsPath + "Hz_econ_vehStore_fnc_openStore.sqf"),[],6,true,false,"","if (Hz_econ_limitedStoreAccess) then {!Hz_econ_vehicleStore_storeClosed} else {true}"];
 
 } foreach Hz_econ_vehStore_stores;
 

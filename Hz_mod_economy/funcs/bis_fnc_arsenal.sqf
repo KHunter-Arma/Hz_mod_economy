@@ -3040,6 +3040,7 @@ false,
 						};
 						_condition = _target getvariable ['bis_fnc_arsenal_condition',{true}];
 						alive _target && {_target distance _this < 5 && {vehicle _this == _this}} && {call _condition}
+						&& {if (Hz_econ_limitedStoreAccess) then {!Hz_econ_combatStore_storeClosed} else {true}}
 					"
 ];
 _x setvariable ["bis_fnc_arsenal_action",_action];

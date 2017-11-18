@@ -193,7 +193,7 @@ class CfgVehicles
       {
 				property = "Hz_econ_module_pFuelPrice";
         displayName = "FuelPrice";
-        tooltip = "Cost per liter of fuel. Used with ACE Refuel if ACE is running. Note: For the ACE interface to work at all, functions recompile should be enabled in the mission description.ext.";
+        tooltip = "Cost per liter of fuel. Used with ACE Refuel if ACE is running. Note: For the ACE interface to work at all, ACE Hunter'z (an edited version of ACE configured to interface with Hunter'z Economy Module) must be used.";
         // Default text filled in the input box
         // Because it's an expression, to return a String one must have a string within a string
         defaultValue = """1.5""";
@@ -214,6 +214,22 @@ class CfgVehicles
         displayName = "Enable Restrictions"; // Argument label
         tooltip = "Enable/disable player restrictions system to limit use of different equipment including all gear items and vehicles."; // Tooltip description
       };
+			class LimitedStoreAccess: Checkbox
+      {
+        // Unique property, use "<moduleClass>_<attributeClass>" format to make sure the name is unique in the world
+        property = "Hz_econ_module_pLimitedStoreAccess";
+        displayName = "Limit Store Access"; // Argument label
+        tooltip = "Limit access to stores to certain players. If enabled, players will not be able to use the combat store if you locally set ""Hz_econ_combatStore_storeClosed = true"", similarly with the vehicle store, if you locally set ""Hz_econ_vehicleStore_storeClosed = true"" the vehicle store will be inaccessible"; // Tooltip description
+      };
+			
+			class DisableInsignia: Checkbox
+      {
+        // Unique property, use "<moduleClass>_<attributeClass>" format to make sure the name is unique in the world
+        property = "Hz_econ_module_pDisableInsignia";
+        displayName = "Disable Unit Insignia"; // Argument label
+        tooltip = "Makes insignia (arm patches) selection unavailable in the store if enabled."; // Tooltip description
+      };			
+			
       class RestrictionsSetupFunctionName: Edit
       {
 				property = "Hz_econ_module_pRestrictionsSetupFunctionName";

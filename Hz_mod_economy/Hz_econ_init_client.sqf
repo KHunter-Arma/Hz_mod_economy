@@ -15,6 +15,20 @@ waitUntil {sleep 0.1; Hz_econ_preInitDone};
 _moduleLogic = _this select 0;
 Hz_econ_pathToPriceCodeFunctions = _moduleLogic getVariable "PathToPriceFunctions";
 Hz_econ_vehStore_spawnEmpty = _moduleLogic getVariable "VehSpawnEmpty";
+Hz_econ_limitedStoreAccess = _moduleLogic getVariable "LimitedStoreAccess";
+Hz_econ_disableInsignia = _moduleLogic getVariable "DisableInsignia";
+
+if (isnil "Hz_econ_combatStore_storeClosed") then {
+
+	Hz_econ_combatStore_storeClosed = false;
+
+};
+
+if (isnil "Hz_econ_vehicleStore_storeClosed") then {
+
+	Hz_econ_vehicleStore_storeClosed = false;
+
+};	
 
 if (isnil "Hz_econ_pathToPriceCodeFunctions") exitwith {hintc "Hunter'z Economy Module WARNING: Path to price code functions not defined. The stores will not be functional!"};
 

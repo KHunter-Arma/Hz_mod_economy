@@ -960,7 +960,13 @@ switch _mode do {
 					_scope = if (isnumber (_x >> "scope")) then {getnumber (_x >> "scope")} else {2};
 					if (_scope == 2) then {
 						_items = _data select IDC_RSCDISPLAYARSENAL_TAB_INSIGNIA;
-						_items set [count _items,configname _x];
+						
+						if (!Hz_econ_disableInsignia) then {
+						
+							_items set [count _items,configname _x];
+						
+						};
+						
 					};
 				} foreach ("isclass _x" configclasses (configfile >> "cfgunitinsignia"));
 			};
@@ -3461,6 +3467,17 @@ switch _mode do {
 					} foreach _temp;
 				
 				};
+				
+				{				
+					_ctrlList = _display displayctrl _x;
+					_lbAdd = _ctrlList lbadd "No attachment";
+					_ctrlList lbsetdata [_lbAdd,""];
+				
+				} foreach [IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_ITEMMUZZLE,
+				IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_ITEMACC,
+				IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_ITEMOPTIC,
+				IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_ITEMBIPOD
+				];
 				
 				{
 					private ["_item"];
