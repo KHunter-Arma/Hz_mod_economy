@@ -22,6 +22,8 @@ BIS_fnc_arsenal_center = nil;
 _originalPos = getposatl _caller;
 _caller setposatl _spawnPos;
 
+[_caller,true] remoteExecCall ["hideObjectGlobal",2,false];
+
 [_originalPos] spawn Hz_econ_vehStore_fnc_showroom;
 
 ["Open",true] call BIS_fnc_garage_M;

@@ -16,11 +16,13 @@ Hz_econ_enableRestrictions = _moduleLogic getVariable "Restrictions";
 Hz_econ_combatStore_stores = call compile (_moduleLogic getVariable "CombatStores");
 Hz_econ_vehStore_stores = call compile (_moduleLogic getVariable "VehStores");
 Hz_econ_funds = call compile (_moduleLogic getVariable "Funds");
+Hz_econ_fuelPrice = call compile (_moduleLogic getVariable "FuelPrice"); 
 
 publicvariable "Hz_econ_enableRestrictions";
 publicvariable "Hz_econ_combatStore_stores";
 publicvariable "Hz_econ_vehStore_stores";
 publicvariable "Hz_econ_funds";
+publicvariable "Hz_econ_fuelPrice";
 
 Hz_econ_module_pRestrictionsSetupFunctionName = _moduleLogic getVariable "RestrictionsSetupFunctionName";
 

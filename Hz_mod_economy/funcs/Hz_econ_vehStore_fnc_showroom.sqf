@@ -15,11 +15,12 @@ waitUntil {dialog};
 
 waituntil {!isnil "Hz_econ_vehStore_vehicle" || !dialog};
 
-if (!dialog) exitWith {player setposatl _originalPos;};
+if (!dialog) exitWith {player setposatl _originalPos; [player,false] remoteExecCall ["hideObjectGlobal",2,false];};
 
 waituntil {!isnull Hz_econ_vehStore_vehicle || !dialog};
 
 player setposatl _originalPos;
+[player,false] remoteExecCall ["hideObjectGlobal",2,false];
 
 if (!dialog) exitWith {};
 
