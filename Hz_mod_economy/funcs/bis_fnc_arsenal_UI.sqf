@@ -1153,7 +1153,7 @@ switch _mode do {
 						if (_virtualAll || {_x in _virtualCargo}) then {
 							_xCfg = configfile >> "cfgweapons" >> _x;
 							
-							_wepClassName = configName _xCfg;							
+							_wepClassName = toupper configName _xCfg;							
 							_skip = false;							
 							with missionnamespace do {							
 							if ((_wepClassName call Hz_econ_combatStore_fnc_getWeaponPrice) == -1) then {_skip = true;};
@@ -1194,7 +1194,7 @@ switch _mode do {
 						
 							_xCfg = configfile >> "cfgweapons" >> _x;
 							
-							_wepClassName = configName _xCfg;							
+							_wepClassName = toupper configName _xCfg;							
 							_skip = false;							
 							with missionnamespace do {							
 								if ((_wepClassName call Hz_econ_combatStore_fnc_getItemPrice) == -1) then {_skip = true;};		
@@ -1226,7 +1226,7 @@ switch _mode do {
 						if (_virtualAll || {_x in _virtualCargo}) then {
 						
 							_xCfg = configfile >> "cfgweapons" >> _x;
-							_wepClassName = configName _xCfg;							
+							_wepClassName = toupper configName _xCfg;							
 							_skip = false;							
 							with missionnamespace do {							
 								if ((_wepClassName call Hz_econ_combatStore_fnc_getWeaponPrice) == -1) then {_skip = true;};		
@@ -1260,7 +1260,7 @@ switch _mode do {
 						
 							_xCfg = configfile >> "cfgglasses" >> _x;
 							
-							_wepClassName = configName _xCfg;							
+							_wepClassName = toupper configName _xCfg;							
 							_skip = false;							
 							with missionnamespace do {							
 								if ((_wepClassName call Hz_econ_combatStore_fnc_getItemPrice) == -1) then {_skip = true;};		
@@ -1292,7 +1292,7 @@ switch _mode do {
 						
 							_xCfg = configfile >> "cfgvehicles" >> _x;
 							
-							_wepClassName = configName _xCfg;							
+							_wepClassName = toupper configName _xCfg;							
 							_skip = false;							
 							with missionnamespace do {							
 								if ((_wepClassName call Hz_econ_combatStore_fnc_getItemPrice) == -1) then {_skip = true;};	
@@ -1364,7 +1364,7 @@ switch _mode do {
 						
 							_xCfg = configfile >> "cfgmagazines" >> _x;
 							
-							_wepClassName = configName _xCfg;							
+							_wepClassName = toupper configName _xCfg;							
 							_skip = false;							
 							with missionnamespace do {							
 								if ((_wepClassName call Hz_econ_combatStore_fnc_getMagazinePrice) == -1) then {_skip = true;};		
@@ -1396,7 +1396,7 @@ switch _mode do {
 						
 							_xCfg = configfile >> "cfgweapons" >> _x;
 							
-							_wepClassName = configName _xCfg;							
+							_wepClassName = toupper configName _xCfg;							
 							_skip = false;							
 							with missionnamespace do {							
 								if ((_wepClassName call Hz_econ_combatStore_fnc_getItemPrice) == -1) then {_skip = true;};		
@@ -2100,6 +2100,15 @@ switch _mode do {
 
 			//--- Attachments
 			_compatibleItems = _item call bis_fnc_compatibleItems;
+			
+			_temp = [];
+			{
+			
+				_temp pushBack (toUpper _x);
+			
+			} foreach _compatibleItems;
+			
+			_compatibleItems = +_temp;
 			
 			with missionNamespace do {
 			
@@ -3414,6 +3423,7 @@ switch _mode do {
 	};
 };
 
+
 	//Hunter: This is literally gross but I can't spend any more days on this or I'll loose the small amount of sanity left in me...
 	if(isnil "BIS_fnc_arsenal_display") exitwith {};
 	_exit = false;
@@ -3454,7 +3464,15 @@ switch _mode do {
 		//--- Attachments
 			if(_selectedWeapon != "") then {
 		
-				_compatibleItems = _selectedWeapon call bis_fnc_compatibleItems;
+				_compatibleItems = _selectedWeapon call bis_fnc_compatibleItems;				
+				_temp = [];
+				{
+				
+					_temp pushBack (toUpper _x);
+				
+				} foreach _compatibleItems;
+				
+				_compatibleItems = +_temp;
 				
 				if (Hz_econ_enableRestrictions) then {_compatibleItems = _compatibleItems - Hz_econ_restrictedAttachments;};
 				
