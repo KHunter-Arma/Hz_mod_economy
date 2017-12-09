@@ -21,12 +21,14 @@
 * https://creativecommons.org/licenses/by-nc-sa/4.0/
 *******************************************************************************/
 
-private ["_return", "_unit", "_addToArray", "_inputType", "_inputArray", "_addCount", "_arrayType", "_arrayCount", "_index", "_items", "_weapons", "_magazines", "_ammo", "_attachments", "_wepFilterBody", "_wep", "_ammoArray", "_mag", "_ammoCount", "_ammoType", "_container", "_wepFilter"];
+private ["_return", "_unit", "_addToArray", "_items", "_weapons", "_magazines", "_ammo", "_attachments", "_addToArray", "_wepFilterBody", "_wep", "_ammoArray", "_mag", "_ammoCount", "_ammoType", "_acc", "_container", "_wepFilter"];
 
 _unit = _this;
 _return = [];
 
 _addToArray = {
+
+	private ["_inputType", "_inputArray", "_addCount", "_arrayType", "_arrayCount", "_index"];
 
 	_inputType = _this select 0;
 	_inputArray = _this select 1;
@@ -54,7 +56,6 @@ _addToArray = {
 	};
 
 };
-
 
 _items = [[],[]];
 _weapons = [[],[]];

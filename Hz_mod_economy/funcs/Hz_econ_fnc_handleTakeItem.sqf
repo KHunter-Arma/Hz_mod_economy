@@ -16,7 +16,7 @@ private _itemType = toupper (_this select 2);
 //Handle restricted radios differently
 if("ACRE_BaseRadio" in ([(configFile >> "CfgWeapons" >> _itemType), true] call BIS_fnc_returnparents)) exitWith {
    
-	_originalItemType = _itemType;
+	private _originalItemType = _itemType;
 	 
 	//ACRE classname correction
 	if ("ACRE_PRC152" in ([(configFile >> "CfgWeapons" >> _itemType), true] call BIS_fnc_returnparents) ) then {_itemType = "ACRE_PRC152";} else { 
@@ -193,13 +193,13 @@ switch (true) do {
 			default {
 			
 				//could be a non-restricted base weapon, but with restricted attachments
-				_attachments = _unit weaponAccessories _itemType;
+				private _attachments = _unit weaponAccessories _itemType;
 				
 				//definitely a weapon with attachments
 				if ((str _attachments) != "["""","""","""",""""]") then {
 				
 					{
-						_attachment = toupper _x;
+						private _attachment = toupper _x;
 					
 						if (_attachment in Hz_econ_restrictedAttachments) then {
 						

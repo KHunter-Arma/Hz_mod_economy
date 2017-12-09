@@ -12,16 +12,16 @@
 #define A_TYPE 0
 #define A_COUNT 1
 
-_totalCost = 0;
-_weaponsArray = _this select 0;
-_attachmentsArray = _this select 1;
-_itemsArray = _this select 2;
-_magazinesArray = _this select 3;
-_ammoArray = _this select 4;
+private _totalCost = 0;
+private _weaponsArray = _this select 0;
+private _attachmentsArray = _this select 1;
+private _itemsArray = _this select 2;
+private _magazinesArray = _this select 3;
+private _ammoArray = _this select 4;
 
 {
 
-_cost = _x call Hz_econ_combatStore_fnc_getWeaponPrice;
+private _cost = _x call Hz_econ_combatStore_fnc_getWeaponPrice;
 _cost = _cost*((_weaponsArray select A_COUNT) select _foreachIndex);
 
 _totalCost = _totalCost + _cost;

@@ -56,7 +56,3 @@ if (_found) exitWith {hint "You are not trained to use this attachment!";};
 	};
 
 } foreach handgunItems _unit;
-
-
-
-

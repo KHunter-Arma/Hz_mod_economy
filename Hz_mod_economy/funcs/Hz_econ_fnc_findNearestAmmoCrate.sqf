@@ -9,6 +9,8 @@
 * https://creativecommons.org/licenses/by-nc-sa/4.0/
 *******************************************************************************/
 
+private ["_unit", "_types", "_objects", "_return"];
+
 _unit = _this select 0;
 _types = _this select 1;
 

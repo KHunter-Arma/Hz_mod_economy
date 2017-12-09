@@ -9,17 +9,17 @@
 * https://creativecommons.org/licenses/by-nc-sa/4.0/
 *******************************************************************************/
 
-_storeObj = _this select 0;
-_caller = _this select 1;
+private _storeObj = _this select 0;
+private _caller = _this select 1;
 
-_spawnPos = _storeObj getvariable ["Hz_econ_vehStore_spawnPos",getposatl _storeObj];
+private _spawnPos = _storeObj getvariable ["Hz_econ_vehStore_spawnPos",getposatl _storeObj];
 
 if ((count nearestObjects [_spawnPos,["LandVehicle","Air"],10]) > 0) exitwith {hint "Error: Vehicle delivery position obstructed!";};
 
 BIS_fnc_garage_center = nil;
 BIS_fnc_arsenal_center = nil;
 
-_originalPos = getposatl _caller;
+private _originalPos = getposatl _caller;
 _caller setposatl _spawnPos;
 
 [_caller,true] remoteExecCall ["hideObjectGlobal",2,false];

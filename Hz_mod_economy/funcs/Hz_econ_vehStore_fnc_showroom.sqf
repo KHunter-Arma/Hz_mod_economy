@@ -9,7 +9,7 @@
 * https://creativecommons.org/licenses/by-nc-sa/4.0/
 *******************************************************************************/
 
-_originalPos = _this select 0;
+private _originalPos = _this select 0;
 
 waitUntil {dialog};
 

@@ -9,8 +9,6 @@
 * https://creativecommons.org/licenses/by-nc-sa/4.0/
 *******************************************************************************/
 
-
-
 /*------------------------------------------------------------------------------
 
         Information in all config variables to be stored in the following way:
@@ -29,6 +27,8 @@
       holding classnames (upper case!) of all assets restricted for that UID.
 
 ------------------------------------------------------------------------------*/
+
+private ["_clientID", "_clientUID", "_index", "_info", "_found"];
 
 _clientID = _this select 0;
 _clientUID = _this select 1;

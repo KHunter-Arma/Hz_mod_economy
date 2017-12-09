@@ -9,6 +9,8 @@
 * https://creativecommons.org/licenses/by-nc-sa/4.0/
 *******************************************************************************/
 
+private ["_itemsBefore", "_weaponsBefore", "_magazinesBefore", "_attachmentsBefore", "_ammoBefore", "_itemsNow", "_weaponsNow", "_magazinesNow", "_attachmentsNow", "_ammoNow", "_returnItems", "_returnWeapons", "_returnAttachments", "_returnMagazines", "_returnAmmo", "_existingAmount", "_index", "_newAmount"];
+
 #define A_TYPE 0
 #define A_COUNT 1
 #define A_WEP 0
