@@ -36,12 +36,12 @@ Hz_econ_vehStore_fnc_getVehCost = compile preprocessfilelinenumbers (Hz_econ_fun
 
 uinamespace setvariable ["Hz_econ_vehStore_dummyObjects",[]];
 
-sleep 20;
-
 _moduleLogic = _this select 0;
 _fncName = _moduleLogic getVariable "VehCustomInitFunctionName";
 
 if (_fncName != "") then {
+
+	waituntil {sleep 1; !isnil {missionNamespace getVariable _fncName}};
 
 	Hz_econ_vehStore_customInitFnc = missionNamespace getVariable _fncName;
 

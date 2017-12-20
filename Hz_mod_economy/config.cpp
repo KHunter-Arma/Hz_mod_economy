@@ -148,7 +148,7 @@ class CfgVehicles
 			{
 				property="Hz_econ_module_pVehCustomInitFunctionName";
 				displayName="Vehicle Custom Init Function Name";
-				tooltip="OPTIONAL: Leave empty if you don't want to use it. The name of your function to execute when a new vehicle is bought from the store. Parameters passed to function: [vehicle]. WARNING: This function will be executed locally by the client that is using the store. The vehicle will be local to the client when spawned as it's 'createvehicle'd by them.";
+				tooltip="OPTIONAL: Leave empty if you don't want to use it. The name of your function to execute when a new vehicle is bought from the store. Parameters passed to function: [vehicle]. WARNING: This function will be executed locally by the client that used the store. The vehicle will be local to the client when spawned as it's 'createvehicle'd by them. If you use this option, you must make sure the function is defined, or the module will get stuck waiting for it to be defined and the store won't be available.";
 				defaultValue="""""";
 			};
 			class FuelPrice: Edit
@@ -174,14 +174,21 @@ class CfgVehicles
 			class LimitedStoreAccess: Checkbox
 			{
 				property="Hz_econ_module_pLimitedStoreAccess";
-				displayName="Limit Store Access";
-				tooltip="Limit access to stores to certain players. If enabled, players will not be able to use the combat store if you locally set ""Hz_econ_combatStore_storeClosed = true"", similarly with the vehicle store, if you locally set ""Hz_econ_vehicleStore_storeClosed = true"" the vehicle store will be inaccessible";
+				displayName="Limit Store Access by Default";
+				tooltip="Limit access to stores by default, to allow whitelisting. If enabled, a player won't be able to use the combat store unless you locally set ""Hz_econ_combatStore_storeClosed = false"", similarly with the vehicle store, unless you locally set ""Hz_econ_vehicleStore_storeClosed = false"" the vehicle store will be inaccessible. If this option is left disabled, the system works in reverse; the stores will be open to everyone by default, but you can still disable access to some players by locally setting those variables to ""true"".";
 			};
 			class DisableInsignia: Checkbox
 			{
 				property="Hz_econ_module_pDisableInsignia";
 				displayName="Disable Unit Insignia";
 				tooltip="Makes insignia (arm patches) selection unavailable in the store if enabled.";
+			};
+			class CombatStoreExitFunctionName: Edit
+			{
+				property="Hz_econ_module_pCombatStoreExitFunctionName";
+				displayName="Combat Store Exit Function Name";
+				tooltip="OPTIONAL: Leave empty if you don't want to use it. The name of your function to execute when a player exits the store. Parameters passed to function: [money spent, items bought], where money spent is a number that holds how much money the player spent at the store, and items bought is an array holding 2D arrays formed up of classnames and quantities of all new items bought by the player in the format [[newWeaponsArray,countArray],[newAttachmentsArray,countArray],[newItemsArray,countArray],[newMagazinesArray,countArray],[newAmmoArray,countArray]]. WARNING: This function will be executed locally by the client that used the store, so the user object can be accessed using the ""player"" command. If you use this option, you must make sure the function is defined, or the module will get stuck waiting for it to be defined and the store won't be available.";
+				defaultValue="""""";
 			};
 			class RestrictionsSetupFunctionName: Edit
 			{

@@ -35,7 +35,13 @@ if (Hz_econ_funds <= 0) exitwith {hint "Insufficient funds!";};
 		
     _cost = _newGear call Hz_econ_combatStore_fnc_getCheckoutCost;
     
-		_cost call Hz_econ_combatStore_fnc_makePayment;
+		if (_cost > 0) then {
+		
+			_cost call Hz_econ_combatStore_fnc_makePayment;
+			
+			[_cost,_newGear] call Hz_econ_combatStore_customExitFnc;
+			
+		};
 
 	} else {
 

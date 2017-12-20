@@ -18,15 +18,32 @@ Hz_econ_vehStore_spawnEmpty = _moduleLogic getVariable "VehSpawnEmpty";
 Hz_econ_limitedStoreAccess = _moduleLogic getVariable "LimitedStoreAccess";
 Hz_econ_disableInsignia = _moduleLogic getVariable "DisableInsignia";
 
+
 if (isnil "Hz_econ_combatStore_storeClosed") then {
 
-	Hz_econ_combatStore_storeClosed = false;
+	if (Hz_econ_limitedStoreAccess) then {
+	
+		Hz_econ_combatStore_storeClosed = true;
+	
+	} else {
+	
+		Hz_econ_combatStore_storeClosed = false;
+	
+	};
 
 };
 
 if (isnil "Hz_econ_vehicleStore_storeClosed") then {
 
-	Hz_econ_vehicleStore_storeClosed = false;
+	if (Hz_econ_limitedStoreAccess) then {
+	
+		Hz_econ_vehicleStore_storeClosed = true;
+	
+	} else {
+	
+		Hz_econ_vehicleStore_storeClosed = false;
+	
+	};
 
 };	
 

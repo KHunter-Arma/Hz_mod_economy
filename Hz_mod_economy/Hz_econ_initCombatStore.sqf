@@ -22,6 +22,21 @@ Hz_econ_combatStore_fnc_getGearDifference = compile preprocessfilelinenumbers (H
 Hz_econ_combatStore_fnc_checkout = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_combatStore_fnc_checkout.sqf");
 Hz_econ_combatStore_fnc_getCheckoutCost = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_combatStore_fnc_getCheckoutCost.sqf");
 
+_moduleLogic = _this select 0;
+_fncName = _moduleLogic getVariable "CombatStoreExitFunctionName";
+
+if (_fncName != "") then {
+
+	waituntil {sleep 1; !isnil {missionNamespace getVariable _fncName}};
+
+	Hz_econ_combatStore_customExitFnc = missionNamespace getVariable _fncName;
+
+} else {
+
+	Hz_econ_combatStore_customExitFnc = {};
+
+};
+
 {
 _store = missionnamespace getVariable [_x,objNull];
 ["AmmoboxInit",[_store,true]] call BIS_fnc_arsenal_M;  
