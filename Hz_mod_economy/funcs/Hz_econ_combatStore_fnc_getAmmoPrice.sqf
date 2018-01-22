@@ -9,4 +9,4 @@
 * https://creativecommons.org/licenses/by-nc-sa/4.0/
 *******************************************************************************/
 
-_this call Hz_econ_combatStore_customAmmoPrice;
+_this call Hz_econ_combatStore_customAmmoPrice
