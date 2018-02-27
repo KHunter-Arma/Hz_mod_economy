@@ -695,7 +695,7 @@ switch _mode do {
 			_ctrlButtonOK ctrlSetText "Checkout";
 			
 		};
-		
+				
 		_ctrlButtonTry = _display displayctrl IDC_RSCDISPLAYARSENAL_CONTROLSBAR_BUTTONTRY;
 		_ctrlButtonTry ctrladdeventhandler ["buttonclick","with uinamespace do {['buttonTry',[ctrlparent (_this select 0)]] call (uinamespace getvariable ""bis_fnc_garage_UI"");};"];
 		_ctrlButtonTry ctrlSetTooltip "";
@@ -740,7 +740,17 @@ switch _mode do {
 				_ctrlTab = _display displayctrl (IDC_RSCDISPLAYARSENAL_TAB + _idc);
 				_mode = if (_idc in [IDCS_LEFT]) then {"TabSelectLeft"} else {"TabSelectRight"};
 				{
-					_x ctrladdeventhandler ["buttonclick",format ["with uinamespace do {['%2',[ctrlparent (_this select 0),%1]] call %3;};",_idc,_mode,_function]];
+				
+					if (_function == "bis_fnc_arsenal") then {
+			
+						_x ctrladdeventhandler ["buttonclick",format ["with uinamespace do {['%2',[ctrlparent (_this select 0),%1]] call bis_fnc_arsenal_UI;};",_idc,_mode]];
+			
+					} else {
+					
+						_x ctrladdeventhandler ["buttonclick",format ["with uinamespace do {['%2',[ctrlparent (_this select 0),%1]] call bis_fnc_garage_UI;};",_idc,_mode]];
+					
+					};				
+					
 					_x ctrladdeventhandler ["mousezchanged","with uinamespace do {['MouseZChanged',_this] call (uinamespace getvariable ""bis_fnc_arsenal_UI"");};"];
 				} foreach [_ctrlIcon,_ctrlTab];
 
@@ -755,8 +765,17 @@ switch _mode do {
 				_ctrlList ctrlsetfade 1;
 				_ctrlList ctrlsetfontheight (_gridH * 0.8);
 				_ctrlList ctrlcommit 0;
-
-				_ctrlList ctrladdeventhandler ["lbselchanged",format ["with uinamespace do {['SelectItem',[ctrlparent (_this select 0),(_this select 0),%1]] call %2;};",_idc,_function]];
+				
+				if (_function == "bis_fnc_arsenal") then {
+			
+					_ctrlList ctrladdeventhandler ["lbselchanged",format ["with uinamespace do {['SelectItem',[ctrlparent (_this select 0),(_this select 0),%1]] call (uinamespace getvariable ""bis_fnc_arsenal_UI"");};",_idc]];
+			
+				} else {
+				
+					_ctrlList ctrladdeventhandler ["lbselchanged",format ["with uinamespace do {['SelectItem',[ctrlparent (_this select 0),(_this select 0),%1]] call (uinamespace getvariable ""bis_fnc_garage_UI"");};",_idc]];
+				
+				};	
+				
 				_ctrlList ctrladdeventhandler ["lbdblclick",format ["with uinamespace do {['ShowItem',[ctrlparent (_this select 0),(_this select 0),%1]] spawn (uinamespace getvariable ""bis_fnc_arsenal_UI"");};",_idc]];
 
 				_ctrlListDisabled = _display displayctrl (IDC_RSCDISPLAYARSENAL_LISTDISABLED + _idc);
@@ -768,8 +787,17 @@ switch _mode do {
 		};
 		uinamespace setvariable ["bis_fnc_arsenal_sort",_sortValues];
 		['TabDeselect',[_display,-1]] call (uinamespace getvariable "bis_fnc_arsenal_UI");
-		['SelectItem',[_display,controlnull,-1]] call (uinamespace getvariable _function);
-
+		
+		if (_function == "bis_fnc_arsenal") then {
+			
+			['SelectItem',[_display,controlnull,-1]] call (uinamespace getvariable "bis_fnc_arsenal_UI");
+			
+		} else {
+		
+			['SelectItem',[_display,controlnull,-1]] call (uinamespace getvariable "bis_fnc_garage_UI");
+		
+		};	
+		
 		_ctrlButtonClose = _display displayctrl IDC_RSCDISPLAYARSENAL_CONTROLSBAR_BUTTONCLOSE;
 		_ctrlButtonClose ctrladdeventhandler ["buttonclick","with uinamespace do {['buttonClose',[ctrlparent (_this select 0)]] spawn (uinamespace getvariable ""bis_fnc_arsenal_UI"");}; true"];
 
@@ -1878,7 +1906,7 @@ switch _mode do {
 					} else {
 						_compatibleItems = _item call bis_fnc_compatibleItems;
 						_weaponAccessories = primaryweaponitems _center - [""];
-						[_center,_item,4] call bis_fnc_addweapon;
+						[_center,_item,0] call bis_fnc_addweapon;
 						{
 							_acc = _x;
 							if ({_x == _acc} count _compatibleItems > 0) then {_center addprimaryweaponitem _acc;};
@@ -1895,7 +1923,7 @@ switch _mode do {
 					} else {
 						_compatibleItems = _item call bis_fnc_compatibleItems;
 						_weaponAccessories = secondaryweaponitems _center - [""];
-						[_center,_item,2] call bis_fnc_addweapon;
+						[_center,_item,0] call bis_fnc_addweapon;
 						{
 							_acc = _x;
 							if ({_x == _acc} count _compatibleItems > 0) then {_center addsecondaryweaponitem _acc;};
@@ -1912,7 +1940,7 @@ switch _mode do {
 					} else {
 						_compatibleItems = _item call bis_fnc_compatibleItems;
 						_weaponAccessories = handgunitems _center - [""];
-						[_center,_item,4] call bis_fnc_addweapon;
+						[_center,_item,0] call bis_fnc_addweapon;
 						{
 							_acc = _x;
 							if ({_x == _acc} count _compatibleItems > 0) then {_center addhandgunitem _acc;};
@@ -2040,15 +2068,34 @@ switch _mode do {
 						_item = _x;
 						if (CONDITION(_virtualMagazineCargo)) then {
 							_mag = tolower _item;
-							if !(_mag in _magazines) then {
-								_magazines set [count _magazines,_mag];
-								_value = {_x == _mag} count _itemsCurrent;
-								_displayName = gettext (configfile >> "cfgmagazines" >> _mag >> "displayName");
-								_lbAdd = _ctrlList lnbaddrow ["",_displayName,str _value];
-								_ctrlList lnbsetdata [[_lbAdd,0],_mag];
-								_ctrlList lnbsetvalue [[_lbAdd,0],getnumber (configfile >> "cfgmagazines" >> _mag >> "mass")];
-								_ctrlList lnbsetpicture [[_lbAdd,0],gettext (configfile >> "cfgmagazines" >> _mag >> "picture")];
-								_ctrlList lbsettooltip [_lbAdd,_displayName];
+							
+							with missionNamespace do {
+							
+								if ((_mag call Hz_econ_combatStore_fnc_getMagazinePrice) != -1) then {
+								
+									_skip = false;
+									
+									if (Hz_econ_enableRestrictions) then {
+								
+										if((toUpper _mag) in Hz_econ_restrictedMagazines) then {_skip = true;};
+								
+									};
+									
+									if (_skip) exitwith {};
+								
+									if !(_mag in _magazines) then {							
+										_magazines set [count _magazines,_mag];
+										_value = {_x == _mag} count _itemsCurrent;
+										_displayName = gettext (configfile >> "cfgmagazines" >> _mag >> "displayName");
+										_lbAdd = _ctrlList lnbaddrow ["",_displayName,str _value];
+										_ctrlList lnbsetdata [[_lbAdd,0],_mag];
+										_ctrlList lnbsetvalue [[_lbAdd,0],getnumber (configfile >> "cfgmagazines" >> _mag >> "mass")];
+										_ctrlList lnbsetpicture [[_lbAdd,0],gettext (configfile >> "cfgmagazines" >> _mag >> "picture")];
+										_ctrlList lbsettooltip [_lbAdd,_displayName];
+									};
+								
+								};
+							
 							};
 						};
 					} foreach getarray (_cfgMuzzle >> "magazines");
@@ -3423,6 +3470,7 @@ switch _mode do {
 	};
 };
 
+/*
 
 	//Hunter: This is literally gross but I can't spend any more days on this or I'll loose the small amount of sanity left in me...
 	if(isnil "BIS_fnc_arsenal_display") exitwith {};
@@ -3457,9 +3505,57 @@ switch _mode do {
 			IDC_RSCDISPLAYARSENAL_TAB_ITEMOPTIC,
 			IDC_RSCDISPLAYARSENAL_TAB_ITEMACC,
 			IDC_RSCDISPLAYARSENAL_TAB_ITEMMUZZLE,
-			IDC_RSCDISPLAYARSENAL_TAB_ITEMBIPOD
-			//IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG
+			IDC_RSCDISPLAYARSENAL_TAB_ITEMBIPOD,
+			IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG
 		];
+		
+			//--- Weapon magazines (based on current weapons)
+			
+			private ["_ctrlList"];
+			_ctrlList = _display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG);
+			_magazines = [];
+			{
+				_cfgWeapon = configfile >> "cfgweapons" >> _x;
+				{
+					_cfgMuzzle = if (_x == "this") then {_cfgWeapon} else {_cfgWeapon >> _x};
+					{
+						private ["_item"];
+						_item = _x;
+						_mag = tolower _item;
+							
+							with missionNamespace do {
+							
+								if ((_mag call Hz_econ_combatStore_fnc_getMagazinePrice) != -1) then {
+								
+									_skip = false;
+									
+									if (Hz_econ_enableRestrictions) then {
+								
+										if((toUpper _mag) in Hz_econ_restrictedMagazines) then {_skip = true;};
+								
+									};
+									
+									if (_skip) exitwith {};
+								
+									if !(_mag in _magazines) then {							
+										_magazines set [count _magazines,_mag];
+										_value = {_x == _mag} count (magazines player);
+										_displayName = gettext (configfile >> "cfgmagazines" >> _mag >> "displayName");
+										_lbAdd = _ctrlList lnbaddrow ["",_displayName,str _value];
+										_ctrlList lnbsetdata [[_lbAdd,0],_mag];
+										_ctrlList lnbsetvalue [[_lbAdd,0],getnumber (configfile >> "cfgmagazines" >> _mag >> "mass")];
+										_ctrlList lnbsetpicture [[_lbAdd,0],gettext (configfile >> "cfgmagazines" >> _mag >> "picture")];
+										_ctrlList lbsettooltip [_lbAdd,_displayName];
+									};
+								
+								};
+							
+							};
+					} foreach getarray (_cfgMuzzle >> "magazines");
+				} foreach getarray (_cfgWeapon >> "muzzles");
+			} foreach (weapons player - ["Throw","Put"]);
+			_ctrlList lbsetcursel (lbcursel _ctrlList max 0);
+
 		
 		//--- Attachments
 			if(_selectedWeapon != "") then {
@@ -3522,3 +3618,5 @@ switch _mode do {
 			};
 
 	};
+	
+*/

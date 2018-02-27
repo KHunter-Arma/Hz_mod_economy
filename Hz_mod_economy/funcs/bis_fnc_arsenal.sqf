@@ -1532,7 +1532,7 @@ _center removeweapon primaryweapon _center;
 } else {
 _compatibleItems = _item call bis_fnc_compatibleItems;
 _weaponAccessories = primaryweaponitems _center - [""];
-[_center,_item,4] call bis_fnc_addweapon;
+[_center,_item,0] call bis_fnc_addweapon;
 {
 _acc = _x;
 if ({_x == _acc} count _compatibleItems > 0) then {_center addprimaryweaponitem _acc;};
@@ -1549,7 +1549,7 @@ _center removeweapon secondaryweapon _center;
 } else {
 _compatibleItems = _item call bis_fnc_compatibleItems;
 _weaponAccessories = secondaryweaponitems _center - [""];
-[_center,_item,2] call bis_fnc_addweapon;
+[_center,_item,0] call bis_fnc_addweapon;
 {
 _acc = _x;
 if ({_x == _acc} count _compatibleItems > 0) then {_center addsecondaryweaponitem _acc;};
@@ -1566,7 +1566,7 @@ _center removeweapon handgunweapon _center;
 } else {
 _compatibleItems = _item call bis_fnc_compatibleItems;
 _weaponAccessories = handgunitems _center - [""];
-[_center,_item,4] call bis_fnc_addweapon;
+[_center,_item,0] call bis_fnc_addweapon;
 {
 _acc = _x;
 if ({_x == _acc} count _compatibleItems > 0) then {_center addhandgunitem _acc;};
