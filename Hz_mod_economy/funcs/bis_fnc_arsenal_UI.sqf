@@ -1900,7 +1900,7 @@ switch _mode do {
 			case IDC_RSCDISPLAYARSENAL_TAB_PRIMARYWEAPON: {
 				_isDifferentWeapon = (primaryweapon _center call bis_fnc_baseWeapon) != _item;
 				if (_isDifferentWeapon) then {
-					{_center removemagazines _x} foreach getarray (configfile >> "cfgweapons" >> primaryweapon _center >> "magazines");
+				//	{_center removemagazines _x} foreach getarray (configfile >> "cfgweapons" >> primaryweapon _center >> "magazines");
 					if (_item == "") then {
 						_center removeweapon primaryweapon _center;
 					} else {
@@ -1917,7 +1917,7 @@ switch _mode do {
 			case IDC_RSCDISPLAYARSENAL_TAB_SECONDARYWEAPON: {
 				_isDifferentWeapon = (secondaryweapon _center call bis_fnc_baseWeapon) != _item;
 				if (_isDifferentWeapon) then {
-					{_center removemagazines _x} foreach getarray (configfile >> "cfgweapons" >> secondaryweapon _center >> "magazines");
+				//	{_center removemagazines _x} foreach getarray (configfile >> "cfgweapons" >> secondaryweapon _center >> "magazines");
 					if (_item == "") then {
 						_center removeweapon secondaryweapon _center;
 					} else {
@@ -1934,7 +1934,7 @@ switch _mode do {
 			case IDC_RSCDISPLAYARSENAL_TAB_HANDGUN: {
 				_isDifferentWeapon = (handgunweapon _center call bis_fnc_baseWeapon) != _item;
 				if (_isDifferentWeapon) then {
-					{_center removemagazines _x} foreach getarray (configfile >> "cfgweapons" >> handgunweapon _center >> "magazines");
+				//	{_center removemagazines _x} foreach getarray (configfile >> "cfgweapons" >> handgunweapon _center >> "magazines");
 					if (_item == "") then {
 						_center removeweapon handgunweapon _center;
 					} else {

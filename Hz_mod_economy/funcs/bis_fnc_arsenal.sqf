@@ -3025,7 +3025,7 @@ _action = _x addaction [
 {
 _box = _this select 0;
 _unit = _this select 1;
-["Open",[nil,_box,_unit]] call Hz_econ_combatStore_fnc_openStore;
+["Open",[nil,_box,_unit]] spawn Hz_econ_combatStore_fnc_openStore;
 },
 [],
 6,
