@@ -63,6 +63,10 @@ if ((count _parents) > 0) then {
 
 		};
 	
+	} else {
+	
+		_itemCategory = "weapon";
+	
 	};
 
 } else {
