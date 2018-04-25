@@ -1,33 +1,7 @@
 /*
 	Author: Karel Moricky
 
-	Description:
-	Splendid arsenal viewer
-
-	Parameter(s):
-
-		0: STRING - mode
-		1: ANY - params (see below)
-
-	Modes:
-		"Open" - Open the Arsenal
-			0 (Optional): BOOL - true to open full Arsenal, with all categories and items available (default: false)
-
-		"Preload" - Preload item configs for Arsenal (without preloading, configs are parsed the first time Arsenal is opened)
-			No params
-
-		"AmmoboxInit" - Add virtual ammobox. Action to access the Arsenal will be added automatically on all clients.
-			0: OBJECT - ammobox
-			1 (Optional): BOOL - true to make all weapons and items in the game available in the box (default: false)
-			2 (Optional): Condition for showing the Arsenal action (default: {true})
-				      Passed arguments are the same as in addAction condition, i.e., _target - the box, _this - caller
-
-		"AmmoboxExit" - Remove virtual ammobox
-			0: OBJECT - ammobox
-
-
-	Returns:
-	NOTHING
+	Modified by K.Hunter to form basis of stores in Hunter'z Economy Module.
 	
 */
 

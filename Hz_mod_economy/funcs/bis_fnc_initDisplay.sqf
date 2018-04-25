@@ -1,3 +1,10 @@
+/*
+	Author: Karel Moricky
+
+	Modified by K.Hunter to form basis of stores in Hunter'z Economy Module.
+	
+*/
+
 private ["_mode","_params","_class"];
 
 with uinamespace do {

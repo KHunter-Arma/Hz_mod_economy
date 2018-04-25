@@ -1,3 +1,9 @@
+/*
+	Author: Karel Moricky
+
+	Modified by K.Hunter to form basis of stores in Hunter'z Economy Module.
+	
+*/
 
 	private _fnc_scriptNameParent = if (isNil '_fnc_scriptName') then {'BIS_fnc_arsenal'} else {_fnc_scriptName};
 	private _fnc_scriptName = 'BIS_fnc_arsenal';

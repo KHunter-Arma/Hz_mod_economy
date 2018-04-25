@@ -1,3 +1,10 @@
+/*
+	Author: Karel Moricky
+
+	Modified by K.Hunter to form basis of stores in Hunter'z Economy Module.
+	
+*/
+
 if (is3DEN && {_fnc_scriptName == "bis_fnc_garage"}) exitwith {_this call compile preprocessfilelinenumbers (Hz_econ_funcsPath + "bis_fnc_garage3DEN.sqf");};
 
 #include "\A3\ui_f\hpp\defineDIKCodes.inc"

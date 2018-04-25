@@ -1,5 +1,5 @@
 /*******************************************************************************
-* Copyright (C) Hunter'z Economy Module
+* Copyright (C) 2017-2018 K.Hunter
 *
 * This file is licensed under a Creative Commons
 * Attribution-NonCommercial-ShareAlike 4.0 International License.
@@ -12,7 +12,6 @@
 if (!Hz_econ_enableRestrictions) exitwith {};
 
 //compile dependencies
-Hz_econ_fnc_findNearestAmmoCrate = compile preprocessFileLineNumbers (Hz_econ_funcsPath + "Hz_econ_fnc_findNearestAmmoCrate.sqf");
 Hz_econ_fnc_handleTakeItem = compile preprocessFileLineNumbers (Hz_econ_funcsPath + "Hz_econ_fnc_handleTakeItem.sqf");
 Hz_econ_fnc_handleTakeRestrictedWeapon = compile preprocessFileLineNumbers (Hz_econ_funcsPath + "Hz_econ_fnc_handleTakeRestrictedWeapon.sqf");
 Hz_econ_fnc_handleTakeRestrictedAttachment = compile preprocessFileLineNumbers (Hz_econ_funcsPath + "Hz_econ_fnc_handleTakeRestrictedAttachment.sqf");

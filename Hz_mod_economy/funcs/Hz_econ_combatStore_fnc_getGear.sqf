@@ -11,7 +11,7 @@
 *						_return select 3:		List of magazines							Type: 2D ARRAY		FORMAT: [type, count]
 *						_return select 4:		Ammo													Type: 2D ARRAY		FORMAT: [type, count]		
 ********************************************************************************
-* Copyright (C) Hunter'z Economy Module
+* Copyright (C) 2017-2018 K.Hunter
 *
 * This file is licensed under a Creative Commons
 * Attribution-NonCommercial-ShareAlike 4.0 International License.
