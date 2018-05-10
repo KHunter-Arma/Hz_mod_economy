@@ -1251,6 +1251,7 @@ switch _mode do {
 														    clearMagazineCargoGlobal _veh;
 																clearItemCargoGlobal _veh;
 																clearWeaponCargoGlobal _veh;
+																clearBackpackCargoGlobal _veh;
 																_veh setfuel 0.05;
 																_veh setvehicleammo 0;														
 														

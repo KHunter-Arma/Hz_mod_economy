@@ -3436,6 +3436,7 @@ switch _mode do {
 						};
 						_condition = _target getvariable ['bis_fnc_arsenal_condition',{true}];
 						alive _target && {_target distance _this < 5 && {vehicle _this == _this}} && {call _condition}
+						&& ((vehicle _this) == _this)
 					"
 				];
 				_x setvariable ["bis_fnc_arsenal_action",_action];
