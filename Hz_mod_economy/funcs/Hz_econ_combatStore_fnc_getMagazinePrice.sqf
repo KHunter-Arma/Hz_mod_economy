@@ -9,4 +9,15 @@
 * https://creativecommons.org/licenses/by-nc-sa/4.0/
 *******************************************************************************/
 
-_this call Hz_econ_combatStore_customMagazinePrice
+// sometimes returns undefined for unknown reasons -- this is a safeguard
+
+if (isnil "Hz_econ_combatStore_customMagazinePrice") then {
+
+	-1
+
+} else {
+
+	_this call Hz_econ_combatStore_customMagazinePrice
+
+}
+
