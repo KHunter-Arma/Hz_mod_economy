@@ -1151,20 +1151,29 @@ switch _mode do {
 				case IDC_RSCDISPLAYARSENAL_TAB_HANDGUN: {
 					_virtualCargo = _virtualWeaponCargo;
 					_virtualAll = _fullVersion || {"%ALL" in _virtualCargo};
+					
+					//always show current weapons
+					_currentWeps = [];
+					{
+						_currentWeps pushback (toUpper _x);
+					} foreach (weapons _center);
+					
 					{
 						if (_virtualAll || {_x in _virtualCargo}) then {
 							_xCfg = configfile >> "cfgweapons" >> _x;
 							
 							_wepClassName = toupper configName _xCfg;							
-							_skip = false;							
-							with missionnamespace do {							
-							if ((_wepClassName call Hz_econ_combatStore_fnc_getWeaponPrice) == -1) then {_skip = true;};
-								if (Hz_econ_enableRestrictions) then {
-							
-								if(_wepClassName in Hz_econ_restrictedWeapons) then {_skip = true;};
-							
-								};
-							};			
+							_skip = false;	
+							if (!(_wepClassName in _currentWeps)) then {
+								with missionnamespace do {							
+								if ((_wepClassName call Hz_econ_combatStore_fnc_getWeaponPrice) == -1) then {_skip = true;};
+									if (Hz_econ_enableRestrictions) then {
+								
+									if(_wepClassName in Hz_econ_restrictedWeapons) then {_skip = true;};
+								
+									};
+								};	
+							};
 							
 							if (!_skip) then {
 							
@@ -1191,19 +1200,32 @@ switch _mode do {
 				case IDC_RSCDISPLAYARSENAL_TAB_WATCH: {
 					_virtualCargo = _virtualItemCargo;
 					_virtualAll = _fullVersion || {"%ALL" in _virtualCargo};
+					
+					//always show current items
+					_currentItems = [];
+					{
+						_currentItems pushback (toUpper _x);
+					} foreach (assignedItems _center);
+					
+					{
+						if (_x != "") then {_currentItems pushback (toUpper _x);};							
+					} foreach [uniform _center, vest _center, headgear _center];
+					
 					{
 						if (_virtualAll || {_x in _virtualCargo}) then {
 						
 							_xCfg = configfile >> "cfgweapons" >> _x;
 							
-							_wepClassName = toupper configName _xCfg;							
-							_skip = false;							
-							with missionnamespace do {							
-								if ((_wepClassName call Hz_econ_combatStore_fnc_getItemPrice) == -1) then {_skip = true;};		
-								if (Hz_econ_enableRestrictions) then {
-							
-								if(_wepClassName in Hz_econ_restrictedItems) then {_skip = true;};
-							
+							_wepClassName = toupper configName _xCfg;		
+							_skip = false;	
+							if (!(_wepClassName in _currentItems)) then {
+								with missionnamespace do {							
+									if ((_wepClassName call Hz_econ_combatStore_fnc_getItemPrice) == -1) then {_skip = true;};		
+									if (Hz_econ_enableRestrictions) then {
+								
+									if(_wepClassName in Hz_econ_restrictedItems) then {_skip = true;};
+								
+									};
 								};
 							};
 							
@@ -1224,18 +1246,25 @@ switch _mode do {
 				case IDC_RSCDISPLAYARSENAL_TAB_BINOCULARS: {
 					_virtualCargo = _virtualWeaponCargo + _virtualItemCargo;
 					_virtualAll = _fullVersion || {"%ALL" in _virtualCargo};
+					
+					//always show current bincoulars
+					_currentBinocs = toUpper (binocular _center);
+					
 					{
 						if (_virtualAll || {_x in _virtualCargo}) then {
 						
 							_xCfg = configfile >> "cfgweapons" >> _x;
-							_wepClassName = toupper configName _xCfg;							
-							_skip = false;							
-							with missionnamespace do {							
-								if ((_wepClassName call Hz_econ_combatStore_fnc_getWeaponPrice) == -1) then {_skip = true;};		
-								if (Hz_econ_enableRestrictions) then {
+							_wepClassName = toupper configName _xCfg;
 							
-								if(_wepClassName in Hz_econ_restrictedWeapons) then {_skip = true;};
-							
+							_skip = false;					
+							if (_wepClassName != _currentBinocs) then {
+								with missionnamespace do {							
+									if ((_wepClassName call Hz_econ_combatStore_fnc_getWeaponPrice) == -1) then {_skip = true;};		
+									if (Hz_econ_enableRestrictions) then {
+								
+									if(_wepClassName in Hz_econ_restrictedWeapons) then {_skip = true;};
+								
+									};
 								};
 							};
 							
@@ -1257,19 +1286,25 @@ switch _mode do {
 				case IDC_RSCDISPLAYARSENAL_TAB_GOGGLES: {
 					_virtualCargo = _virtualItemCargo;
 					_virtualAll = _fullVersion || {"%ALL" in _virtualCargo};
+					
+					//always list current goggles
+					_currentGoggles = toUpper (goggles _center);
+					
 					{
 						if (_virtualAll || {_x in _virtualCargo}) then {
 						
 							_xCfg = configfile >> "cfgglasses" >> _x;
 							
 							_wepClassName = toupper configName _xCfg;							
-							_skip = false;							
-							with missionnamespace do {							
-								if ((_wepClassName call Hz_econ_combatStore_fnc_getItemPrice) == -1) then {_skip = true;};		
-								if (Hz_econ_enableRestrictions) then {
-							
-								if(_wepClassName in Hz_econ_restrictedItems) then {_skip = true;};
-							
+							_skip = false;
+								if (_wepClassName != _currentGoggles) then {
+								with missionnamespace do {							
+									if ((_wepClassName call Hz_econ_combatStore_fnc_getItemPrice) == -1) then {_skip = true;};		
+									if (Hz_econ_enableRestrictions) then {
+								
+									if(_wepClassName in Hz_econ_restrictedItems) then {_skip = true;};
+								
+									};
 								};
 							};
 							
@@ -1289,20 +1324,26 @@ switch _mode do {
 				case IDC_RSCDISPLAYARSENAL_TAB_BACKPACK: {
 					_virtualCargo = _virtualBackpackCargo;
 					_virtualAll = _fullVersion || {"%ALL" in _virtualCargo};
+					
+					//always list current backpack
+					_currentBackpack = toUpper (backpack _center);
+					
 					{
 						if (_virtualAll || {_x in _virtualCargo}) then {
 						
 							_xCfg = configfile >> "cfgvehicles" >> _x;
 							
 							_wepClassName = toupper configName _xCfg;							
-							_skip = false;							
-							with missionnamespace do {							
-								if ((_wepClassName call Hz_econ_combatStore_fnc_getItemPrice) == -1) then {_skip = true;};	
-								if (Hz_econ_enableRestrictions) then {
-							
-								if(_wepClassName in Hz_econ_restrictedItems) then {_skip = true;};
-							
-								};							
+							_skip = false;
+							if (_wepClassName != _currentBackpack) then {
+								with missionnamespace do {							
+									if ((_wepClassName call Hz_econ_combatStore_fnc_getItemPrice) == -1) then {_skip = true;};	
+									if (Hz_econ_enableRestrictions) then {
+								
+									if(_wepClassName in Hz_econ_restrictedItems) then {_skip = true;};
+								
+									};							
+								};
 							};
 							
 							if (!_skip) then {	
@@ -3444,154 +3485,3 @@ switch _mode do {
 		} foreach _boxes;
 	};
 };
-
-/*
-
-	//Hunter: This is literally gross but I can't spend any more days on this or I'll loose the small amount of sanity left in me...
-	if(isnil "BIS_fnc_arsenal_display") exitwith {};
-	_exit = false;
-	with missionNamespace do {
-		if(isnil "Hz_econ_vehStore_vehicle") then {Hz_econ_vehStore_vehicle = objNull;};
-		if(!isnull Hz_econ_vehStore_vehicle) then {_exit = true;};
-	};
-	if (_exit) exitWith {};
-	
-	_display = BIS_fnc_arsenal_display;
-		with missionNamespace do {
-		
-		//alternative: use BIS_fnc_arsenal_selectedWeaponType
-		_selectedWeapon = switch true do {
-			case ((ctrlFade (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_PRIMARYWEAPON))) == 0): {primaryweapon player};
-			case ((ctrlfade (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_SECONDARYWEAPON))) == 0): {secondaryWeapon player};
-			case ((ctrlFade (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_HANDGUN))) == 0): {handgunweapon player};
-			default {""};
-		};
-		
-		if(_selectedWeapon != "") then {
-		
-			["ShowItemStats",[configfile >> "cfgweapons" >> _selectedWeapon]] call (uinamespace getvariable "bis_fnc_arsenal_UI");
-			
-		};
-	
-		{
-			_ctrlList = _display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + _x);
-			lbclear _ctrlList;
-		} foreach [
-			IDC_RSCDISPLAYARSENAL_TAB_ITEMOPTIC,
-			IDC_RSCDISPLAYARSENAL_TAB_ITEMACC,
-			IDC_RSCDISPLAYARSENAL_TAB_ITEMMUZZLE,
-			IDC_RSCDISPLAYARSENAL_TAB_ITEMBIPOD,
-			IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG
-		];
-		
-			//--- Weapon magazines (based on current weapons)
-			
-			private ["_ctrlList"];
-			_ctrlList = _display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG);
-			_magazines = [];
-			{
-				_cfgWeapon = configfile >> "cfgweapons" >> _x;
-				{
-					_cfgMuzzle = if (_x == "this") then {_cfgWeapon} else {_cfgWeapon >> _x};
-					{
-						private ["_item"];
-						_item = _x;
-						_mag = tolower _item;
-							
-							with missionNamespace do {
-							
-								if ((_mag call Hz_econ_combatStore_fnc_getMagazinePrice) != -1) then {
-								
-									_skip = false;
-									
-									if (Hz_econ_enableRestrictions) then {
-								
-										if((toUpper _mag) in Hz_econ_restrictedMagazines) then {_skip = true;};
-								
-									};
-									
-									if (_skip) exitwith {};
-								
-									if !(_mag in _magazines) then {							
-										_magazines set [count _magazines,_mag];
-										_value = {_x == _mag} count (magazines player);
-										_displayName = gettext (configfile >> "cfgmagazines" >> _mag >> "displayName");
-										_lbAdd = _ctrlList lnbaddrow ["",_displayName,str _value];
-										_ctrlList lnbsetdata [[_lbAdd,0],_mag];
-										_ctrlList lnbsetvalue [[_lbAdd,0],getnumber (configfile >> "cfgmagazines" >> _mag >> "mass")];
-										_ctrlList lnbsetpicture [[_lbAdd,0],gettext (configfile >> "cfgmagazines" >> _mag >> "picture")];
-										_ctrlList lbsettooltip [_lbAdd,_displayName];
-									};
-								
-								};
-							
-							};
-					} foreach getarray (_cfgMuzzle >> "magazines");
-				} foreach getarray (_cfgWeapon >> "muzzles");
-			} foreach (weapons player - ["Throw","Put"]);
-			_ctrlList lbsetcursel (lbcursel _ctrlList max 0);
-
-		
-		//--- Attachments
-			if(_selectedWeapon != "") then {
-		
-				_compatibleItems = _selectedWeapon call bis_fnc_compatibleItems;				
-				_temp = [];
-				{
-				
-					_temp pushBack (toUpper _x);
-				
-				} foreach _compatibleItems;
-				
-				_compatibleItems = +_temp;
-				
-				if (Hz_econ_enableRestrictions) then {_compatibleItems = _compatibleItems - Hz_econ_restrictedAttachments;};
-				
-				if ((count _compatibleItems) > 0) then {
-				
-					_temp = +_compatibleItems;
-					{
-						if ((_x call Hz_econ_combatStore_fnc_getAttachmentPrice) == -1) then {_compatibleItems = _compatibleItems - [_x];};
-					
-					} foreach _temp;
-				
-				};
-				
-				{				
-					_ctrlList = _display displayctrl _x;
-					_lbAdd = _ctrlList lbadd "No attachment";
-					_ctrlList lbsetdata [_lbAdd,""];
-				
-				} foreach [IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_ITEMMUZZLE,
-				IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_ITEMACC,
-				IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_ITEMOPTIC,
-				IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_ITEMBIPOD
-				];
-				
-				{
-					private ["_item"];
-					_item = _x;
-					_itemCfg = configfile >> "cfgweapons" >> _item;
-					_scope = if (isnumber (_itemCfg >> "scopeArsenal")) then {getnumber (_itemCfg >> "scopeArsenal")} else {getnumber (_itemCfg >> "scope")};
-					if (_scope == 2) then {
-						_type = _item call bis_fnc_itemType;
-						_idcList = switch (_type select 1) do {
-							case "AccessoryMuzzle": {IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_ITEMMUZZLE};
-							case "AccessoryPointer": {IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_ITEMACC};
-							case "AccessorySights": {IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_ITEMOPTIC};
-							case "AccessoryBipod": {IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_ITEMBIPOD};
-							default {-1};
-						};
-						_ctrlList = _display displayctrl _idcList;
-						_lbAdd = _ctrlList lbadd gettext (_itemCfg >> "displayName");
-						_ctrlList lbsetdata [_lbAdd,_item];
-						_ctrlList lbsetpicture [_lbAdd,gettext (_itemCfg >> "picture")];
-						_itemCfg call ADDMODICON;
-					};
-				} foreach _compatibleItems;
-			
-			};
-
-	};
-	
-*/

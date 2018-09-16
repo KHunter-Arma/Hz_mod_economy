@@ -42,3 +42,25 @@ _store = missionnamespace getVariable [_x,objNull];
 ["AmmoboxInit",[_store,true]] call BIS_fnc_arsenal_M;  
 
 }foreach Hz_econ_combatStore_stores;
+
+[] spawn {
+
+	waitUntil {sleep 1; !isnull player};
+	
+	player addEventHandler ["Reloaded",{
+
+		_oldmag = _this select 4;
+
+		if (!isnil "_oldmag") then {
+
+			if ((_oldmag select 1) == 0) then {
+
+				player addMagazine [_oldmag select 0,0];
+
+			};
+
+		};
+
+	}];
+
+};
