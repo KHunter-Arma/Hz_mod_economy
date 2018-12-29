@@ -58,7 +58,7 @@ if ((count _parents) > 0) then {
 			case (("Vest_Camo_Base" in _parents) || ("Vest_NoCamo_Base" in _parents)) : {_itemCategory = "vest"};
 			case ("H_HelmetB" in _parents) : {_itemCategory = "headgear"};
 
-			//could be assigneditem, weaponacc or actual weapon
+			//could be assigneditem, weaponacc, wearable or actual weapon
 			default {_itemCategory = "weapon"};
 
 		};
@@ -169,16 +169,18 @@ switch (true) do {
 	
 	case (_itemCategory == "weapon") : {
 	
-		//could be assigneditem, weaponacc or actual weapon
+		//could be assigneditem, weaponacc, wearable or actual weapon
 		
 		switch (true) do {
 
 			case (_baseWeapon in Hz_econ_restrictedWeapons) : {_this call Hz_econ_fnc_handleTakeRestrictedWeapon};
 			case (_itemType in Hz_econ_restrictedAttachments) : {_this call Hz_econ_fnc_handleTakeRestrictedAttachment};
 			
-			//could be assigneditem (but not binoculars -- binoculars must be defined under weapons)
+			//could be assigneditem (but not binoculars -- binoculars must be defined under weapons), or wearable
 			case (_itemType in Hz_econ_restrictedItems) : {
-			
+						
+				private _handled = false;		
+						
 				{
 				
 					if (_itemType == (toUpper _x)) exitWith {
@@ -187,10 +189,51 @@ switch (true) do {
 						_container addItemCargoGlobal [_itemType,1];
 				
 						hint "You are not trained to use this item!";
+						
+						_handled = true;
 					
 					};
 				
-				} foreach assigneditems _unit;
+				} foreach assigneditems _unit;				
+				
+				//iterate through remaining possibilities
+				if (!_handled) then {
+									
+					if (_itemType == (toupper uniform _unit)) exitWith {
+		
+						[_unit,_container,uniformContainer _unit,uniformItems _unit] call Hz_econ_fnc_handleTakeRestrictedWearable;
+						removeUniform _unit;
+						_container addItemCargoGlobal [_itemType,1];
+						hint "You are not allowed to wear this uniform!";
+					
+					};
+					
+					if (_itemType == (toupper vest _unit)) exitWith {
+		
+						[_unit,_container,vestContainer _unit,vestItems _unit] call Hz_econ_fnc_handleTakeRestrictedWearable;
+						removeVest _unit;
+						_container addItemCargoGlobal [_itemType,1];
+						hint "You are not allowed to wear this vest!";
+					
+					};
+					
+					if (_itemType == (toupper headgear _unit)) exitWith {
+					
+						removeHeadgear _unit;
+						_container addItemCargoGlobal [_itemType,1];
+						hint "You are not allowed to wear this item!";
+					
+					};
+					
+					if (_itemType == (toupper goggles _unit)) exitWith {
+					
+						removeGoggles _unit;
+						_container addItemCargoGlobal [_itemType,1];
+						hint "You are not allowed to wear this item!";
+					
+					};
+									
+				};
 			
 			};
 			
