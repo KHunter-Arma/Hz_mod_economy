@@ -111,6 +111,14 @@ switch (true) do {
 			[_unit,_container,uniformContainer _unit,uniformItems _unit] call Hz_econ_fnc_handleTakeRestrictedWearable;
 			removeUniform _unit;
 			_container addItemCargoGlobal [_itemType,1];
+			{
+				if ((toupper (_x select 0)) ==  _itemType) then {
+				
+					clearItemCargoGlobal (_x select 1); 
+				
+				};			
+			} foreach everyContainer _container;
+			
 			hint "You are not allowed to wear this uniform!";
 		
 		};
@@ -124,6 +132,14 @@ switch (true) do {
 			[_unit,_container,vestContainer _unit,vestItems _unit] call Hz_econ_fnc_handleTakeRestrictedWearable;
 			removeVest _unit;
 			_container addItemCargoGlobal [_itemType,1];
+			{
+				if ((toupper (_x select 0)) ==  _itemType) then {
+				
+					clearItemCargoGlobal (_x select 1); 
+				
+				};			
+			} foreach everyContainer _container;						
+			
 			hint "You are not allowed to wear this vest!";
 		
 		};
@@ -135,8 +151,16 @@ switch (true) do {
 		if (_itemType in Hz_econ_restrictedItems) then {
 		
 			[_unit,_container,backpackContainer _unit,backpackItems _unit] call Hz_econ_fnc_handleTakeRestrictedWearable;
-			removeBackpack _unit;
+			removeBackpackGlobal _unit;			
 			_container addBackpackCargoGlobal [_itemType,1];
+			{
+				if (_x iskindof _itemType) then {
+				
+					clearItemCargoGlobal _x; 
+				
+				};			
+			} foreach everyBackpack _container;			
+			
 			hint "You are not allowed to wear this backpack!";
 		
 		};
@@ -203,7 +227,15 @@ switch (true) do {
 		
 						[_unit,_container,uniformContainer _unit,uniformItems _unit] call Hz_econ_fnc_handleTakeRestrictedWearable;
 						removeUniform _unit;
-						_container addItemCargoGlobal [_itemType,1];
+						_container addItemCargoGlobal [_itemType,1];					
+						{
+							if ((toupper (_x select 0)) ==  _itemType) then {
+							
+								clearItemCargoGlobal (_x select 1); 
+							
+							};			
+						} foreach everyContainer _container;
+						
 						hint "You are not allowed to wear this uniform!";
 					
 					};
@@ -213,6 +245,14 @@ switch (true) do {
 						[_unit,_container,vestContainer _unit,vestItems _unit] call Hz_econ_fnc_handleTakeRestrictedWearable;
 						removeVest _unit;
 						_container addItemCargoGlobal [_itemType,1];
+						{
+							if ((toupper (_x select 0)) ==  _itemType) then {
+							
+								clearItemCargoGlobal (_x select 1); 
+							
+							};			
+						} foreach everyContainer _container;
+						
 						hint "You are not allowed to wear this vest!";
 					
 					};
