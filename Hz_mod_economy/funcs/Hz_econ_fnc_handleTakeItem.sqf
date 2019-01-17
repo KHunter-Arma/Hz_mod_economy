@@ -151,7 +151,8 @@ switch (true) do {
 		if (_itemType in Hz_econ_restrictedItems) then {
 		
 			[_unit,_container,backpackContainer _unit,backpackItems _unit] call Hz_econ_fnc_handleTakeRestrictedWearable;
-			removeBackpackGlobal _unit;			
+			//some problem with removing backpack... try a delay
+			_unit spawn {sleep 1; removeBackpackGlobal _this};			
 			_container addBackpackCargoGlobal [_itemType,1];
 			{
 				if (_x iskindof _itemType) then {
