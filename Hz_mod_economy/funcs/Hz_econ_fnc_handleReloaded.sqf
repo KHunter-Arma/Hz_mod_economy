@@ -18,6 +18,15 @@ private _oldMagArray = _this select 4;
 
 if (_magType in Hz_econ_restrictedMagazines) then {
 
+	_this spawn {
+	
+		_unit = _this select 0;
+		_weapon = _this select 1;
+		_muzzle = _this select 2;
+		_magType = toupper ((_this select 3) select 0);
+		_ammoCount = (_this select 3) select 1;
+		_oldMagArray = _this select 4;
+
 		if ((_weapon == (primaryWeapon _unit)) || (_weapon == (secondaryWeapon _unit)) || (_weapon == (handgunWeapon _unit))) then {
 			
 			private _weaponsItems = weaponsItems _unit;
@@ -85,21 +94,37 @@ if (_magType in Hz_econ_restrictedMagazines) then {
 			
 			_wepHolder = objNull;
 			
-			if ((vehicle _unit) == _unit) then {
+			_countMags = {(toupper _x) == _magType} count (magazines _unit);
+			_unit addMagazine [_magType, _ammoCount];
+			sleep 0.1;
+			_countMagsNow = {(toupper _x) == _magType} count (magazines _unit);
 			
-				_wepHolder = "groundWeaponHolder" createVehicle [0,0,0];
-				_wepHolder setposatl (getposatl _unit);
+			if (_countMags == _countMagsNow) then {
 			
+				if ((vehicle _unit) == _unit) then {
+				
+					_wepHolder = "groundWeaponHolder" createVehicle [0,0,0];
+					_wepHolder setposatl (getposatl _unit);
+					
+					hint "You are not trained to use this magazine!\nDropped magazine on ground.";
+				
+				} else {
+				
+					_wepHolder = vehicle _unit;
+					hint "You are not trained to use this magazine!\nMagazine stored in vehicle.";
+				
+				};
+				
+				_wepHolder addMagazineAmmoCargo [_magType,1,_ammoCount];
+
 			} else {
 			
-				_wepHolder = vehicle _unit;
+				hint "You are not trained to use this magazine!";
 			
-			};		
-			
-			_wepHolder addMagazineAmmoCargo [_magType,1,_ammoCount];
-
-			hint "You are not trained to use this magazine!";
+			};
 
 		};
+
+	};
 
 };
