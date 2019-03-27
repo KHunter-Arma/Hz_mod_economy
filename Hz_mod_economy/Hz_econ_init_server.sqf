@@ -24,6 +24,19 @@ publicvariable "Hz_econ_vehStore_stores";
 publicvariable "Hz_econ_funds";
 publicvariable "Hz_econ_fuelPrice";
 
+//This is needed on the server too for ACE interface to work reliably for rearming vehicles
+Hz_econ_pathToPriceCodeFunctions = _moduleLogic getVariable "PathToPriceFunctions";
+if (!isnil "Hz_econ_pathToPriceCodeFunctions") then {
+
+	Hz_econ_combatStore_customAmmoPrice = compile preprocessFileLineNumbers (Hz_econ_pathToPriceCodeFunctions + "\Hz_econ_combatStore_fnc_getAmmoPrice.sqf");
+	Hz_econ_combatStore_fnc_getAmmoPrice = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_combatStore_fnc_getAmmoPrice.sqf");
+	
+} else {
+
+	Hz_econ_combatStore_fnc_getAmmoPrice = {-1};
+	
+};
+
 Hz_econ_module_pRestrictionsSetupFunctionName = _moduleLogic getVariable "RestrictionsSetupFunctionName";
 
 if (Hz_econ_enableRestrictions) then {
