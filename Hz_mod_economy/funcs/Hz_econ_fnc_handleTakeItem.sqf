@@ -281,6 +281,8 @@ switch (true) do {
 			default {
 			
 				//could be a non-restricted base weapon, but with restricted attachments
+				//does not handle if weapon is put straight into backpack, uniform or vest
+				
 				private _attachments = _unit weaponAccessories _itemType;
 				
 				//definitely a weapon with attachments
@@ -296,6 +298,73 @@ switch (true) do {
 						};
 					
 					} foreach _attachments;
+				
+				};
+				
+				//what about having a restricted magazine loaded automatically when taking wep out of crate?
+				//just remove automatic loading of weapon altogether - more realistic :)
+				switch (true) do {
+				
+					case (_itemType == (toupper (primaryWeapon _unit))) : {
+					
+						_magArray = [];
+						{
+						
+							if ((_x select 3) == 1) then {
+							
+								_magArray set [0,_x select 0];
+								_magArray set [1,_x select 1];
+							
+							};
+						
+						} foreach magazinesAmmoFull _unit;
+						
+						if ((count _magArray) == 0) exitWith {};
+						
+						_unit removePrimaryWeaponItem (_magArray select 0);
+						_container addMagazineAmmoCargo [_magArray select 0, 1, _magArray select 1];
+					
+					};
+					case (_itemType == (toupper (secondaryWeapon _unit))) : {
+					
+						_magArray = [];
+						{
+						
+							if ((_x select 3) == 4) then {
+							
+								_magArray set [0,_x select 0];
+								_magArray set [1,_x select 1];
+							
+							};
+						
+						} foreach magazinesAmmoFull _unit;
+						
+						if ((count _magArray) == 0) exitWith {};
+						
+						_unit removeSecondaryWeaponItem (_magArray select 0);
+						_container addMagazineAmmoCargo [_magArray select 0, 1, _magArray select 1];
+					
+					};
+					case (_itemType == (toupper (handgunWeapon _unit))) : {
+					
+						_magArray = [];
+						{
+						
+							if ((_x select 3) == 2) then {
+							
+								_magArray set [0,_x select 0];
+								_magArray set [1,_x select 1];
+							
+							};
+						
+						} foreach magazinesAmmoFull _unit;
+						
+						if ((count _magArray) == 0) exitWith {};
+						
+						_unit removeHandgunItem (_magArray select 0);
+						_container addMagazineAmmoCargo [_magArray select 0, 1, _magArray select 1];
+					
+					};
 				
 				};
 			
