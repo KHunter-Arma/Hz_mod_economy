@@ -370,6 +370,13 @@ BIS_fnc_arsenal_buttons = [[],[]];
 BIS_fnc_arsenal_action = "";
 _center = (missionnamespace getvariable ["BIS_fnc_arsenal_center",player]);
 _center hideobject false;
+
+if (bis_fnc_arsenal_type == 1) then {
+	
+	_center = (missionNamespace getVariable "Hz_econ_vehStore_showroomCenterObj");
+
+};
+
 cuttext ["","plain"];
 showcommandingmenu "";
 
@@ -663,11 +670,13 @@ _target = createagent ["Logic",position _center,[],0,"none"];
 _target attachto [_center,BIS_fnc_arsenal_campos select 3,""];
 missionnamespace setvariable ["BIS_fnc_arsenal_target",_target];
 
-_cam = "camera" camcreate position _center;
-_cam cameraeffect ["internal","back"];
-_cam campreparefocus [-1,-1];
-_cam campreparefov 0.35;
-_cam camcommitprepared 0;
+_cam = objnull;
+		if (BIS_fnc_arsenal_type != 0) then {_cam = "camera" camcreate (missionNamespace getVariable "Hz_econ_vehStore_showroomPos");
+		} else {_cam = "camera" camcreate position _center;};		
+		_cam cameraeffect ["internal","back"];
+		_cam campreparefocus [-1,-1];
+		_cam campreparefov 0.35;
+		_cam camcommitprepared 0;
 
 showcinemaborder false;
 BIS_fnc_arsenal_cam = _cam;

@@ -9,20 +9,15 @@
 * https://creativecommons.org/licenses/by-nc-sa/4.0/
 *******************************************************************************/
 
-private _originalPos = _this select 0;
-
 waitUntil {dialog};
 
 waituntil {!isnil "Hz_econ_vehStore_vehicle" || !dialog};
 
-if (!dialog) exitWith {player setposatl _originalPos; [player,false] remoteExecCall ["hideObjectGlobal",2,false];};
+if (!dialog) exitWith {deleteVehicle Hz_econ_vehStore_showroomCenterObj};
 
 waituntil {!isnull Hz_econ_vehStore_vehicle || !dialog};
 
-player setposatl _originalPos;
-[player,false] remoteExecCall ["hideObjectGlobal",2,false];
-
-if (!dialog) exitWith {};
+if (!dialog) exitWith {deleteVehicle Hz_econ_vehStore_showroomCenterObj};
 
 //start music
 ace_hearing_disableVolumeUpdate = true;
@@ -42,6 +37,7 @@ while {dialog} do {
 };
 
 deletevehicle Hz_econ_vehStore_vehicle;
+deleteVehicle Hz_econ_vehStore_showroomCenterObj;
 
 5 fademusic 0;
 {deletevehicle _x} foreach (uinamespace getvariable "Hz_econ_vehStore_dummyObjects");

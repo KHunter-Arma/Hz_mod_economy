@@ -105,9 +105,11 @@ switch _mode do {
 		setstatvalue ["MarkVirtualVehicleInspection",1];
 
 		with missionnamespace do {
-			BIS_fnc_arsenal_group = creategroup side group player;
-			BIS_fnc_arsenal_center = missionnamespace getvariable ["BIS_fnc_garage_center",player];
-		};
+            BIS_fnc_arsenal_group = creategroup side group player;
+						BIS_fnc_arsenal_group deleteGroupWhenEmpty true;
+            //BIS_fnc_arsenal_center = missionnamespace getvariable ["BIS_fnc_garage_center",player];
+						BIS_fnc_arsenal_center = Hz_econ_vehStore_showroomCenterObj;
+        };
 
 		//--- Show specific class
 		_classDefault = uinamespace getvariable ["bis_fnc_garage_defaultClass",""];
