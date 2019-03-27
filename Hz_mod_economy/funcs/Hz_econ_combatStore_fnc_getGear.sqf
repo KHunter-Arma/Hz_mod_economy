@@ -188,7 +188,7 @@ _wepFilterBody = [];
 				_ammoArray = _x select 4;
 				_mag = _ammoArray select 0;
 				
-				if (_mag != "") then {
+				if ((!isnil "_mag") && {_mag != ""}) then {
 				
 					[_mag, _magazines] call _addToArray;	
 					
