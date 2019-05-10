@@ -249,6 +249,8 @@ _wepFilterBody = [];
 
 } foreach [backpackcontainer _unit, vestcontainer _unit, uniformcontainer _unit];
 
+_items set [0,(_items select 0) apply {_x call Hz_econ_combatStore_fnc_handleAcreRadios}];
+
 _return = [_weapons,_attachments,_items,_magazines,_ammo];
 
 _return

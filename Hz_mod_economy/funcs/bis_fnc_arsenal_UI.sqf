@@ -1877,9 +1877,40 @@ switch _mode do {
 				if (_item == "") then {
 					removeuniform _center;
 				} else {
+				
+					//Hunter: This is where stuff gets refilled. Don't refill magazines that don't have ammo prices...
 					_items = uniformitems _center;
-					_center forceadduniform _item;
-					{_center additemtouniform _x;} foreach _items;
+					_magsUniform = magazinesAmmoCargo uniformContainer _center;
+					_center forceadduniform _item;	
+					_uniformContainer = uniformContainer _center;			
+
+					with missionNamespace do {
+								
+						{
+						
+							if (((getText (configfile >> "cfgmagazines" >> (_x select 0) >> "ammo")) call Hz_econ_combatStore_fnc_getAmmoPrice) != -1) then {
+								
+									_center additemtouniform (_x select 0);
+								
+							} else {
+							
+									_uniformContainer addMagazineAmmoCargo [_x select 0, 1, _x select 1];
+							
+							};
+						
+						} foreach _magsUniform;
+					
+					};
+					
+					{
+						
+						if !("CA_Magazine" in ([(configfile >> "cfgmagazines" >> _x), true] call bis_fnc_returnParents)) then {
+						
+							_center additemtouniform _x;
+						
+						};						
+					
+					} foreach _items;
 				};
 
 				//--- Refresh insignia (gets removed when uniform changes)
@@ -1889,17 +1920,77 @@ switch _mode do {
 				if (_item == "") then {
 					removevest _center;
 				} else {
-					_items = vestitems _center;
-					_center addvest _item;
-					{_center additemtovest _x;} foreach _items;
+					_items = vestitems _center;					
+					_magsVest = magazinesAmmoCargo vestContainer _center;
+					_center addvest _item;		
+					_vestContainer = vestContainer _center;		
+					
+					with missionNamespace do {
+									
+						{
+						
+							if (((getText (configfile >> "cfgmagazines" >> (_x select 0) >> "ammo")) call Hz_econ_combatStore_fnc_getAmmoPrice) != -1) then {
+								
+									_center addItemToVest (_x select 0);
+								
+							} else {
+							
+									_vestContainer addMagazineAmmoCargo [_x select 0, 1, _x select 1];
+							
+							};
+						
+						} foreach _magsVest;
+					
+					};
+					
+					{
+						
+						if !("CA_Magazine" in ([(configfile >> "cfgmagazines" >> _x), true] call bis_fnc_returnParents)) then {
+						
+							_center addItemToVest _x;
+						
+						};						
+					
+					} foreach _items;
+
 				};
 			};
 			case IDC_RSCDISPLAYARSENAL_TAB_BACKPACK: {
-				_items = backpackitems _center;
+				_items = backpackitems _center;				
+				_magsBackpack = magazinesAmmoCargo backpackContainer _center;
 				removebackpack _center;
 				if !(_item == "") then {
-					_center addbackpack _item;
-					{_center additemtobackpack _x;} foreach _items;
+					_center addbackpack _item;	
+					_backpackContainer = backpackContainer _center;	
+					
+					with missionNamespace do {
+								
+						{
+						
+							if (((getText (configfile >> "cfgmagazines" >> (_x select 0) >> "ammo")) call Hz_econ_combatStore_fnc_getAmmoPrice) != -1) then {
+								
+									_center addItemToBackpack (_x select 0);
+								
+							} else {
+							
+									_backpackContainer addMagazineAmmoCargo [_x select 0, 1, _x select 1];
+							
+							};
+						
+						} foreach _magsBackpack;
+					
+					};
+					
+					{
+						
+						if !("CA_Magazine" in ([(configfile >> "cfgmagazines" >> _x), true] call bis_fnc_returnParents)) then {
+						
+							_center addItemToBackpack _x;
+						
+						};						
+					
+					} foreach _items;					
+					
 				};
 			};
 			case IDC_RSCDISPLAYARSENAL_TAB_HEADGEAR: {
@@ -1918,7 +2009,6 @@ switch _mode do {
 					} foreach (assigneditems _center);
 				} else {
 					_center addweapon _item;
-					ADDBINOCULARSMAG
 				};
 			};
 			case IDC_RSCDISPLAYARSENAL_TAB_PRIMARYWEAPON: {
@@ -3486,7 +3576,6 @@ switch _mode do {
 						};
 						_condition = _target getvariable ['bis_fnc_arsenal_condition',{true}];
 						alive _target && {_target distance _this < 5 && {vehicle _this == _this}} && {call _condition}
-						&& ((vehicle _this) == _this)
 					"
 				];
 				_x setvariable ["bis_fnc_arsenal_action",_action];

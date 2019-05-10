@@ -14,18 +14,45 @@ private _container = _this select 1;
 private _itemType = toupper (_this select 2);
 
 //Handle restricted radios differently
-if("ACRE_BaseRadio" in ([(configFile >> "CfgWeapons" >> _itemType), true] call BIS_fnc_returnparents)) exitWith {
+private _parents = [(configFile >> "CfgWeapons" >> _itemType), true] call BIS_fnc_returnparents;
+
+if("ACRE_BaseRadio" in _parents) exitWith {
    
 	private _originalItemType = _itemType;
 	 
-	//ACRE classname correction
-	if ("ACRE_PRC152" in ([(configFile >> "CfgWeapons" >> _itemType), true] call BIS_fnc_returnparents) ) then {_itemType = "ACRE_PRC152";} else { 
-		if ("ACRE_PRC148" in ([(configFile >> "CfgWeapons" >> _itemType), true] call BIS_fnc_returnparents) ) then {_itemType = "ACRE_PRC148";} else {
-			if ("ACRE_PRC343" in ([(configFile >> "CfgWeapons" >> _itemType), true] call BIS_fnc_returnparents) ) then {_itemType = "ACRE_PRC343";} else {
-				if ("ACRE_PRC117F" in ([(configFile >> "CfgWeapons" >> _itemType), true] call BIS_fnc_returnparents) ) then {_itemType = "ACRE_PRC117F";} else {
-					if ("ACRE_PRC77" in ([(configFile >> "CfgWeapons" >> _itemType), true] call BIS_fnc_returnparents) ) then {_itemType = "ACRE_PRC77";};
-					
-						};};};};
+	switch (true) do {
+	
+		case ("ACRE_PRC343" in _parents) : {
+		
+			_itemType = "ACRE_PRC343";
+		
+		};
+		
+		case ("ACRE_PRC148" in _parents) : {
+		
+			_itemType = "ACRE_PRC148";
+		
+		};
+		
+		case ("ACRE_PRC117F" in _parents) : {
+		
+			_itemType = "ACRE_PRC117F";
+		
+		};
+		
+		case ("ACRE_PRC152" in _parents) : {
+		
+			_itemType = "ACRE_PRC152";
+		
+		};
+		
+		case ("ACRE_PRC77" in _parents) : {
+		
+			_itemType = "ACRE_PRC77";
+		
+		};
+	
+	};
 
 	if (_itemType in Hz_econ_restrictedItems) then {
 
