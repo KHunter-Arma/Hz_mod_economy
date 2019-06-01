@@ -22,6 +22,7 @@ Hz_econ_combatStore_fnc_getGearDifference = compile preprocessfilelinenumbers (H
 Hz_econ_combatStore_fnc_checkout = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_combatStore_fnc_checkout.sqf");
 Hz_econ_combatStore_fnc_getCheckoutCost = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_combatStore_fnc_getCheckoutCost.sqf");
 Hz_econ_combatStore_fnc_handleAcreRadios = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_combatStore_fnc_handleAcreRadios.sqf");
+Hz_econ_combatStore_fnc_checkIfAccessingBackpack = compile preprocessfilelinenumbers (Hz_econ_funcsPath + "Hz_econ_combatStore_fnc_checkIfAccessingBackpack.sqf");
 
 _moduleLogic = _this select 0;
 _fncName = _moduleLogic getVariable "CombatStoreExitFunctionName";
@@ -62,6 +63,22 @@ _store = missionnamespace getVariable [_x,objNull];
 
 		};
 
+	}];
+		
+	player addEventHandler ["InventoryOpened",{
+	
+		params ["_unit", "_container"];
+	
+		_owner = objectParent _container;
+		
+		player setVariable ["Hz_econ_lastAccessedContainerOwner",_owner];
+
+		if (isNull _owner) exitWith {false};
+		
+		if (_owner getVariable ["Hz_econ_backpackLocked",false]) exitWith {true};
+		
+		false
+	
 	}];
 
 };
