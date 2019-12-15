@@ -11,9 +11,9 @@
 
 if (Hz_econ_funds <= 0) exitwith {hint "Insufficient funds!";};
 
-call Hz_pers_API_disablePlayerSaveStateOnDisconnect;
-
 player setvariable ["Hz_econ_backpackLocked",true,true];
+call Hz_pers_API_disablePlayerSaveStateOnDisconnect;
+sleep 1;
 player remoteExecCall ["Hz_econ_combatStore_fnc_checkIfAccessingBackpack",-2,false];
 
 _gearBegin = player call Hz_econ_combatStore_fnc_getGear;
