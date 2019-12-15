@@ -1,0 +1,9 @@
+name = "Hunter'z Economy Module";
+picture = "\x\Hz\Hz_mod_economy\media\Hunterz_logo.paa";
+logo = "\x\Hz\Hz_mod_economy\media\Hunterz_icon.paa";
+logoSmall = "\x\Hz\Hz_mod_economy\media\Hunterz_iconSmall.paa";
+logoOver = "\x\Hz\Hz_mod_economy\media\Hunterz_icon.paa";
+actionName = "Website";
+action = "https://github.com/KHunter-Arma";
+author = "K.Hunter";
+overviewPicture = "\x\Hz\Hz_mod_economy\media\Hunterz_logo.paa";
