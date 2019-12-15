@@ -43,7 +43,7 @@ if (_magType in Hz_econ_restrictedMagazines) then {
 					_magArray = _x select 4;
 					if ((count _magArray) > 0) then {
 						if ((toupper (_magArray select 0)) != _magType) then {
-							_unit addWeaponItem [(_x select 0), [(_magArray select 0), (_magArray select 1)]];
+							_unit addWeaponItem [(_x select 0), [(_magArray select 0), (_magArray select 1)],true];
 						};
 					};
 					
@@ -53,39 +53,20 @@ if (_magType in Hz_econ_restrictedMagazines) then {
 					
 					{
 					
-						if (!((tolower _x) in _wepComponents)) then {
+						if ((_x != "") && {!((tolower _x) in _wepComponents)}) then {
 						
-							_unit addWeaponItem [_wep, _x];
+							_unit addWeaponItem [_wep, _x,true];
 							sleep 0.1;
 						
 						};
 					
-					} foreach [_x select 1, _x select 2, _x select 3];
+					} foreach [_x select 1, _x select 2, _x select 3, _x select 6];
 					
-					//Grenade launcher?
-					if ((typename (_x select 5)) == "ARRAY") then {
-						
-						_magArray = _x select 5;
-						if ((count _magArray) > 0) then {
-							if ((toupper (_magArray select 0)) != _magType) then {
-								_unit addWeaponItem [(_x select 0), [(_magArray select 0), (_magArray select 1)]];
-							};
+					_magArray = _x select 5;
+					if ((count _magArray) > 0) then {
+						if ((toupper (_magArray select 0)) != _magType) then {
+							_unit addWeaponItem [(_x select 0), [(_magArray select 0), (_magArray select 1)],true];
 						};
-						
-						if (!((tolower (_x select 6)) in _wepComponents)) then {
-						
-							_unit addWeaponItem [_wep, (_x select 6)];
-						
-						};	
-
-					} else {
-					
-						if (!((tolower (_x select 5)) in _wepComponents)) then {
-						
-							_unit addWeaponItem [_wep, (_x select 5)];
-						
-						};	
-					
 					};
 				
 				};

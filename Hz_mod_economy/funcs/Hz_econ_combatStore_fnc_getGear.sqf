@@ -90,40 +90,25 @@ _wepFilterBody = [];
 			
 			};
 			
-		} foreach [_x select 1, _x select 2, _x select 3];
+		} foreach [_x select 1, _x select 2, _x select 3, _x select 6];
 		
-		if((typename (_x select 5)) == "ARRAY") then {
+		_ammoArray = _x select 5;
 		
-			//has GL
-			_ammoArray = _x select 5;
+		if ((count _ammoArray) > 0) then {
+		
+			_mag = _ammoArray select 0;
+		
+			[_mag, _magazines] call _addToArray;	
 			
-			if ((count _ammoArray) > 0) then {
-			
-				_mag = _ammoArray select 0;
-			
-				[_mag, _magazines] call _addToArray;	
+			if ((getNumber (configfile >> "cfgMagazines" >> _mag >> "count")) > 1) then {
+		
+				_ammoCount = _ammoArray select 1;
+				_ammoType = getText (configfile >> "cfgMagazines" >> _mag >> "ammo");
+				[_ammoType, _ammo, _ammoCount] call _addToArray;	
 				
-				if ((getNumber (configfile >> "cfgMagazines" >> _mag >> "count")) > 1) then {
-			
-					_ammoCount = _ammoArray select 1;
-					_ammoType = getText (configfile >> "cfgMagazines" >> _mag >> "ammo");
-					[_ammoType, _ammo, _ammoCount] call _addToArray;	
-					
-				};
-			
 			};
 		
-		} else {
-		
-			_acc = _x select 5;
-		
-			if (_acc != "") then {
-			
-				[_acc, _attachments] call _addToArray;
-			
-			};
-		
-		};		
+		};
 		
 		_ammoArray = _x select 4;
 		
@@ -183,9 +168,27 @@ _wepFilterBody = [];
 					
 					};
 					
-				} foreach [_x select 1, _x select 2, _x select 3,_x select 5];
+				} foreach [_x select 1, _x select 2, _x select 3,_x select 6];
 				
 				_ammoArray = _x select 4;
+				_mag = _ammoArray select 0;
+				
+				if ((!isnil "_mag") && {_mag != ""}) then {
+				
+					[_mag, _magazines] call _addToArray;	
+					
+					if ((getNumber (configfile >> "cfgMagazines" >> _mag >> "count")) > 1) then {
+			
+						_ammoCount = _ammoArray select 1;
+						_ammoType = getText (configfile >> "cfgMagazines" >> _mag >> "ammo");	
+
+						[_ammoType, _ammo, _ammoCount] call _addToArray;
+					
+					};						
+				
+				};
+				
+				_ammoArray = _x select 5;
 				_mag = _ammoArray select 0;
 				
 				if ((!isnil "_mag") && {_mag != ""}) then {
