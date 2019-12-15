@@ -40,7 +40,14 @@ deletevehicle Hz_econ_vehStore_vehicle;
 deleteVehicle Hz_econ_vehStore_showroomCenterObj;
 
 5 fademusic 0;
-{deletevehicle _x} foreach (uinamespace getvariable "Hz_econ_vehStore_dummyObjects");
+{
+	_veh = vehicle _x;
+	if (_veh == _x) then {							
+		deletevehicle _x;							
+	} else {							
+		_veh deleteVehicleCrew _x;							
+	};
+} foreach (uinamespace getvariable "Hz_econ_vehStore_dummyObjects");
 sleep 5;
 playmusic "";
 ace_hearing_disableVolumeUpdate = false;
