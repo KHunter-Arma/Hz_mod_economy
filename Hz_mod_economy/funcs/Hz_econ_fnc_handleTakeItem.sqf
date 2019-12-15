@@ -335,21 +335,44 @@ switch (true) do {
 					case (_itemType == (toupper (primaryWeapon _unit))) : {
 					
 						_magArray = [];
+						_magsAmmo = magazinesAmmoFull _unit;
 						{
 						
-							if ((_x select 3) == 1) then {
+							_magsAmmo = _magsAmmo - [_x];
+							
+							if ((_x select 3) == 1) exitWith {
+							
+								_magArray set [0,_x select 0];
+								_magArray set [1,_x select 1];
+								_magsAmmo = _magsAmmo - [_x];
+							
+							};
+						
+						} foreach _magsAmmo;
+						
+						if ((count _magArray) == 0) exitWith {};
+						
+						_unit removePrimaryWeaponItem (_magArray select 0);
+						_container addMagazineAmmoCargo [_magArray select 0, 1, _magArray select 1];
+						
+						//do it again in case of underbarrel
+						_magArray = [];
+						{
+													
+							if ((_x select 3) == 1) exitWith {
 							
 								_magArray set [0,_x select 0];
 								_magArray set [1,_x select 1];
 							
 							};
 						
-						} foreach magazinesAmmoFull _unit;
+						} foreach _magsAmmo;
 						
 						if ((count _magArray) == 0) exitWith {};
 						
 						_unit removePrimaryWeaponItem (_magArray select 0);
 						_container addMagazineAmmoCargo [_magArray select 0, 1, _magArray select 1];
+						
 					
 					};
 					case (_itemType == (toupper (secondaryWeapon _unit))) : {
