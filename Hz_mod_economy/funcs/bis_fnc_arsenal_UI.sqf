@@ -1,7 +1,7 @@
 /*
 	Author: Karel Moricky
 
-	Modified by K.Hunter to form basis of stores in Hunter'z Economy Module.
+	Modified by K.Hunter for Hunter'z Economy Module.
 	
 */
 
@@ -163,15 +163,15 @@ switch _mode do {
 		_dirH = BIS_fnc_arsenal_campos select 1;
 		_dirV = BIS_fnc_arsenal_campos select 2;
 
-		[_target,[_dirH + 180,-_dirV,0]] call bis_fnc_setobjectrotation;
-	if (BIS_fnc_arsenal_type == 0) then {_target attachto [_center,BIS_fnc_arsenal_campos select 3,""];}; //--- Reattach for smooth movement
-
+		[_target,[(_dirH + 180) % 360,-_dirV,0]] call bis_fnc_setobjectrotation;
+		if (BIS_fnc_arsenal_type == 0) then {_target attachto [_center,BIS_fnc_arsenal_campos select 3,""];}; //--- Reattach for smooth movement
+		
 		_cam setpos (_target modeltoworld [0,-_dis,0]);
     _composlololol = getposatl _cam;
     _cam setposatl [_composlololol select 0, _composlololol select 1,2.5];
 		_cam setvectordirandup [vectordir _target,vectorup _target];
 		if (BIS_fnc_arsenal_type == 0) then {_cam attachto [_target,[0,-_dis,0],""];};
-
+		
 		//--- Make sure the camera is not underground
 		if ((getposasl _cam select 2) < (getposasl _center select 2)) then {
 			_disCoef = ((getposasl _target select 2) - (getposasl _center select 2)) / ((getposasl _target select 2) - (getposasl _cam select 2) + 0.001);
@@ -350,8 +350,10 @@ switch _mode do {
 			BIS_fnc_arsenal_campos set [3,_targetPos];
 			BIS_fnc_arsenal_buttons set [1,[_mX,_mY]];
 		};
-
-		if (isnull _ctrl) then {BIS_fnc_arsenal_buttons = [[],[]];};
+		
+		if (isnull _ctrl) then {
+			BIS_fnc_arsenal_buttons = [[],[]];
+		};
 
 		//--- Terminate when unit is dead
 		if (!alive _center || isnull _center) then {
@@ -518,6 +520,10 @@ switch _mode do {
 	
 			_center = (missionNamespace getVariable "Hz_econ_vehStore_showroomCenterObj");
 
+		} else {
+		
+			_center = player;
+		
 		};
 		
 		cuttext ["","plain"];
@@ -870,6 +876,8 @@ switch _mode do {
 				if (BIS_fnc_arsenal_type == 0) then {[5,0,0,[0,0,0.85]]} else {[10,-45,15,[0,0,-1]]}
 			]
 		];
+		// Disable cam orientation caching and correct initial orientation for Arsenal
+		if (BIS_fnc_arsenal_type == 0) then {BIS_fnc_arsenal_campos = [5,(180 - (getdir _center)) % 360,0,[0,0,0.85]]};
 		BIS_fnc_arsenal_campos = +BIS_fnc_arsenal_campos;
 		_target = createagent ["Logic",position _center,[],0,"none"];
  	if (BIS_fnc_arsenal_type == 0) then {_target attachto [_center,BIS_fnc_arsenal_campos select 3,""];};
@@ -877,7 +885,7 @@ switch _mode do {
 		
 		_cam = objnull;
 		if (BIS_fnc_arsenal_type != 0) then {_cam = "camera" camcreate (missionNamespace getVariable "Hz_econ_vehStore_showroomPos");
-		} else {_cam = "camera" camcreate position _center;};		
+		} else {_cam = "camera" camcreate position _center;};
 		_cam cameraeffect ["internal","back"];
 		_cam campreparefocus [-1,-1];
 		_cam campreparefov 0.35;
@@ -2015,6 +2023,10 @@ switch _mode do {
 				_isDifferentWeapon = (primaryweapon _center call bis_fnc_baseWeapon) != _item;
 				if (_isDifferentWeapon) then {
 				//	{_center removemagazines _x} foreach getarray (configfile >> "cfgweapons" >> primaryweapon _center >> "magazines");
+					{
+						_center addMagazine _x;
+						_center removeprimaryweaponitem _x;
+					} foreach primaryWeaponMagazine _center;	
 					if (_item == "") then {
 						_center removeweapon primaryweapon _center;
 					} else {
@@ -2024,7 +2036,7 @@ switch _mode do {
 						{
 							_acc = _x;
 							if ({_x == _acc} count _compatibleItems > 0) then {_center addprimaryweaponitem _acc;};
-						} foreach _weaponAccessories;
+						} foreach _weaponAccessories;											
 					};
 				};
 			};
@@ -2032,6 +2044,10 @@ switch _mode do {
 				_isDifferentWeapon = (secondaryweapon _center call bis_fnc_baseWeapon) != _item;
 				if (_isDifferentWeapon) then {
 				//	{_center removemagazines _x} foreach getarray (configfile >> "cfgweapons" >> secondaryweapon _center >> "magazines");
+					{
+						_center addMagazine _x;
+						_center removesecondaryweaponitem _x;
+					} foreach secondaryWeaponMagazine _center;
 					if (_item == "") then {
 						_center removeweapon secondaryweapon _center;
 					} else {
@@ -2041,7 +2057,7 @@ switch _mode do {
 						{
 							_acc = _x;
 							if ({_x == _acc} count _compatibleItems > 0) then {_center addsecondaryweaponitem _acc;};
-						} foreach _weaponAccessories;
+						} foreach _weaponAccessories;						
 					};
 				};
 			};
@@ -2049,6 +2065,10 @@ switch _mode do {
 				_isDifferentWeapon = (handgunweapon _center call bis_fnc_baseWeapon) != _item;
 				if (_isDifferentWeapon) then {
 				//	{_center removemagazines _x} foreach getarray (configfile >> "cfgweapons" >> handgunweapon _center >> "magazines");
+					{
+						_center addMagazine _x;
+						_center removeHandgunItem _x;
+					} foreach handgunMagazine _center;
 					if (_item == "") then {
 						_center removeweapon handgunweapon _center;
 					} else {
@@ -2058,7 +2078,7 @@ switch _mode do {
 						{
 							_acc = _x;
 							if ({_x == _acc} count _compatibleItems > 0) then {_center addhandgunitem _acc;};
-						} foreach _weaponAccessories;
+						} foreach _weaponAccessories;						
 					};
 				};
 			};
@@ -2865,7 +2885,8 @@ switch _mode do {
 				['buttonInterface',[_display]] call (uinamespace getvariable "bis_fnc_arsenal_UI");
 				_return = true;
 			};
-
+			
+			/*
 			//--- Acctime
 			case (_key in (actionkeys "timeInc")): {
 				if (acctime == 0) then {setacctime 1;};
@@ -2877,7 +2898,7 @@ switch _mode do {
 
 			};
 
-			//--- Vision mode
+			//--- Vision mode			
 			case (_key in (actionkeys "nightvision") && !_inTemplate): {
 				_mode = missionnamespace getvariable ["BIS_fnc_arsenal_visionMode",-1];
 				_mode = (_mode + 1) % 3;
@@ -2903,7 +2924,7 @@ switch _mode do {
 				_return = true;
 
 			};
-/*
+
 			//--- Delete template
 			case (_key == DIK_DELETE): {
 				_ctrlMouseBlock = _display displayctrl IDC_RSCDISPLAYARSENAL_MOUSEBLOCK;
@@ -2912,7 +2933,7 @@ switch _mode do {
 					_return = true;
 				};
 			};
-*/
+		*/
 		};
 		_return
 	};

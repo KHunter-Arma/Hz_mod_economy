@@ -11,6 +11,8 @@
 
 _this spawn {
 
+	Hz_econ_preInitDone = false;
+
 	disableserialization;
 
 	Hz_econ_path = "\x\Hz\Hz_mod_economy\";
