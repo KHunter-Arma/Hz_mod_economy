@@ -454,10 +454,10 @@ switch _mode do {
 		};
 
 		INITTYPES
-		["InitGUI",[_display,"bis_fnc_arsenal"]] call (uinamespace getvariable "bis_fnc_arsenal_UI");
-		["Preload"] call (uinamespace getvariable "bis_fnc_arsenal_UI");
-		["ListAdd",[_display]] call (uinamespace getvariable "bis_fnc_arsenal_UI");
-		["ListSelectCurrent",[_display]] call (uinamespace getvariable "bis_fnc_arsenal_UI");
+		["InitGUI",[_display,"bis_fnc_arsenal"]] call bis_fnc_arsenal_UI;
+		["Preload"] call bis_fnc_arsenal_UI;
+		["ListAdd",[_display]] call bis_fnc_arsenal_UI;
+		["ListSelectCurrent",[_display]] call bis_fnc_arsenal_UI;
 
 		//--- Save default weapon type
 		BIS_fnc_arsenal_selectedWeaponType = switch true do {
