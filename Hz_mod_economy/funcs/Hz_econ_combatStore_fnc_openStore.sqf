@@ -11,9 +11,11 @@
 
 if (Hz_econ_funds <= 0) exitwith {hint "Insufficient funds!";};
 
-call Hz_pers_API_disablePlayerSaveStateOnDisconnect;
-
 player setvariable ["Hz_econ_backpackLocked",true,true];
+if (!isNil "Hz_pers_API_disablePlayerSaveStateOnDisconnect") then {
+	call Hz_pers_API_disablePlayerSaveStateOnDisconnect;
+};
+sleep 1;
 player remoteExecCall ["Hz_econ_combatStore_fnc_checkIfAccessingBackpack",-2,false];
 
 _gearBegin = player call Hz_econ_combatStore_fnc_getGear;
@@ -21,7 +23,12 @@ _gearBegin = player call Hz_econ_combatStore_fnc_getGear;
 Hz_econ_combatStore_gearAtStoreEntry = _gearBegin;
 
 Hz_econ_combatStore_checkout = false;
-_this spawn (uinamespace getVariable "bis_fnc_arsenal_UI");
+
+with uiNamespace do {
+
+	_this spawn bis_fnc_arsenal_UI;
+
+};
 
 waituntil {dialog};
 waituntil {sleep 0.1; !dialog};
@@ -53,5 +60,7 @@ if (Hz_econ_combatStore_checkout) then {
 
 };
 
-call Hz_pers_API_enablePlayerSaveStateOnDisconnect;
+if (!isNil "Hz_pers_API_enablePlayerSaveStateOnDisconnect") then {
+	call Hz_pers_API_enablePlayerSaveStateOnDisconnect;
+};
 player setvariable ["Hz_econ_backpackLocked",false,true];

@@ -55,7 +55,7 @@ _store = missionnamespace getVariable [_x,objNull];
 
 		if (!isnil "_oldmag") then {
 
-			if ((_oldmag select 1) == 0) then {
+			if (((_oldmag select 1) == 0) && {(getNumber (configFile >> "cfgMagazines" >> (_oldmag select 0) >> "count")) > 1}) then {
 
 				player addMagazine [_oldmag select 0,0];
 
@@ -73,11 +73,15 @@ _store = missionnamespace getVariable [_x,objNull];
 		
 		player setVariable ["Hz_econ_lastAccessedContainerOwner",_owner];
 
-		if (isNull _owner) exitWith {false};
+		if ((!isNull _owner) && {_owner getVariable ["Hz_econ_backpackLocked",false]}) then {
 		
-		if (_owner getVariable ["Hz_econ_backpackLocked",false]) exitWith {true};
+			true
 		
-		false
+		} else {
+		
+			false
+		
+		}
 	
 	}];
 

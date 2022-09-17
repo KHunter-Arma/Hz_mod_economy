@@ -10,6 +10,10 @@
 *******************************************************************************/
 
 _this spawn {
+	
+	if (isNil "Hz_econ_preInitDone") then {
+		Hz_econ_preInitDone = false;
+	};
 
 	disableserialization;
 
