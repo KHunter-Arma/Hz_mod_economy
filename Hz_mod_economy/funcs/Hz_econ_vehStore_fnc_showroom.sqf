@@ -44,8 +44,10 @@ deleteVehicle Hz_econ_vehStore_showroomCenterObj;
 	_veh = vehicle _x;
 	if (_veh == _x) then {							
 		deletevehicle _x;							
-	} else {							
-		_veh deleteVehicleCrew _x;							
+	} else {
+		moveout _x;
+		sleep 1;
+		deletevehicle _x;
 	};
 } foreach (uinamespace getvariable "Hz_econ_vehStore_dummyObjects");
 sleep 5;

@@ -199,7 +199,11 @@ switch (true) do {
 	
 		if (_itemType in Hz_econ_restrictedItems) then {
 		
-			removeGoggles _unit;
+			if ((toUpper goggles _unit) == _itemType) then {
+				removeGoggles _unit;
+			} else {
+				_unit removeItem _itemType;
+			};
 			_container addItemCargoGlobal [_itemType,1];
 			hint "You are not allowed to wear this item!";
 		
@@ -211,7 +215,11 @@ switch (true) do {
 	
 		if (_itemType in Hz_econ_restrictedItems) then {
 		
-			removeHeadgear _unit;
+			if ((toUpper headgear _unit) == _itemType) then {
+				removeHeadgear _unit;
+			} else {
+				_unit removeItem _itemType;
+			};
 			_container addItemCargoGlobal [_itemType,1];
 			hint "You are not allowed to wear this item!";
 		
