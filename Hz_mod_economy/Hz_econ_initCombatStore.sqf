@@ -65,24 +65,13 @@ _store = missionnamespace getVariable [_x,objNull];
 
 	}];
 		
-	player addEventHandler ["InventoryOpened",{
-	
-		params ["_unit", "_container"];
-	
-		_owner = objectParent _container;
-		
+	player addEventHandler ["InventoryOpened",{	
+		params ["_unit", "_container"];	
+		_owner = objectParent _container;		
 		player setVariable ["Hz_econ_lastAccessedContainerOwner",_owner];
-
 		if ((!isNull _owner) && {_owner getVariable ["Hz_econ_backpackLocked",false]}) then {
-		
-			true
-		
-		} else {
-		
-			false
-		
-		}
-	
+			true		
+		}	
 	}];
 
 };

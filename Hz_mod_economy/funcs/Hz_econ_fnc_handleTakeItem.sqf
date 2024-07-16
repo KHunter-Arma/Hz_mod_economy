@@ -179,7 +179,7 @@ switch (true) do {
 		
 			[_unit,_container,backpackContainer _unit,backpackItems _unit] call Hz_econ_fnc_handleTakeRestrictedWearable;
 			//some problem with removing backpack... try a delay
-			_unit spawn {sleep 1; removeBackpackGlobal _this};			
+			_unit spawn {sleep 1; removeBackpackGlobal _this};
 			_container addBackpackCargoGlobal [_itemType,1];
 			{
 				if (_x iskindof _itemType) then {
@@ -337,7 +337,6 @@ switch (true) do {
 				};
 				
 				//what about having a restricted magazine loaded automatically when taking wep out of crate?
-				//just remove automatic loading of weapon altogether - more realistic :)
 				switch (true) do {
 				
 					case (_itemType == (toupper (primaryWeapon _unit))) : {
@@ -360,8 +359,10 @@ switch (true) do {
 						
 						if ((count _magArray) == 0) exitWith {};
 						
-						_unit removePrimaryWeaponItem (_magArray select 0);
-						_container addMagazineAmmoCargo [_magArray select 0, 1, _magArray select 1];
+						if ((toUpper (_magArray select 0)) in Hz_econ_restrictedMagazines) then {
+							_unit removePrimaryWeaponItem (_magArray select 0);
+							_container addMagazineAmmoCargo [_magArray select 0, 1, _magArray select 1];
+						};
 						
 						//do it again in case of underbarrel
 						_magArray = [];
@@ -378,9 +379,10 @@ switch (true) do {
 						
 						if ((count _magArray) == 0) exitWith {};
 						
-						_unit removePrimaryWeaponItem (_magArray select 0);
-						_container addMagazineAmmoCargo [_magArray select 0, 1, _magArray select 1];
-						
+						if ((toUpper (_magArray select 0)) in Hz_econ_restrictedMagazines) then {
+							_unit removePrimaryWeaponItem (_magArray select 0);
+							_container addMagazineAmmoCargo [_magArray select 0, 1, _magArray select 1];
+						};
 					
 					};
 					case (_itemType == (toupper (secondaryWeapon _unit))) : {
@@ -399,8 +401,10 @@ switch (true) do {
 						
 						if ((count _magArray) == 0) exitWith {};
 						
-						_unit removeSecondaryWeaponItem (_magArray select 0);
-						_container addMagazineAmmoCargo [_magArray select 0, 1, _magArray select 1];
+						if ((toUpper (_magArray select 0)) in Hz_econ_restrictedMagazines) then {
+							_unit removeSecondaryWeaponItem (_magArray select 0);
+							_container addMagazineAmmoCargo [_magArray select 0, 1, _magArray select 1];
+						};
 					
 					};
 					case (_itemType == (toupper (handgunWeapon _unit))) : {
@@ -419,8 +423,10 @@ switch (true) do {
 						
 						if ((count _magArray) == 0) exitWith {};
 						
-						_unit removeHandgunItem (_magArray select 0);
-						_container addMagazineAmmoCargo [_magArray select 0, 1, _magArray select 1];
+						if ((toUpper (_magArray select 0)) in Hz_econ_restrictedMagazines) then {
+							_unit removeHandgunItem (_magArray select 0);
+							_container addMagazineAmmoCargo [_magArray select 0, 1, _magArray select 1];
+						};
 					
 					};
 				
